@@ -1,11 +1,5 @@
 import sgMail from "@sendgrid/mail"
 
-if (!process.env.SENDGRID_API_KEY) {
-  throw new Error("SENDGRID_API_KEY is not set")
-}
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-
 const FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL ?? "noreply@dos2a.com"
 const FROM_NAME = process.env.SENDGRID_FROM_NAME ?? "DOS2A"
 
@@ -15,6 +9,11 @@ export async function sendEmail(
   html: string,
   text?: string
 ): Promise<void> {
+  if (!process.env.SENDGRID_API_KEY) {
+    console.warn("SENDGRID_API_KEY is not set — email not sent")
+    return
+  }
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
   await sgMail.send({
     to,
     from: { email: FROM_EMAIL, name: FROM_NAME },
