@@ -1,0 +1,249 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  DJ
+  CLIENT
+  ENGINEER
+  PROMOTER
+  ADMIN
+}
+
+enum SubscriptionTier {
+  FREE
+  STARTER
+  PRO
+  ENTERPRISE
+}
+
+enum BookingStatus {
+  PENDING
+  QUOTED
+  ACCEPTED
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  DISPUTED
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+enum GearCondition {
+  EXCELLENT
+  GOOD
+  FAIR
+}
+
+model User {
+  id                String           @id @default(cuid())
+  email             String           @unique
+  name              String
+  username          String?          @unique
+  passwordHash      String?
+  role              UserRole         @default(CLIENT)
+  tier              SubscriptionTier @default(FREE)
+  stripeCustomerId  String?
+  avatarUrl         String?
+  phone             String?
+  whatsapp          String?
+  location          String?
+  bio               String?
+  emailVerified     DateTime?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  djProfile         DjProfile?
+  bookingsAsClient  Booking[]        @relation("ClientBookings")
+  bookingsAsDj      Booking[]        @relation("DjBookings")
+  gearItems         GearItem[]
+  teamMemberships   TeamMember[]
+  reviewsGiven      Review[]         @relation("ReviewsGiven")
+  reviewsReceived   Review[]         @relation("ReviewsReceived")
+  subscription      Subscription?
+  agentLogs         AgentLog[]
+
+  @@index([email])
+  @@index([username])
+}
+
+model DjProfile {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  genres        String[]
+  equipment     String[]
+  portfolio     Json     @default("[]")
+  hourlyRate    Int      @default(0)
+  minHours      Int      @default(2)
+  yearsExp      Int      @default(0)
+  bio           String?
+  socialLinks   Json     @default("{}")
+  rating        Float    @default(0)
+  reviewCount   Int      @default(0)
+  bookingCount  Int      @default(0)
+  featured      Boolean  @default(false)
+  verified      Boolean  @default(false)
+  coverUrl      String?
+  city          String?
+  country       String   @default("MX")
+  available     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([genres])
+  @@index([city])
+  @@index([featured])
+}
+
+model Booking {
+  id              String        @id @default(cuid())
+  clientId        String
+  client          User          @relation("ClientBookings", fields: [clientId], references: [id])
+  djId            String
+  dj              User          @relation("DjBookings", fields: [djId], references: [id])
+  eventDate       DateTime
+  duration        Int
+  location        String
+  eventType       String
+  guestCount      Int           @default(0)
+  grossAmount     Int
+  platformFee     Int
+  djPayout        Int
+  status          BookingStatus @default(PENDING)
+  notes           String?
+  quoteExpiresAt  DateTime?
+  stripePaymentId String?
+  confirmedAt     DateTime?
+  completedAt     DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  transaction     Transaction?
+  reviews         Review[]
+
+  @@index([clientId])
+  @@index([djId])
+  @@index([eventDate])
+  @@index([status])
+}
+
+model GearItem {
+  id           String        @id @default(cuid())
+  ownerId      String
+  owner        User          @relation(fields: [ownerId], references: [id])
+  name         String
+  category     String
+  description  String?
+  condition    GearCondition @default(GOOD)
+  dailyRate    Int
+  available    Boolean       @default(true)
+  imageUrl     String?
+  location     String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([ownerId])
+  @@index([category])
+  @@index([available])
+}
+
+model Team {
+  id          String       @id @default(cuid())
+  name        String
+  description String?
+  createdById String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  members     TeamMember[]
+}
+
+model TeamMember {
+  id            String   @id @default(cuid())
+  teamId        String
+  team          Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  role          String
+  revenueSplit  Int      @default(0)
+  joinedAt      DateTime @default(now())
+
+  @@unique([teamId, userId])
+  @@index([teamId])
+  @@index([userId])
+}
+
+model Transaction {
+  id              String            @id @default(cuid())
+  bookingId       String            @unique
+  booking         Booking           @relation(fields: [bookingId], references: [id])
+  amount          Int
+  platformFee     Int
+  djPayout        Int
+  stripeChargeId  String?
+  stripePayoutId  String?
+  status          TransactionStatus @default(PENDING)
+  paidOutAt       DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([status])
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  reviewerId  String
+  reviewer    User     @relation("ReviewsGiven", fields: [reviewerId], references: [id])
+  targetId    String
+  target      User     @relation("ReviewsReceived", fields: [targetId], references: [id])
+  bookingId   String?
+  booking     Booking? @relation(fields: [bookingId], references: [id])
+  rating      Int
+  comment     String?
+  createdAt   DateTime @default(now())
+
+  @@index([targetId])
+  @@index([reviewerId])
+}
+
+model Subscription {
+  id                   String           @id @default(cuid())
+  userId               String           @unique
+  user                 User             @relation(fields: [userId], references: [id])
+  tier                 SubscriptionTier
+  stripeSubscriptionId String?
+  stripePriceId        String?
+  status               String           @default("active")
+  currentPeriodEnd     DateTime?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+}
+
+model AgentLog {
+  id          String   @id @default(cuid())
+  agentName   String
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  inputTokens Int      @default(0)
+  outputTokens Int     @default(0)
+  costCents   Int      @default(0)
+  input       Json
+  output      Json
+  success     Boolean  @default(true)
+  errorMsg    String?
+  createdAt   DateTime @default(now())
+
+  @@index([agentName])
+  @@index([createdAt])
+}
