@@ -1,0 +1,58 @@
+{
+  "baseline_sha": "6b54cc0cf053165e9cbfade5606ad71937eedae8",
+  "claims": [
+    {
+      "claim": "Canonical public brand is dos A",
+      "status": "verified_project_decision",
+      "source": "owner decision + repository governance",
+      "publishable": true
+    },
+    {
+      "claim": "Tagline is audio · iluminación · video",
+      "status": "verified_project_decision",
+      "source": "owner decision + repository governance",
+      "publishable": true
+    },
+    {
+      "claim": "Más de 10 años de experiencia.",
+      "status": "owner_approved_not_independently_corroborated",
+      "source": "owner statement",
+      "publishable": true,
+      "constraint": "Do not increase to 15+ or 25+ years without evidence."
+    },
+    {
+      "claim": "Primary audience includes corporate event/marketing teams and event agencies/producers",
+      "status": "verified_project_decision",
+      "source": "owner decision",
+      "publishable": true
+    },
+    {
+      "claim": "Ciudad de México first; projects throughout Mexico",
+      "status": "verified_project_decision",
+      "source": "owner decision",
+      "publishable": true
+    },
+    {
+      "claim": "Supplied project photography is cleared for public use including visible client/project branding",
+      "status": "owner_attested",
+      "source": "owner statement",
+      "publishable": true,
+      "constraint": "Preserve provenance and do not present renders/concepts as completed projects."
+    },
+    {
+      "claim": "Production home is reachable",
+      "status": "observed",
+      "source": "HTTP 200 from https://dos2a.vercel.app/ during Stage 00 audit",
+      "publishable": false
+    }
+  ],
+  "prohibited_unverified_claims": [
+    "500+ DJs registered",
+    "2,400+ gigs booked",
+    "4.9 average DJ rating",
+    "15 minute average quote time",
+    "more than 15 years experience",
+    "25+ years experience",
+    "any client outcome or testimonial not backed by evidence"
+  ]
+}
