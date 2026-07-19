@@ -1,0 +1,46 @@
+{
+  "initiative": "DOSA-OS",
+  "phase": "03-tenant-data-foundation",
+  "status": "blocked_on_required_supabase_organization_confirmation",
+  "risk": "medium_repository_low_operational_until_applied",
+  "openspec_change": "add-tenant-data-foundation",
+  "beads": [],
+  "beads_status": "CLI not exposed in current execution environment; state persisted in OpenSpec/ICM/ops artifacts",
+  "stages_completed": [
+    "hydrate",
+    "baseline",
+    "spec",
+    "data_contract_design",
+    "migration_authored",
+    "tests_authored",
+    "static_review",
+    "supabase_account_discovery",
+    "cost_lookup"
+  ],
+  "baseline_sha": "b003a09f0e3ac68ef0cf63ac88cc7fcf3d6f2074",
+  "baseline_public_home_status": 200,
+  "supabase": {
+    "organizations_found": 1,
+    "candidate_organization_id": "yqcqxdgcnbzdpeevzykk",
+    "candidate_organization_name": "executiveusa@gmail.com",
+    "active_dos_a_project_found": false,
+    "new_project_cost_amount": 0,
+    "new_project_cost_recurrence": "monthly",
+    "project_created": false,
+    "migration_applied": false,
+    "tests_run": false
+  },
+  "changes": {
+    "migration": "supabase/migrations/20260719030000_tenant_data_foundation.sql",
+    "tests": "supabase/tests/database/tenant_data_foundation.test.sql",
+    "schemas": ["app_core", "crm", "comms", "agent_audit"],
+    "auth_changes": false,
+    "rls_changes": false,
+    "browser_api_grants": false,
+    "legacy_schema_changes": false,
+    "application_runtime_changes": false
+  },
+  "stop_condition": "Supabase connector requires explicit human confirmation of the target organization before project creation. Database verification cannot be completed until an approved isolated project/test database exists.",
+  "rollback_receipt": "ops/rollback/phase-03-tenant-data-foundation.json",
+  "zero_context_handoff": true
+}
