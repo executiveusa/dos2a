@@ -1,0 +1,8 @@
+{
+  "baseline_sha":"40ea5b9383390c60612c3e75d3b75ddc42496a99",
+  "affected_services":["Vercel public frontend"],
+  "schema_changes":[],
+  "production_data_risk":"none",
+  "rollback":"Roll Vercel back to the prior READY production deployment and/or revert the Stage 07 squash merge. No database rollback is required.",
+  "media_note":"Temporary backing media URLs are behind stable local rewrite paths; rollback restores the prior frontend and does not delete source media."
+}
