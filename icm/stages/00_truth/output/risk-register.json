@@ -1,0 +1,61 @@
+{
+  "baseline_sha": "6b54cc0cf053165e9cbfade5606ad71937eedae8",
+  "risks": [
+    {
+      "id": "R-001",
+      "severity": "high",
+      "area": "public-ai",
+      "risk": "Public /chat exposes BYOK provider configuration and browser-side provider calls instead of governed La Genio.",
+      "mitigation_stage": "09/10/15",
+      "rule": "Replace safely; public trust context must never access private owner data."
+    },
+    {
+      "id": "R-002",
+      "severity": "high",
+      "area": "lead-capture",
+      "risk": "Mailto fallback can report success without durable lead persistence.",
+      "mitigation_stage": "08",
+      "rule": "Success requires durable persistence; notification delivery is secondary and retryable."
+    },
+    {
+      "id": "R-003",
+      "severity": "high",
+      "area": "infrastructure",
+      "risk": "Owner server topology, secrets, backup state, and runtime identities are not yet connected/verified.",
+      "mitigation_stage": "15/17/18",
+      "rule": "Inventory + verified backup + staging + least privilege before live changes."
+    },
+    {
+      "id": "R-004",
+      "severity": "medium",
+      "area": "production-ui",
+      "risk": "Forced intro delays orientation and the referenced hero image returns 404.",
+      "mitigation_stage": "05/07",
+      "rule": "Five-second clarity before cinema; resilient media fallback."
+    },
+    {
+      "id": "R-005",
+      "severity": "medium",
+      "area": "mobile",
+      "risk": "Current cinematic behavior is desktop-oriented and not evidence of first-class mobile art direction.",
+      "mitigation_stage": "05/06/16",
+      "rule": "Separate mobile composition/QA and reduced-motion fallback."
+    },
+    {
+      "id": "R-006",
+      "severity": "medium",
+      "area": "repo-truth",
+      "risk": "Root marketplace, stale README, deployed frontend, and new OS foundation coexist and can mislead workers.",
+      "mitigation_stage": "01",
+      "rule": "Reconcile canonical master and preserve parked legacy boundaries."
+    },
+    {
+      "id": "R-007",
+      "severity": "medium",
+      "area": "claims",
+      "risk": "Legacy/unverified metrics, years, and marketplace claims could leak into public copy.",
+      "mitigation_stage": "04/14",
+      "rule": "Publish only claims in the verified claims registry."
+    }
+  ]
+}
