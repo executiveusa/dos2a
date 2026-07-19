@@ -1,0 +1,11 @@
+# Tasks
+- [x] Replace forced intro with immediate orientation.
+- [x] Add canonical public navigation, routes, copy, and SEO.
+- [x] Add curated real-project cinematic proof journey.
+- [x] Implement mobile and reduced-motion fallback structure.
+- [x] Redirect legacy public BYOK chat.
+- [x] Remove false mailto-success behavior.
+- [x] Add deterministic public web build/route/media CI.
+- [x] Preserve server/database/auth boundaries.
+- [ ] Pass final PR review/status gate.
+- [ ] Squash merge and post-merge production verification.
