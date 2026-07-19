@@ -1,0 +1,7 @@
+{
+  "baseline_sha":"a0008e3de45b04e9128451300cbd641f706767df",
+  "affected_services":[],
+  "schema_changes":[],
+  "production_data_risk":"none",
+  "rollback":"Revert the squash merge that installs the ICM harness. No production data rollback is required."
+}
