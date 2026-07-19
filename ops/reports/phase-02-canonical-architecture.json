@@ -1,7 +1,7 @@
 {
   "initiative": "DOSA-OS",
   "phase": "02-canonical-architecture",
-  "status": "ready_for_pr",
+  "status": "passed_with_external_quota_note",
   "risk": "low",
   "openspec_change": "define-canonical-architecture",
   "beads": [],
@@ -12,7 +12,13 @@
     "repository_audit",
     "spec",
     "architecture_decision",
-    "static_verification"
+    "static_verification",
+    "pr_opened",
+    "pr_inspection",
+    "review_gate",
+    "squash_merge",
+    "post_merge_verify",
+    "report"
   ],
   "baseline_sha": "d536e2468266f002311798ad89cc48762c0743f5",
   "baseline_deployment": "dpl_8nJ4VQ1kHc8Je2L4wxb2ZbMgJn7y",
@@ -22,6 +28,14 @@
   "database_changes": false,
   "auth_changes": false,
   "deployment_configuration_changes": false,
+  "pr": 5,
+  "merge_method": "squash",
+  "merge_sha": "b003a09f0e3ac68ef0cf63ac88cc7fcf3d6f2074",
+  "review_threads": 0,
+  "submitted_reviews": 0,
+  "coderabbit_status": "success",
+  "vercel_status_note": "deployment status was blocked by account free-plan quota api-deployments-free-per-day; no source/build defect was identified for this documentation-only phase",
+  "post_merge_public_home_status": 200,
   "decisions": {
     "frontend": "keep_then_migrate_incrementally_to_apps_web",
     "public_chat": "remove_from_public_after_governed_private_replacement",
@@ -30,15 +44,8 @@
     "readme_backend_claims": "stale_unverified",
     "target_architecture": "bounded_apps_and_packages_monorepo"
   },
-  "evidence": [
-    "root src/app/page.tsx is a DJ marketplace/subscription landing page with unsupported marketplace metrics",
-    "frontend/src/app/page.tsx is the current dos A audiovisual public site shell",
-    "root prisma/schema.prisma is DJ/marketplace-centric",
-    "backend/Cargo.toml is absent despite README Rust/Axum backend claim",
-    "frontend public chat stores provider configuration including API key in browser localStorage and calls AI providers client-side"
-  ],
   "rollback_receipt": "ops/rollback/phase-02-canonical-architecture.json",
-  "next_phase": "03-tenant-data-auth-foundation",
-  "next_phase_risk_note": "auth/permission-boundary or destructive data changes are HIGH risk and require explicit human approval before merge/destructive action",
+  "next_phase": "03-tenant-data-foundation",
+  "next_phase_risk_note": "data contract may proceed additively; auth/RLS/live migration are separated as HIGH-risk gates",
   "zero_context_handoff": true
 }

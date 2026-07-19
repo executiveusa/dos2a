@@ -1,0 +1,95 @@
+name: Database foundation
+
+on:
+  pull_request:
+    paths:
+      - 'supabase/migrations/**'
+      - 'supabase/tests/database/**'
+      - 'scripts/db/**'
+      - 'infra/postgres/**'
+      - '.github/workflows/database-foundation.yml'
+  push:
+    branches:
+      - 'phase/03-tenant-data-foundation'
+    paths:
+      - 'supabase/migrations/**'
+      - 'supabase/tests/database/**'
+      - 'scripts/db/**'
+      - 'infra/postgres/**'
+      - '.github/workflows/database-foundation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  postgres-foundation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: dosa_os
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d dosa_os"
+          --health-interval 2s
+          --health-timeout 3s
+          --health-retries 30
+
+    env:
+      DB_ADMIN_URL: postgresql://postgres:postgres@127.0.0.1:5432/dosa_os
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Apply migrations
+        run: bash scripts/db/migrate.sh
+
+      - name: Verify migration runner is repeat-safe
+        run: bash scripts/db/migrate.sh
+
+      - name: Verify schema and tenant integrity
+        run: psql "$DB_ADMIN_URL" --set=ON_ERROR_STOP=1 --no-psqlrc --file=scripts/db/verify_foundation.sql
+
+      - name: Verify schema can be dumped
+        run: |
+          pg_dump "$DB_ADMIN_URL" \
+            --schema-only \
+            --no-owner \
+            --no-privileges \
+            --schema=app_meta \
+            --schema=app_core \
+            --schema=crm \
+            --schema=comms \
+            --schema=agent_audit \
+            > /tmp/dosa-foundation-schema.sql
+          test -s /tmp/dosa-foundation-schema.sql
+
+      - name: Verify backup checksum artifact
+        run: |
+          DB_BACKUP_DIR=/tmp/dosa-backups bash scripts/db/backup.sh
+          backup_file="$(find /tmp/dosa-backups -maxdepth 1 -type f -name 'dosa-os-*.sql.gz' | sort | tail -n 1)"
+          test -n "$backup_file"
+          (
+            cd /tmp/dosa-backups
+            sha256sum --check "$(basename "$backup_file").sha256"
+          )
+
+      - name: Verify guarded restore works from another directory
+        run: |
+          backup_file="$(find /tmp/dosa-backups -maxdepth 1 -type f -name 'dosa-os-*.sql.gz' | sort | tail -n 1)"
+          (
+            cd /tmp
+            RESTORE_CONFIRM=RESTORE_DOSA_OS bash "$GITHUB_WORKSPACE/scripts/db/restore.sh" "$backup_file"
+          )
+          psql "$DB_ADMIN_URL" --set=ON_ERROR_STOP=1 --no-psqlrc --file=scripts/db/verify_foundation.sql
