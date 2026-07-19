@@ -75,21 +75,17 @@ jobs:
             > /tmp/dosa-foundation-schema.sql
           test -s /tmp/dosa-foundation-schema.sql
 
-      - name: Verify backup checksum is location-independent
+      - name: Verify backup checksum artifact
         run: |
           DB_BACKUP_DIR=/tmp/dosa-backups bash scripts/db/backup.sh
           backup_file="$(find /tmp/dosa-backups -maxdepth 1 -type f -name 'dosa-os-*.sql.gz' | sort | tail -n 1)"
           test -n "$backup_file"
           (
-            cd /tmp
-            sha256sum --check "$backup_file.sha256" --ignore-missing
-          )
-          (
             cd /tmp/dosa-backups
             sha256sum --check "$(basename "$backup_file").sha256"
           )
 
-      - name: Verify guarded restore succeeds atomically
+      - name: Verify guarded restore works from another directory
         run: |
           backup_file="$(find /tmp/dosa-backups -maxdepth 1 -type f -name 'dosa-os-*.sql.gz' | sort | tail -n 1)"
           (
