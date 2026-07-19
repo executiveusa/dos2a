@@ -21,7 +21,7 @@ language plpgsql
 set search_path = pg_catalog
 as $$
 begin
-  new.updated_at = now();
+  new.updated_at = statement_timestamp();
   return new;
 end;
 $$;
