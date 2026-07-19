@@ -1,8 +1,14 @@
 -- Sovereign AV Business OS — tenant/data foundation
 -- Additive only. No legacy marketplace tables are altered.
--- These schemas are intentionally not granted to anon/authenticated roles in this phase.
+-- Portable PostgreSQL 16+ migration. These schemas are intentionally not exposed
+-- to browser/API roles in this phase. Auth/RLS grants are a later bounded change.
 
 begin;
+
+set local lock_timeout = '5s';
+set local statement_timeout = '60s';
+
+create extension if not exists pgcrypto;
 
 create schema if not exists app_core;
 create schema if not exists crm;
