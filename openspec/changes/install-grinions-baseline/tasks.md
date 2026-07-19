@@ -6,10 +6,10 @@
 - [x] Add GRINIONS orchestrator contract.
 - [x] Add GRINIONS execution protocol.
 - [x] Add OpenSpec proposal/design/tasks for this phase.
-- [ ] Add ICM factory context.
-- [ ] Add dos A tenant context.
-- [ ] Add rollback receipt.
-- [ ] Add phase report.
+- [x] Add ICM factory context.
+- [x] Add dos A tenant context.
+- [x] Add rollback receipt.
+- [x] Add phase report.
 - [ ] Open phase PR.
 - [ ] Inspect CI, comments, review threads, conflicts, and preview deployment.
 - [ ] Repair valid findings.
