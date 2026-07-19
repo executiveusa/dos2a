@@ -57,12 +57,11 @@ for migration in "${migrations[@]}"; do
 
   echo "Applying $version"
   psql "$DB_URL" \
+    --single-transaction \
     --set=ON_ERROR_STOP=1 \
     --no-psqlrc \
-    --file="$migration"
-
-  psql "$DB_URL" --set=ON_ERROR_STOP=1 --no-psqlrc \
-    -c "insert into app_meta.schema_migrations(version, checksum) values ('$version', '$checksum');"
+    --file="$migration" \
+    --command="insert into app_meta.schema_migrations(version, checksum) values ('$version', '$checksum');"
 done
 
 echo "Migration set applied successfully."
