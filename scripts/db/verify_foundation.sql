@@ -36,7 +36,14 @@ declare
   schema_name text;
 begin
   foreach schema_name in array array['app_core','crm','comms','agent_audit'] loop
-    if has_schema_privilege('public', schema_name, 'USAGE') then
+    if exists (
+      select 1
+      from pg_namespace n
+      cross join lateral aclexplode(coalesce(n.nspacl, acldefault('n', n.nspowner))) acl
+      where n.nspname = schema_name
+        and acl.grantee = 0
+        and acl.privilege_type = 'USAGE'
+    ) then
       raise exception 'schema % unexpectedly grants USAGE to PUBLIC', schema_name;
     end if;
   end loop;
@@ -68,7 +75,7 @@ begin
 end;
 $$;
 
--- updated_at trigger must advance on update.
+-- updated_at trigger must advance on a later statement.
 do $$
 declare
   tenant_id uuid;
