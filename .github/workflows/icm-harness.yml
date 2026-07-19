@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Validate shell
         run: bash -n scripts/agent/*.sh
       - name: Validate JSON and stage contracts
@@ -22,12 +24,22 @@ jobs:
           python3 - <<'PY'
           import json, pathlib
           json.load(open('icm/config/project.json'))
+          json.load(open('icm/_config/tooling/PINS.json'))
           stages=json.load(open('icm/config/stages.json'))
           assert len(stages)==20
           for s in stages:
               hits=list(pathlib.Path('icm/stages').glob(f"{s['id']}_*/CONTEXT.md"))
               assert len(hits)==1,(s,hits)
+              status=hits[0].parent/'STATUS.md'
+              assert status.is_file(), status
           print('20 ICM stage contracts valid')
           PY
-      - name: Harness smoke
-        run: python3 harness.py next
+      - name: Validate stage evidence gates
+        run: |
+          for stage in $(seq -w 0 19); do
+            bash scripts/agent/check-icm-stage.sh "$stage"
+          done
+      - name: Harness smoke identifies Stage 00
+        run: |
+          next="$(python3 harness.py next)"
+          test "$next" = "${GITHUB_WORKSPACE}/icm/stages/00_truth"
