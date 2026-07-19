@@ -1,0 +1,12 @@
+{
+  "stage":"02",
+  "baseline_sha":"bc74009bbcb0dbfa27567d1950a11e93261647c5",
+  "risk":"LOW",
+  "source_images":82,
+  "source_dimensions":"4000x2250",
+  "selected_count":10,
+  "selected_indices":[35,20,17,23,54,62,36,26,58,12],
+  "runtime_changed":false,
+  "binary_derivatives_deferred_to_consumer_stage":true,
+  "status":"verified_pending_pr_merge"
+}

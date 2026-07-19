@@ -1,0 +1,6 @@
+{
+  "baseline_sha":"bc74009bbcb0dbfa27567d1950a11e93261647c5",
+  "affected_services":[],
+  "production_data_risk":"none",
+  "rollback":"Revert the Stage 02 squash merge. No runtime or binary assets are changed by this stage."
+}
