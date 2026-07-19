@@ -9,9 +9,9 @@
 - [x] Inspect public `/chat` and browser-side provider configuration.
 - [x] Define KEEP/PARK/REPLACE/MIGRATE/REMOVE-FROM-PUBLIC decisions.
 - [x] Define target application/package boundaries and migration sequence.
-- [ ] Add canonical architecture and route-inventory documents.
-- [ ] Add Phase 02 ICM context.
-- [ ] Add rollback receipt and machine-readable report.
+- [x] Add canonical architecture and route-inventory documents.
+- [x] Add Phase 02 ICM context.
+- [x] Add rollback receipt and machine-readable report.
 - [ ] Open phase PR.
 - [ ] Inspect CI, review comments/threads, conflicts, preview/deployment status.
 - [ ] Repair valid findings or classify external infrastructure failures.
