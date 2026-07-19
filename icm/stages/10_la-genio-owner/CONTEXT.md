@@ -2,4 +2,4 @@
 
 One job: build the authenticated owner assistant that summarizes incoming work and prepares governed business actions.
 
-Human approval remains mandatory for final pricing, proposal send, mass campaigns, contracts, financial commitments, destructive actions, and protected security/account changes.
+Human approval remains mandatory for final pricing, proposal send, mass campaigns, contracts, financial commitments, destructive actions, and protected security/account changes. Completion requires `output/human-approval-tests.json` with `approval_enforcement_passed: true`; the harness must reject `state: complete` without this proof.
