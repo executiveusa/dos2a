@@ -1,0 +1,29 @@
+{
+  "initiative": "DOSA-OS",
+  "phase": "00-01-grinions-baseline",
+  "status": "ready_for_pr",
+  "risk": "low",
+  "openspec_change": "install-grinions-baseline",
+  "beads": [],
+  "beads_status": "not initialized in this phase; bootstrap tracked as follow-up",
+  "stages_completed": [
+    "hydrate",
+    "baseline",
+    "spec",
+    "build",
+    "local_static_verification"
+  ],
+  "application_source_changes": false,
+  "dependency_changes": false,
+  "database_changes": false,
+  "baseline_sha": "14cbffa1973b8fceb0cb71b66b76d5cd7ebbb22f",
+  "baseline_deployment": "dpl_8nJ4VQ1kHc8Je2L4wxb2ZbMgJn7y",
+  "rollback_receipt": "ops/rollback/phase-00-01-grinions-baseline.json",
+  "known_followups": [
+    "Initialize Beads with the supported CLI in an execution environment that exposes it.",
+    "Install/validate OpenSpec CLI rather than treating repository markdown alone as CLI verification.",
+    "Establish required CI and branch protection before feature phases.",
+    "Separate production promotion from ordinary master merges because current Vercel Git integration auto-deploys master."
+  ],
+  "zero_context_handoff": true
+}
