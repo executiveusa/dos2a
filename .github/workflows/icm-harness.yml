@@ -1,0 +1,33 @@
+name: ICM harness
+on:
+  pull_request:
+    paths:
+      - 'TOKEN_SAVING_RULES.md'
+      - '.jcodemunch.jsonc'
+      - 'icm/**'
+      - 'scripts/agent/**'
+      - 'harness.py'
+      - '.github/workflows/icm-harness.yml'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate shell
+        run: bash -n scripts/agent/*.sh
+      - name: Validate JSON and stage contracts
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          json.load(open('icm/config/project.json'))
+          stages=json.load(open('icm/config/stages.json'))
+          assert len(stages)==20
+          for s in stages:
+              hits=list(pathlib.Path('icm/stages').glob(f"{s['id']}_*/CONTEXT.md"))
+              assert len(hits)==1,(s,hits)
+          print('20 ICM stage contracts valid')
+          PY
+      - name: Harness smoke
+        run: python3 harness.py next
