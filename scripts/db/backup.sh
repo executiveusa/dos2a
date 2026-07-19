@@ -19,9 +19,11 @@ done
 
 mkdir -p "$BACKUP_DIR"
 chmod 700 "$BACKUP_DIR" || true
+BACKUP_DIR="$(cd "$BACKUP_DIR" && pwd -P)"
 
 stamp="$(date -u +%Y%m%dT%H%M%SZ)"
-base="$BACKUP_DIR/dosa-os-$stamp.sql.gz"
+backup_name="dosa-os-$stamp.sql.gz"
+base="$BACKUP_DIR/$backup_name"
 
 umask 077
 pg_dump "$DB_URL" \
@@ -32,7 +34,10 @@ pg_dump "$DB_URL" \
   --if-exists \
   | gzip -9 > "$base"
 
-sha256sum "$base" > "$base.sha256"
+(
+  cd "$BACKUP_DIR"
+  sha256sum "$backup_name" > "$backup_name.sha256"
+)
 
 find "$BACKUP_DIR" -type f \( -name 'dosa-os-*.sql.gz' -o -name 'dosa-os-*.sql.gz.sha256' \) \
   -mtime "+$RETENTION_DAYS" -delete
