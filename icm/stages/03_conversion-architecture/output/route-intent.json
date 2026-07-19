@@ -1,0 +1,11 @@
+{
+  "/": {"intent":"orient + prove + convert","primary_cta":"Cotizar mi evento","secondary_cta":"Hablar con La Genio"},
+  "/servicios": {"intent":"understand integrated capabilities","primary_cta":"Cuéntanos tu evento"},
+  "/eventos": {"intent":"self-identify by event context","primary_cta":"Cotizar mi evento"},
+  "/portafolio": {"intent":"verify real-world proof","primary_cta":"Hablar de un proyecto parecido"},
+  "/casos/[slug]": {"intent":"verify a specific outcome/process with sourced facts","primary_cta":"Cotizar un proyecto"},
+  "/blog": {"intent":"education + search discovery + trust","primary_cta":"Ver cómo podemos ayudarte"},
+  "/blog/[slug]": {"intent":"answer a buyer question without generic AI copy","primary_cta":"Cuéntanos tu evento"},
+  "/cotizar": {"intent":"create durable structured event brief","primary_cta":"Enviar mi solicitud"},
+  "/bienvenida": {"intent":"authenticated owner onboarding","visibility":"owner/private"}
+}
