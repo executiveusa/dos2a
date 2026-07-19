@@ -1,0 +1,65 @@
+name: Public web
+on:
+  pull_request:
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/public-web.yml'
+permissions:
+  contents: read
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm build
+      - name: Start
+        run: |
+          pnpm start > /tmp/dosa-web.log 2>&1 &
+          echo $! > /tmp/dosa-web.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:3000/ >/tmp/home.html; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/dosa-web.log
+          exit 1
+      - name: Smoke critical routes
+        run: |
+          set -e
+          for route in / /servicios /eventos /portafolio /blog /cotizar; do
+            code="$(curl -sS -o /tmp/route.html -w '%{http_code}' "http://127.0.0.1:3000${route}")"
+            test "$code" = "200"
+          done
+          curl -fsSL http://127.0.0.1:3000/chat -o /tmp/chat.html
+          grep -q 'dos A' /tmp/home.html
+          grep -q 'Audio, video' /tmp/home.html
+          grep -q 'Cotizar' /tmp/home.html
+      - name: Verify legacy public chat is not rendered
+        run: |
+          ! grep -R --line-number 'Guarda tus llaves en este navegador' .next/server/app 2>/dev/null
+          ! grep -R --line-number 'DOS2A Chat' .next/server/app 2>/dev/null
+      - name: Verify reduced-motion and mobile rules exist
+        run: |
+          grep -q 'prefers-reduced-motion:reduce' src/app/globals.css
+          grep -q '@media(max-width:640px)' src/app/globals.css
+      - name: Stop
+        if: always()
+        run: |
+          if [ -f /tmp/dosa-web.pid ]; then kill "$(cat /tmp/dosa-web.pid)" || true; fi
+          tail -100 /tmp/dosa-web.log || true
