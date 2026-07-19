@@ -27,13 +27,24 @@ for binary in gzip psql sha256sum; do
   fi
 done
 
-if [[ -f "$BACKUP_FILE.sha256" ]]; then
-  sha256sum --check "$BACKUP_FILE.sha256"
+BACKUP_DIR="$(cd "$(dirname "$BACKUP_FILE")" && pwd -P)"
+BACKUP_NAME="$(basename "$BACKUP_FILE")"
+BACKUP_FILE="$BACKUP_DIR/$BACKUP_NAME"
+CHECKSUM_FILE="$BACKUP_FILE.sha256"
+
+if [[ -f "$CHECKSUM_FILE" ]]; then
+  (
+    cd "$BACKUP_DIR"
+    sha256sum --check "$BACKUP_NAME.sha256"
+  )
 else
-  echo "WARNING: no checksum file found at $BACKUP_FILE.sha256" >&2
+  echo "WARNING: no checksum file found at $CHECKSUM_FILE" >&2
 fi
 
 echo "Restoring $BACKUP_FILE"
-gzip -dc "$BACKUP_FILE" | psql "$DB_URL" --set=ON_ERROR_STOP=1 --no-psqlrc
+gzip -dc "$BACKUP_FILE" | psql "$DB_URL" \
+  --single-transaction \
+  --set=ON_ERROR_STOP=1 \
+  --no-psqlrc
 
 echo "Restore completed. Run verification before accepting traffic."
