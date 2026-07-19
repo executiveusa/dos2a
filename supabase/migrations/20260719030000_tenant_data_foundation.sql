@@ -3,10 +3,8 @@
 -- Portable PostgreSQL 16+ migration. These schemas are intentionally not exposed
 -- to browser/API roles in this phase. Auth/RLS grants are a later bounded change.
 
-begin;
-
-set local lock_timeout = '5s';
-set local statement_timeout = '60s';
+set lock_timeout = '5s';
+set statement_timeout = '60s';
 
 create extension if not exists pgcrypto;
 
@@ -283,5 +281,3 @@ comment on schema app_core is 'Sovereign AV core tenancy data. Do not expose bef
 comment on schema crm is 'Sovereign AV CRM data. Do not expose before the dedicated auth/RLS phase.';
 comment on schema comms is 'Sovereign AV communication records. Do not expose before the dedicated auth/RLS phase.';
 comment on schema agent_audit is 'Sovereign AV agent identity and audit records. Do not expose before the dedicated auth/RLS phase.';
-
-commit;
