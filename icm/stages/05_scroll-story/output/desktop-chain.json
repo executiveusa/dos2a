@@ -1,0 +1,20 @@
+{
+  "architecture":"continuous-forward-take",
+  "aspect_ratio":"16:9",
+  "scenes":[
+    {"id":"scale","proof":[35],"dwell":1.15,"motion":"threshold glide + gentle crane reveal + forward settle"},
+    {"id":"audio-video","proof":[20,36],"dwell":1.1,"motion":"low lateral track + stage push + forward settle"},
+    {"id":"lighting","proof":[17],"dwell":1.0,"motion":"restrained half-orbit + pass-through + forward settle"},
+    {"id":"stage-stand","proof":[62],"dwell":1.05,"motion":"structural doorway glide + lateral facade track + forward settle"},
+    {"id":"experiences","proof":[54,23,26,58],"dwell":1.25,"motion":"portal push + geometric orbit + layered screen glide + forward settle"},
+    {"id":"operation-action","proof":[12,36],"dwell":1.15,"motion":"technical preparation to audience reveal + final settle"}
+  ],
+  "engine_rules": {
+    "no_scroll_hijack":true,
+    "reverse_scroll_supported":true,
+    "copy_is_html":true,
+    "real_photos_are_proof":true,
+    "generated_video_is_connective_cinema":true,
+    "fallback":"static real-photo journey"
+  }
+}
