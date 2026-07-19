@@ -39,7 +39,25 @@ jobs:
           for stage in $(seq -w 0 19); do
             bash scripts/agent/check-icm-stage.sh "$stage"
           done
-      - name: Harness smoke identifies Stage 00
+      - name: Harness smoke identifies first incomplete stage
         run: |
-          next="$(python3 harness.py next)"
-          test "$next" = "${GITHUB_WORKSPACE}/icm/stages/00_truth"
+          expected="$(python3 - <<'PY'
+          import json, pathlib
+          stages=json.load(open('icm/config/stages.json'))
+          root=pathlib.Path.cwd()
+          for s in stages:
+              hits=list((root/'icm/stages').glob(f"{s['id']}_*"))
+              assert len(hits)==1,(s,hits)
+              status={}
+              for line in (hits[0]/'STATUS.md').read_text().splitlines():
+                  if ':' in line:
+                      k,v=line.split(':',1); status[k.strip()]=v.strip()
+              if status.get('state') != 'complete':
+                  print(hits[0])
+                  break
+          else:
+              print('ALL_COMPLETE')
+          PY
+          )"
+          actual="$(python3 harness.py next)"
+          test "$actual" = "$expected"
