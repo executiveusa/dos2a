@@ -13,9 +13,9 @@
 - [x] Open phase PR.
 - [x] Inspect CI, comments, review threads, conflicts, and preview deployment.
 - [x] Repair valid findings or classify non-code infrastructure failures.
-- [ ] Squash merge when gates pass.
-- [ ] Verify post-merge deployment/runtime state.
+- [x] Squash merge when gates pass.
+- [x] Verify post-merge deployment/runtime state.
 
-## Current gate note
+## Completion note
 
-PR #4 is mergeable with no review threads or submitted reviews. Vercel preview creation is blocked by the account-wide free-plan deployment quota (`api-deployments-free-per-day`), not by a source/build error. The pre-phase production deployment remains READY. CodeRabbit review is still processing and must be checked again before merge.
+PR #4 was squash merged as `d536e2468266f002311798ad89cc48762c0743f5`. The public production home route returned HTTP 200 after merge. A Vercel status check remained red because the account hit the free-plan deployment quota (`api-deployments-free-per-day`), not because a source/build failure was identified. Earlier branch previews for this documentation-only phase reached READY. No application source, dependency, database, lockfile, or runtime configuration change was included.

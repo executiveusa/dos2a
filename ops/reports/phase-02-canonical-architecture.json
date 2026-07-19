@@ -1,0 +1,44 @@
+{
+  "initiative": "DOSA-OS",
+  "phase": "02-canonical-architecture",
+  "status": "ready_for_pr",
+  "risk": "low",
+  "openspec_change": "define-canonical-architecture",
+  "beads": [],
+  "beads_status": "CLI not exposed in current execution environment; phase state persisted in OpenSpec/ICM/ops artifacts",
+  "stages_completed": [
+    "hydrate",
+    "baseline",
+    "repository_audit",
+    "spec",
+    "architecture_decision",
+    "static_verification"
+  ],
+  "baseline_sha": "d536e2468266f002311798ad89cc48762c0743f5",
+  "baseline_deployment": "dpl_8nJ4VQ1kHc8Je2L4wxb2ZbMgJn7y",
+  "baseline_public_home_status": 200,
+  "application_source_changes": false,
+  "dependency_changes": false,
+  "database_changes": false,
+  "auth_changes": false,
+  "deployment_configuration_changes": false,
+  "decisions": {
+    "frontend": "keep_then_migrate_incrementally_to_apps_web",
+    "public_chat": "remove_from_public_after_governed_private_replacement",
+    "root_marketplace": "park",
+    "root_prisma_marketplace_schema": "preserve_legacy_then_replace_new_product_additively",
+    "readme_backend_claims": "stale_unverified",
+    "target_architecture": "bounded_apps_and_packages_monorepo"
+  },
+  "evidence": [
+    "root src/app/page.tsx is a DJ marketplace/subscription landing page with unsupported marketplace metrics",
+    "frontend/src/app/page.tsx is the current dos A audiovisual public site shell",
+    "root prisma/schema.prisma is DJ/marketplace-centric",
+    "backend/Cargo.toml is absent despite README Rust/Axum backend claim",
+    "frontend public chat stores provider configuration including API key in browser localStorage and calls AI providers client-side"
+  ],
+  "rollback_receipt": "ops/rollback/phase-02-canonical-architecture.json",
+  "next_phase": "03-tenant-data-auth-foundation",
+  "next_phase_risk_note": "auth/permission-boundary or destructive data changes are HIGH risk and require explicit human approval before merge/destructive action",
+  "zero_context_handoff": true
+}
