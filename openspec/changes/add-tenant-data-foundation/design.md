@@ -6,16 +6,24 @@ Use a dedicated owner-controlled PostgreSQL/Supabase project for the Sovereign A
 
 Do not mutate the legacy root Prisma marketplace schema. The new migration is additive and independent.
 
+## Schema boundaries
+
+Keep data isolated in dedicated schemas that are not exposed to browser/API roles in this phase:
+
+- `app_core` — tenant and membership records;
+- `crm` — contacts, companies, leads, event briefs, services;
+- `comms` — conversations and messages;
+- `agent_audit` — agent identities and audit events.
+
+No `anon` or `authenticated` grants are added in this migration. RLS/auth exposure is a separate security phase that must be tested before any schema is exposed through the API.
+
 ## Foundation tables
 
-### Identity / tenancy
-
+### `app_core`
 - `tenants`
-- `profiles`
 - `tenant_memberships`
 
-### CRM
-
+### `crm`
 - `contacts`
 - `companies`
 - `lead_sources`
@@ -24,32 +32,27 @@ Do not mutate the legacy root Prisma marketplace schema. The new migration is ad
 - `services`
 - `lead_services`
 
-### Communications
-
+### `comms`
 - `conversations`
 - `messages`
 
-### Governance
-
+### `agent_audit`
 - `agent_identities`
 - `audit_events`
 
 Booking, proposals, projects, approvals, vendors, crew, assets, content, backups, and exports are introduced in later bounded migrations.
 
-## Tenant isolation
+## Tenant integrity
 
-All tenant-owned records include `tenant_id` with a foreign key to `tenants(id)` and an index suitable for tenant filtering.
+All tenant-owned records include `tenant_id` with a foreign key to `app_core.tenants(id)`.
 
-Authenticated access is evaluated through membership helper functions in a schema-qualified, non-exposed `private` schema:
+Where one tenant-owned table references another, use composite `(tenant_id, id)` keys/constraints so a record cannot point at another tenant's contact, company, lead, service, conversation, or agent identity even before RLS is introduced.
 
-- `private.is_tenant_member(uuid)`
-- `private.has_tenant_role(uuid, text[])`
+The database therefore enforces tenant consistency as data integrity, while the later auth/RLS phase enforces who may read or mutate each tenant.
 
-The helpers are `security definer`, use a fixed search path, and expose only boolean authorization decisions. Application code never receives database credentials through these helpers.
+## Membership roles
 
-## Roles
-
-Initial membership roles:
+The data contract allows these initial roles:
 
 - `owner`
 - `admin`
@@ -58,33 +61,15 @@ Initial membership roles:
 - `editor`
 - `viewer`
 
-Role policy intent:
-
-- owner/admin: tenant administration and destructive business-record actions where permitted;
-- sales: CRM/contact/lead/event-brief/conversation write access;
-- operations: operational read/write access needed for event handoff later;
-- editor: content-related capability later; read access to selected CRM context only when required;
-- viewer: read-only business visibility.
-
-No role authorizes production deployment, secret access, unrestricted SQL, or agent permission changes.
+This phase stores role data only. It does not grant database/API privileges based on these values.
 
 ## Bootstrap rule
 
-Tenant creation and initial owner membership are server-side onboarding operations using a privileged, audited path. Ordinary authenticated browser clients do not receive a generic policy that can create arbitrary tenants or elevate membership roles.
+Tenant creation and initial owner membership will be a server-side, audited onboarding operation in a later phase. No browser-accessible bootstrap function or self-elevation path is created here.
 
 ## Audit rule
 
-`audit_events` is append-only from the application perspective. Ordinary authenticated browser roles receive read access only when role policy allows; writes occur through trusted server-side operations/service role or later narrowly scoped RPCs.
-
-## RLS policy principles
-
-- enable RLS on every exposed business table;
-- no public/anonymous business-record policies in this foundation;
-- use membership helpers instead of trusting user-editable JWT metadata;
-- tenant owners/admins can manage memberships, but ordinary members cannot self-elevate;
-- tenant deletion is not exposed through an authenticated RLS delete policy;
-- `UPDATE` policies are paired with appropriate `SELECT` policies;
-- indexes exist for `tenant_id`, membership user lookup, status/date fields used by common queries.
+`agent_audit.audit_events` is structurally separated from ordinary CRM data. The later security phase will make it append-only from the application perspective and restrict direct writes to trusted server-side operations.
 
 ## Data minimization
 
@@ -92,24 +77,41 @@ Contacts store only business-operational information needed for inquiry/client w
 
 ## Migration safety
 
-- migration file is additive;
+- migration is additive;
 - no DROP/ALTER against legacy marketplace tables;
 - no production apply in this PR;
+- no browser/API grants;
+- no auth references or RLS policies;
 - test on a local/dev Supabase database before live apply;
-- capture a separate live-database rollback/backup receipt immediately before any future production migration.
+- capture a separate live-database backup/rollback receipt immediately before any future live migration.
 
 ## Testing
 
 Use Supabase CLI/pgTAP-compatible SQL tests to assert:
 
-- required table existence;
-- primary tenant/membership constraints;
-- RLS policy inventory for high-value tables;
-- helper-function existence/security-definer attributes;
-- absence of a tenant delete policy for ordinary authenticated users.
+- required schemas and tables exist;
+- tenant/member primary keys and role/status constraints exist;
+- tenant-owned tables have `tenant_id`;
+- same-tenant composite foreign keys exist for key cross-table relationships;
+- no accidental tables are created in the legacy Prisma model;
+- no browser/API grants are introduced by this migration.
 
-Behavioral cross-tenant tests are required before any application uses the schema in production. They are not considered proven merely because policy definitions exist.
+Behavioral RLS and cross-tenant authorization tests belong to the later security/auth phase. Structural same-tenant foreign-key tests are required here.
 
-## Future integration
+## Future auth/security phase
+
+Before any of these schemas are exposed to PostgREST/browser clients:
+
+1. map authenticated users to tenant memberships;
+2. add RLS to every exposed table;
+3. add schema-qualified authorization helpers in a non-exposed schema;
+4. grant only required privileges;
+5. test positive and negative cross-tenant access with pgTAP/client tests;
+6. verify no user can self-elevate roles;
+7. verify tenant deletion and audit mutation remain protected.
+
+That phase is HIGH risk because it establishes an authorization boundary and requires explicit human approval before merge/live application.
+
+## Future runtime integration
 
 The first runtime consumer should be the lead/CRM revenue circuit. The public website submits to a server-side endpoint, which validates input, resolves the tenant server-side, writes one durable lead/contact/event-brief transaction, creates an audit event, and triggers owner notification. The browser must never be trusted to choose an arbitrary `tenant_id`.
