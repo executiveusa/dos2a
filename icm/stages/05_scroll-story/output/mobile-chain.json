@@ -1,0 +1,20 @@
+{
+  "aspect_ratio":"9:16",
+  "rule":"Native mobile composition; never center-crop the desktop film as the production mobile experience.",
+  "scenes":[
+    {"id":"scale","proof":[35],"composition":"stage/LED vertical axis; retain enough seating/room depth to communicate scale","motion":"short forward glide; no wide crane that loses subject"},
+    {"id":"audio-video","proof":[20,36],"composition":"screen + stage + audience foreground in one portrait hierarchy","motion":"audience-height forward move"},
+    {"id":"lighting","proof":[17],"composition":"projection/screen plus colored room edge lighting","motion":"short lateral reveal"},
+    {"id":"stage-stand","proof":[62],"composition":"one strong structural opening + stand height; preserve floor scale","motion":"walk-through portal"},
+    {"id":"experiences","proof":[54,23,26,58],"composition":"circular portal as dominant vertical frame; one installation per beat","motion":"short portal push + restrained orbit"},
+    {"id":"operation-action","proof":[12,36],"composition":"meeting/audience foreground and main content surface","motion":"preparation-to-ready reveal"}
+  ],
+  "performance_rules": {
+    "prefer_720p_delivery_when_visually_sufficient":true,
+    "poster_before_video":true,
+    "plays_inline_muted":true,
+    "coalesced_seeking":true,
+    "reduced_motion_uses_stills":true,
+    "cta_never_depends_on_video":true
+  }
+}
