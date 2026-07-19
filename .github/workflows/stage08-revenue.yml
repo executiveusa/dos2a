@@ -1,0 +1,97 @@
+name: Stage 08 revenue circuit
+on:
+  pull_request:
+    paths:
+      - 'packages/validation/**'
+      - 'packages/crm/**'
+      - 'packages/bookings/**'
+      - 'packages/proposals/**'
+      - 'packages/projects/**'
+      - 'apps/agent-gateway/**'
+      - 'apps/worker/**'
+      - 'tests/stage08/**'
+      - 'tsconfig.stage08.json'
+      - 'supabase/migrations/**'
+      - 'scripts/db/**'
+      - '.github/workflows/stage08-revenue.yml'
+permissions:
+  contents: read
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install bounded compiler
+        run: npm install --no-save --ignore-scripts typescript@5.8.3 @types/node@22.15.3
+      - name: Compile
+        run: ./node_modules/.bin/tsc -p tsconfig.stage08.json
+      - name: Test
+        run: node --test .tmp/stage08/tests/stage08/*.test.js
+  postgres:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: dosa_os
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d dosa_os"
+          --health-interval 2s
+          --health-timeout 3s
+          --health-retries 30
+    env:
+      DB_ADMIN_URL: postgresql://postgres:postgres@127.0.0.1:5432/dosa_os
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - name: Apply migrations atomically
+        run: bash scripts/db/migrate.sh
+      - name: Verify migration replay safety
+        run: bash scripts/db/migrate.sh
+      - name: Verify revenue schemas and contracts
+        run: |
+          psql "$DB_ADMIN_URL" --set=ON_ERROR_STOP=1 --no-psqlrc <<'SQL'
+          select to_regclass('crm.intake_requests') is not null as intake_requests_exists \gset
+          \if :intake_requests_exists
+          \else
+            \error 'crm.intake_requests missing'
+          \endif
+          select to_regclass('app_core.outbox_events') is not null as outbox_exists \gset
+          \if :outbox_exists
+          \else
+            \error 'app_core.outbox_events missing'
+          \endif
+          select to_regclass('bookings.calendar_slots') is not null as bookings_exists \gset
+          \if :bookings_exists
+          \else
+            \error 'bookings.calendar_slots missing'
+          \endif
+          select to_regclass('proposals.proposals') is not null as proposals_exists \gset
+          \if :proposals_exists
+          \else
+            \error 'proposals.proposals missing'
+          \endif
+          select to_regclass('projects.projects') is not null as projects_exists \gset
+          \if :projects_exists
+          \else
+            \error 'projects.projects missing'
+          \endif
+          select count(*) = 1 as overlap_trigger_exists from pg_trigger where tgname='calendar_slots_resource_overlap' and not tgisinternal \gset
+          \if :overlap_trigger_exists
+          \else
+            \error 'booking overlap trigger missing'
+          \endif
+          SQL
+      - name: Verify schema dump
+        run: pg_dump "$DB_ADMIN_URL" --schema-only --no-owner --no-privileges > /tmp/stage08-schema.sql && test -s /tmp/stage08-schema.sql
