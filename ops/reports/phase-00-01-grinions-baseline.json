@@ -1,7 +1,7 @@
 {
   "initiative": "DOSA-OS",
   "phase": "00-01-grinions-baseline",
-  "status": "ready_for_pr",
+  "status": "pr_gate_pending",
   "risk": "low",
   "openspec_change": "install-grinions-baseline",
   "beads": [],
@@ -11,13 +11,23 @@
     "baseline",
     "spec",
     "build",
-    "local_static_verification"
+    "local_static_verification",
+    "pr_opened",
+    "pr_initial_inspection"
   ],
   "application_source_changes": false,
   "dependency_changes": false,
   "database_changes": false,
   "baseline_sha": "14cbffa1973b8fceb0cb71b66b76d5cd7ebbb22f",
   "baseline_deployment": "dpl_8nJ4VQ1kHc8Je2L4wxb2ZbMgJn7y",
+  "baseline_deployment_state": "READY",
+  "pr": 4,
+  "pr_mergeable": true,
+  "review_threads": 0,
+  "submitted_reviews": 0,
+  "vercel_preview_status": "blocked_by_account_quota",
+  "vercel_error_code": "api-deployments-free-per-day",
+  "coderabbit_status": "pending",
   "rollback_receipt": "ops/rollback/phase-00-01-grinions-baseline.json",
   "known_followups": [
     "Initialize Beads with the supported CLI in an execution environment that exposes it.",
