@@ -14,7 +14,6 @@ export default function SiteNav() {
     ["/servicios", n.services[lang]],
     ["/eventos", n.events[lang]],
     ["/portafolio", n.portfolio[lang]],
-    ["/blog", n.signal[lang]],
   ] as const;
 
   return (
