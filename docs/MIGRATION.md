@@ -20,6 +20,7 @@ Current Supabase-specific production migrations:
 
 - `20260724072000_dosa_supabase_lead_intake.sql`
 - `20260724073500_dosa_explicit_deny_rls_policies.sql`
+- `20260724074500_dosa_intake_requests_lead_index.sql`
 
 The Edge Function source is under:
 
