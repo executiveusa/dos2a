@@ -1,6 +1,6 @@
 import { createHash, randomUUID } from "node:crypto";
 import { normalizeLeadInput, LeadValidationError } from "../../../packages/validation/src/lead-intake";
-import { LeadIntakeService, UnknownServiceError, type TenantIntakePolicy } from "../../../packages/crm/src/revenue-circuit";
+import { LeadIntakeService, IdempotencyConflictError, UnknownServiceError, type TenantIntakePolicy } from "../../../packages/crm/src/revenue-circuit";
 
 export interface LeadHttpRequest { method:string; bodyText:string; headers:Record<string,string|undefined> }
 export interface LeadHttpResponse { status:number; headers:Record<string,string>; body:Record<string,unknown> }
@@ -22,6 +22,7 @@ export async function handleLeadIntake(req:LeadHttpRequest,args:{service:LeadInt
  }catch(error){
   if(error instanceof LeadValidationError)return{status:error.code==="spam"?202:400,headers,body:error.code==="spam"?{accepted:true}:{error:error.code}};
   if(error instanceof UnknownServiceError)return{status:400,headers,body:{error:"unknown_service"}};
+  if(error instanceof IdempotencyConflictError)return{status:409,headers,body:{error:"idempotency_conflict"}};
   return{status:500,headers,body:{error:"internal_error"}};
  }
 }
