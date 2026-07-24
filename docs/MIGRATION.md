@@ -6,6 +6,7 @@
 - Project: `botanic-creations`
 - Project ref: `cyxdevcjycmffhmwxojh`
 - App schema: `dosa`
+- Registry slug: `dosa`
 - Shared schema used: `platform` only for `platform.app_registry`
 - Forbidden cross-app schema: `chispa`
 - Auth users required for public lead intake: none
@@ -51,7 +52,7 @@ Preferred schema-only/data export for migration planning:
 pg_dump --schema=dosa --format=custom "$SOURCE_DATABASE_URL" > dosa.dump
 ```
 
-Also export the function definition for `public.dosa_create_public_lead` and the `platform.app_registry` row for `app_slug='dos-a'`.
+Also export the function definition for `public.dosa_create_public_lead` and the `platform.app_registry` row for `app_slug='dosa'`.
 
 ## Import
 
