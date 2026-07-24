@@ -92,6 +92,11 @@ jobs:
           \else
             \error 'booking overlap trigger missing'
           \endif
+          select count(*) = 1 as immutable_trigger_exists from pg_trigger where tgname='proposal_versions_immutable' and not tgisinternal \gset
+          \if :immutable_trigger_exists
+          \else
+            \error 'proposal version immutability trigger missing'
+          \endif
           SQL
       - name: Verify schema dump
         run: pg_dump "$DB_ADMIN_URL" --schema-only --no-owner --no-privileges > /tmp/stage08-schema.sql && test -s /tmp/stage08-schema.sql
