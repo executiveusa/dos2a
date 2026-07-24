@@ -9,6 +9,7 @@ Current production database provider: Supabase managed PostgreSQL
 Supabase project: `botanic-creations`
 Project ref: `cyxdevcjycmffhmwxojh`
 App schema: `dosa`
+Registry slug: `dosa`
 Auth: not required for public lead intake
 Storage: none required for current dos A V1
 
@@ -32,13 +33,13 @@ Function:
 
 RLS:
 - enabled + forced on every `dosa.*` table
-- explicit deny policies for anon/authenticated CRUD
+- explicit RESTRICTIVE deny policies for anon/authenticated CRUD
 
 Edge Function:
 - `dosa-lead-intake`
 
 Shared registry:
-- `platform.app_registry` row where `app_slug='dos-a'`
+- `platform.app_registry` row where `app_slug='dosa'`
 
 ## Environment variable names
 
@@ -49,6 +50,8 @@ NEXT_PUBLIC_API_URL
 DATABASE_URL
 DB_ADMIN_URL
 INTERNAL_API_TOKEN
+SOURCE_DATABASE_URL
+DEST_DATABASE_URL
 ```
 
 Names only. Never copy secret values into this file.
@@ -76,6 +79,17 @@ E:\THE PAULI FILES\Cosmos_Vault.env
 
 Never print, echo, commit, log, screenshot, or expose values. Cloud sessions must not assume this path exists.
 
+## Migration preflight
+
+Provision the migration-only URLs in a secure migration-capable environment, then fail closed before any export/import:
+
+```bash
+: "${SOURCE_DATABASE_URL:?SOURCE_DATABASE_URL is required}"
+: "${DEST_DATABASE_URL:?DEST_DATABASE_URL is required}"
+```
+
+Do not proceed if either target is ambiguous or points to an unapproved database.
+
 ## Export
 
 ```bash
@@ -96,12 +110,13 @@ Reapply least-privilege grants and deploy the Edge Function/runtime equivalent.
 
 - [ ] row counts match
 - [ ] RLS enabled and forced
-- [ ] explicit deny policies present
+- [ ] explicit restrictive deny policies present
 - [ ] anon direct reads/writes denied
 - [ ] authenticated direct reads/writes denied
 - [ ] server lead RPC works
 - [ ] same idempotency key + same payload deduplicates
 - [ ] same idempotency key + different payload rejects
+- [ ] proactive intake rate limit works when source IP hash is present
 - [ ] cross-app access denied
 - [ ] production form persists a lead
 - [ ] rollback remains available
