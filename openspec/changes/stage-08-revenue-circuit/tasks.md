@@ -1,0 +1,12 @@
+# Tasks
+- [x] Add public lead validation and forbidden-authority fields.
+- [x] Add tenant-resolved idempotent lead bundle contract.
+- [x] Add transactional outbox/retry contract.
+- [x] Add booking conflict domain contract.
+- [x] Add versioned proposal + human approval rules.
+- [x] Add accepted-proposal → confirmed-project snapshot contract.
+- [x] Add additive PostgreSQL migration for intake/outbox/bookings/proposals/projects.
+- [x] Add bounded TypeScript tests and PostgreSQL CI.
+- [ ] Repair CI/review findings until green.
+- [ ] HIGH-risk merge gate immediately before merge.
+- [ ] Do not apply migration to owner server in this stage.

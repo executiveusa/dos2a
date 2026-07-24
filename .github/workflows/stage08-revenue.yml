@@ -1,0 +1,109 @@
+name: Stage 08 revenue circuit
+on:
+  pull_request:
+    paths:
+      - 'packages/validation/**'
+      - 'packages/crm/**'
+      - 'packages/bookings/**'
+      - 'packages/proposals/**'
+      - 'packages/projects/**'
+      - 'apps/agent-gateway/**'
+      - 'apps/worker/**'
+      - 'tests/stage08/**'
+      - 'tsconfig.stage08.json'
+      - 'supabase/migrations/**'
+      - 'scripts/db/**'
+      - '.github/workflows/stage08-revenue.yml'
+permissions:
+  contents: read
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install bounded compiler
+        run: npm install --no-save --ignore-scripts typescript@5.8.3 @types/node@22.15.3
+      - name: Compile
+        run: ./node_modules/.bin/tsc -p tsconfig.stage08.json
+      - name: Test
+        run: node --test .tmp/stage08/tests/stage08/*.test.js
+  postgres:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: dosa_os
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres -d dosa_os"
+          --health-interval 2s
+          --health-timeout 3s
+          --health-retries 30
+    env:
+      DB_ADMIN_URL: postgresql://postgres:postgres@127.0.0.1:5432/dosa_os
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - name: Apply migrations atomically
+        run: bash scripts/db/migrate.sh
+      - name: Verify migration replay safety
+        run: bash scripts/db/migrate.sh
+      - name: Verify revenue schemas and contracts
+        run: |
+          psql "$DB_ADMIN_URL" --set=ON_ERROR_STOP=1 --no-psqlrc <<'SQL'
+          do $$
+          begin
+            if to_regclass('crm.intake_requests') is null then
+              raise exception 'crm.intake_requests missing';
+            end if;
+            if to_regclass('app_core.outbox_events') is null then
+              raise exception 'app_core.outbox_events missing';
+            end if;
+            if to_regclass('bookings.calendar_slots') is null then
+              raise exception 'bookings.calendar_slots missing';
+            end if;
+            if to_regclass('proposals.proposals') is null then
+              raise exception 'proposals.proposals missing';
+            end if;
+            if to_regclass('projects.projects') is null then
+              raise exception 'projects.projects missing';
+            end if;
+            if not exists (
+              select 1
+              from pg_trigger t
+              join pg_class c on c.oid = t.tgrelid
+              join pg_namespace n on n.oid = c.relnamespace
+              where t.tgname = 'calendar_slots_resource_overlap'
+                and n.nspname = 'bookings'
+                and c.relname = 'calendar_slots'
+                and not t.tgisinternal
+            ) then
+              raise exception 'booking overlap trigger missing';
+            end if;
+            if not exists (
+              select 1
+              from pg_trigger t
+              join pg_class c on c.oid = t.tgrelid
+              join pg_namespace n on n.oid = c.relnamespace
+              where t.tgname = 'proposal_versions_immutable'
+                and n.nspname = 'proposals'
+                and c.relname = 'proposal_versions'
+                and not t.tgisinternal
+            ) then
+              raise exception 'proposal version immutability trigger missing';
+            end if;
+          end $$;
+          SQL
+      - name: Verify schema dump
+        run: pg_dump "$DB_ADMIN_URL" --schema-only --no-owner --no-privileges > /tmp/stage08-schema.sql && test -s /tmp/stage08-schema.sql
