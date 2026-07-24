@@ -1,6 +1,7 @@
 {
   "phase": "final-hardening-supabase",
   "protected_main_baseline_sha": "dc8b5559d08fcde7c0df191fde48d22b1c441c41",
+  "final_hardening_squash_sha": "98477f4cea873cd5fbbd4d161bc81caedf2fa887",
   "baseline_production_deployment": "dpl_GC683DWBFxzj1ABpK5DbRMBAkyis",
   "supabase_project_ref": "cyxdevcjycmffhmwxojh",
   "schema": "dosa",
@@ -25,13 +26,13 @@
   ],
   "feature_flags": [],
   "rollback_commands": {
-    "repository": "git revert <FINAL_HARDENING_SQUASH_SHA>",
+    "repository": "git revert 98477f4cea873cd5fbbd4d161bc81caedf2fa887",
     "database": "psql \"$DB_ADMIN_URL\" --set=ON_ERROR_STOP=1 --no-psqlrc --file=ops/rollback/final-hardening-supabase.sql",
     "edge_function": "Redeploy the prior dosa-lead-intake version that does not map rate_limited to HTTP 429 after the database rollback, if full behavioral rollback is required.",
     "production": "Use Vercel rollback to deployment dpl_GC683DWBFxzj1ABpK5DbRMBAkyis after the dos2a project/account is unpaused."
   },
   "verification_after_rollback": [
-    "run supabase/tests/database/dosa_security.test.sql only after reapplying the baseline-compatible policy expectation or use the baseline test suite",
+    "use the baseline-compatible security verification after database rollback",
     "verify public.dosa_create_public_lead EXECUTE remains service_role-only",
     "verify no customer rows were deleted",
     "verify quote-form fallback remains truthful"
