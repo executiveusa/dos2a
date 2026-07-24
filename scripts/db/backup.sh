@@ -26,10 +26,12 @@ backup_name="dosa-os-$stamp.sql.gz"
 base="$BACKUP_DIR/$backup_name"
 
 umask 077
+# Preserve ACL/grant statements so an exact recovery also restores the
+# server-only security boundary (for example service_role-only RPC access).
+# Ownership remains excluded so restores are portable across hosts.
 pg_dump "$DB_URL" \
   --format=plain \
   --no-owner \
-  --no-privileges \
   --clean \
   --if-exists \
   | gzip -9 > "$base"
