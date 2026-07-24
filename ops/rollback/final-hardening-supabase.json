@@ -1,22 +1,41 @@
 {
   "phase": "final-hardening-supabase",
-  "baseline_master_sha": "dc8b5559d08fcde7c0df191fde48d22b1c441c41",
+  "protected_main_baseline_sha": "dc8b5559d08fcde7c0df191fde48d22b1c441c41",
   "baseline_production_deployment": "dpl_GC683DWBFxzj1ABpK5DbRMBAkyis",
   "supabase_project_ref": "cyxdevcjycmffhmwxojh",
   "schema": "dosa",
-  "changes": [
-    "explicit deny RLS policies for anon/authenticated CRUD",
-    "covering index for intake_requests.lead_id foreign key",
-    "portable database security verification",
-    "backup now preserves ACL/grant statements for faithful security restore",
-    "migration/security/environment handoff documentation",
-    "CI Supabase-role compatibility setup and dosa schema verification"
+  "migration_state_before": [
+    "20260724072000_dosa_supabase_lead_intake.sql"
   ],
-  "rollback": {
-    "application": "revert the final hardening squash merge if repository-only regressions occur",
-    "database": "security/index changes are additive; use a new forward migration for any future policy/index change rather than editing applied migrations",
-    "production": "Vercel may roll back to dpl_GC683DWBFxzj1ABpK5DbRMBAkyis after the project is unpaused"
+  "migration_state_applied_in_phase": [
+    "20260724073500_dosa_explicit_deny_rls_policies.sql",
+    "20260724074500_dosa_intake_requests_lead_index.sql",
+    "20260724075000_dosa_restrictive_policies_and_rate_limit.sql"
+  ],
+  "backup": {
+    "id": null,
+    "status": "not_captured_before_additive_hardening",
+    "rationale": "No destructive DDL or customer-data rewrite occurred. The phase changes policies, function logic, and indexes only. An executable non-data-destructive rollback SQL is committed, and CI proves backup/restore fidelity for the resulting schema and grants."
   },
-  "data_loss_risk": "none expected; no destructive DDL or customer-data mutation",
-  "notes": "Visual verification deferred until Vercel project live flag is restored."
+  "affected_services": [
+    "Supabase PostgreSQL dosa schema",
+    "Supabase Edge Function dosa-lead-intake",
+    "dos2a Vercel frontend lead submission client",
+    "GitHub database/revenue CI"
+  ],
+  "feature_flags": [],
+  "rollback_commands": {
+    "repository": "git revert <FINAL_HARDENING_SQUASH_SHA>",
+    "database": "psql \"$DB_ADMIN_URL\" --set=ON_ERROR_STOP=1 --no-psqlrc --file=ops/rollback/final-hardening-supabase.sql",
+    "edge_function": "Redeploy the prior dosa-lead-intake version that does not map rate_limited to HTTP 429 after the database rollback, if full behavioral rollback is required.",
+    "production": "Use Vercel rollback to deployment dpl_GC683DWBFxzj1ABpK5DbRMBAkyis after the dos2a project/account is unpaused."
+  },
+  "verification_after_rollback": [
+    "run supabase/tests/database/dosa_security.test.sql only after reapplying the baseline-compatible policy expectation or use the baseline test suite",
+    "verify public.dosa_create_public_lead EXECUTE remains service_role-only",
+    "verify no customer rows were deleted",
+    "verify quote-form fallback remains truthful"
+  ],
+  "data_loss_risk": "none expected; rollback SQL does not delete customer rows or drop dos A tables",
+  "notes": "Visual verification is intentionally deferred until the Vercel live flag is restored."
 }
