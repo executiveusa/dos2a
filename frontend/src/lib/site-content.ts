@@ -28,7 +28,7 @@ export const siteContent = {
       en: "We design, coordinate, and operate conferences, launches, activations, stands, and brand experiences from Mexico City, with projects across Mexico.",
     },
     primary: { es: "Cotizar mi evento", en: "Get a quote" },
-    secondary: { es: "Hablar con La Genio", en: "Talk to La Genio" },
+    secondary: { es: "Contar mi idea", en: "Describe my event" },
     proof: { es: "Más de 10 años de experiencia.", en: "More than 10 years of experience." },
   },
   journey: [
@@ -123,10 +123,10 @@ export const siteContent = {
     ],
   },
   genio: {
-    eyebrow: { es: "La Genio", en: "La Genio" },
+    eyebrow: { es: "Brief del evento", en: "Event brief" },
     title: { es: "¿Todavía no sabes exactamente qué necesitas?", en: "Not sure exactly what you need yet?" },
-    body: { es: "Cuéntale la fecha, el lugar y la idea. La Genio te ayuda a ordenar lo esencial antes de preparar el siguiente paso, sin pedirte que conozcas términos técnicos.", en: "Share the date, place, and idea. La Genio helps organize the essentials before the next step, without making you learn technical terms." },
-    cta: { es: "Cuéntale mi evento", en: "Tell La Genio about my event" },
+    body: { es: "Cuéntanos la fecha, el lugar y la idea con tus propias palabras. Ordenaremos lo esencial para preparar el siguiente paso sin pedirte que conozcas términos técnicos.", en: "Share the date, place, and idea in your own words. We will organize the essentials for the next step without making you learn technical terms." },
+    cta: { es: "Preparar mi brief", en: "Prepare my brief" },
   },
   quote: {
     title: { es: "Cuéntanos tu evento. Empecemos por lo esencial.", en: "Tell us about your event. Start with what you know." },
