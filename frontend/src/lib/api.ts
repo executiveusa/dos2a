@@ -14,6 +14,8 @@ export interface LeadSubmitResult {
   mailtoUrl?: string;
 }
 
+const LEAD_ENDPOINT = "https://cyxdevcjycmffhmwxojh.supabase.co/functions/v1/dosa-lead-intake";
+
 function buildMailto(data: LeadFormData) {
   const subject = encodeURIComponent(`Nueva solicitud dos A — ${data.eventType || "Evento"}`);
   const body = encodeURIComponent(
@@ -25,18 +27,32 @@ function buildMailto(data: LeadFormData) {
   return `mailto:2audioiluminacion@gmail.com?subject=${subject}&body=${body}`;
 }
 
+function getIdempotencyKey() {
+  if (typeof window === "undefined") return crypto.randomUUID();
+  const key = "dosa_lead_idempotency";
+  const existing = sessionStorage.getItem(key);
+  if (existing) return existing;
+  const created = crypto.randomUUID();
+  sessionStorage.setItem(key, created);
+  return created;
+}
+
 export async function submitLead(data: LeadFormData): Promise<LeadSubmitResult> {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  if (!apiUrl) {
-    return { success: false, message: "Lead API is not configured.", mailtoUrl: buildMailto(data) };
-  }
   try {
-    const res = await fetch(`${apiUrl}/api/v1/leads`, {
+    const idempotencyKey = getIdempotencyKey();
+    const res = await fetch(LEAD_ENDPOINT, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Idempotency-Key": idempotencyKey,
+        "X-Request-ID": crypto.randomUUID(),
+      },
       body: JSON.stringify(data),
     });
-    if (res.ok) return { success: true };
+    if (res.ok) {
+      if (typeof window !== "undefined") sessionStorage.removeItem("dosa_lead_idempotency");
+      return { success: true };
+    }
     return { success: false, message: `Lead API returned ${res.status}.`, mailtoUrl: buildMailto(data) };
   } catch {
     return { success: false, message: "Lead API request failed.", mailtoUrl: buildMailto(data) };
