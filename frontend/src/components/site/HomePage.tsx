@@ -11,7 +11,7 @@ export default function HomePage() {
   const { lang } = useLanguage(); const c = siteContent;
   return <PublicShell>
     <section className="hero-orientation">
-      <div className="hero-orientation__image" aria-hidden="true"><img src="/images/projects/dosa-project-35.webp" alt=""/><div/></div>
+      <div className="hero-orientation__image" aria-hidden="true"><img src="/images/projects/dosa-recovered-hero-scale.webp" alt=""/><div/></div>
       <div className="hero-orientation__content">
         <p className="eyebrow">{c.hero.eyebrow[lang]}</p>
         <h1>{c.hero.title[lang]}</h1>
