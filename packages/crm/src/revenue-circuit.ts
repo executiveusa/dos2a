@@ -11,6 +11,7 @@ export interface LeadBundleReceipt {
   leadId: string;
   requestId: string;
   duplicate: boolean;
+  payloadHash?: string;
 }
 
 export interface LeadBundleRepository {
@@ -31,6 +32,7 @@ export interface LeadNotificationPort {
 }
 
 export class UnknownServiceError extends Error {}
+export class IdempotencyConflictError extends Error {}
 
 export class LeadIntakeService {
   constructor(private readonly repository: LeadBundleRepository, private readonly notifier?: LeadNotificationPort) {}
@@ -48,7 +50,12 @@ export class LeadIntakeService {
     }
     if (args.idempotencyKey) {
       const existing = await this.repository.findCompletedByIdempotency(args.policy.tenantId, args.idempotencyKey);
-      if (existing) return { ...existing, duplicate: true };
+      if (existing) {
+        if (!existing.payloadHash || existing.payloadHash !== args.payloadHash) {
+          throw new IdempotencyConflictError("idempotency_key_payload_mismatch");
+        }
+        return { ...existing, duplicate: true };
+      }
     }
     const receipt = await this.repository.createLeadBundle({
       tenantId: args.policy.tenantId,
