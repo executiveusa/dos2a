@@ -1,0 +1,20 @@
+{
+  "phase": "final-hardening-supabase",
+  "baseline_master_sha": "dc8b5559d08fcde7c0df191fde48d22b1c441c41",
+  "baseline_production_deployment": "dpl_GC683DWBFxzj1ABpK5DbRMBAkyis",
+  "supabase_project_ref": "cyxdevcjycmffhmwxojh",
+  "schema": "dosa",
+  "changes": [
+    "explicit deny RLS policies for anon/authenticated CRUD",
+    "portable database security verification",
+    "migration/security/environment handoff documentation",
+    "CI Supabase-role compatibility setup and dosa schema verification"
+  ],
+  "rollback": {
+    "application": "revert the final hardening squash merge if repository-only regressions occur",
+    "database": "explicit deny policies are additive security hardening; rollback only if they block an approved client role, by applying a forward migration rather than editing applied migrations",
+    "production": "Vercel may roll back to dpl_GC683DWBFxzj1ABpK5DbRMBAkyis after the project is unpaused"
+  },
+  "data_loss_risk": "none expected; no destructive DDL or customer-data mutation",
+  "notes": "Visual verification deferred until Vercel project live flag is restored."
+}
