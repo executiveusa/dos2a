@@ -62,41 +62,48 @@ jobs:
       - name: Verify revenue schemas and contracts
         run: |
           psql "$DB_ADMIN_URL" --set=ON_ERROR_STOP=1 --no-psqlrc <<'SQL'
-          select to_regclass('crm.intake_requests') is not null as intake_requests_exists \gset
-          \if :intake_requests_exists
-          \else
-            \error 'crm.intake_requests missing'
-          \endif
-          select to_regclass('app_core.outbox_events') is not null as outbox_exists \gset
-          \if :outbox_exists
-          \else
-            \error 'app_core.outbox_events missing'
-          \endif
-          select to_regclass('bookings.calendar_slots') is not null as bookings_exists \gset
-          \if :bookings_exists
-          \else
-            \error 'bookings.calendar_slots missing'
-          \endif
-          select to_regclass('proposals.proposals') is not null as proposals_exists \gset
-          \if :proposals_exists
-          \else
-            \error 'proposals.proposals missing'
-          \endif
-          select to_regclass('projects.projects') is not null as projects_exists \gset
-          \if :projects_exists
-          \else
-            \error 'projects.projects missing'
-          \endif
-          select count(*) = 1 as overlap_trigger_exists from pg_trigger where tgname='calendar_slots_resource_overlap' and not tgisinternal \gset
-          \if :overlap_trigger_exists
-          \else
-            \error 'booking overlap trigger missing'
-          \endif
-          select count(*) = 1 as immutable_trigger_exists from pg_trigger where tgname='proposal_versions_immutable' and not tgisinternal \gset
-          \if :immutable_trigger_exists
-          \else
-            \error 'proposal version immutability trigger missing'
-          \endif
+          do $$
+          begin
+            if to_regclass('crm.intake_requests') is null then
+              raise exception 'crm.intake_requests missing';
+            end if;
+            if to_regclass('app_core.outbox_events') is null then
+              raise exception 'app_core.outbox_events missing';
+            end if;
+            if to_regclass('bookings.calendar_slots') is null then
+              raise exception 'bookings.calendar_slots missing';
+            end if;
+            if to_regclass('proposals.proposals') is null then
+              raise exception 'proposals.proposals missing';
+            end if;
+            if to_regclass('projects.projects') is null then
+              raise exception 'projects.projects missing';
+            end if;
+            if not exists (
+              select 1
+              from pg_trigger t
+              join pg_class c on c.oid = t.tgrelid
+              join pg_namespace n on n.oid = c.relnamespace
+              where t.tgname = 'calendar_slots_resource_overlap'
+                and n.nspname = 'bookings'
+                and c.relname = 'calendar_slots'
+                and not t.tgisinternal
+            ) then
+              raise exception 'booking overlap trigger missing';
+            end if;
+            if not exists (
+              select 1
+              from pg_trigger t
+              join pg_class c on c.oid = t.tgrelid
+              join pg_namespace n on n.oid = c.relnamespace
+              where t.tgname = 'proposal_versions_immutable'
+                and n.nspname = 'proposals'
+                and c.relname = 'proposal_versions'
+                and not t.tgisinternal
+            ) then
+              raise exception 'proposal version immutability trigger missing';
+            end if;
+          end $$;
           SQL
       - name: Verify schema dump
         run: pg_dump "$DB_ADMIN_URL" --schema-only --no-owner --no-privileges > /tmp/stage08-schema.sql && test -s /tmp/stage08-schema.sql
