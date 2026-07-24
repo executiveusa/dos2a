@@ -28,16 +28,34 @@ SUPABASE_SERVICE_ROLE_KEY
 ## Production identity
 
 ```text
-APP_SLUG=dos-a
+APP_SLUG=dosa
 APP_SCHEMA=dosa
 PRODUCTION_URL=https://dos2a.vercel.app
 ```
 
 These are documentation identifiers, not required runtime secrets.
 
-## Future migration
+## Migration-only variables
 
-A self-hosted migration may introduce server-side names such as:
+Provision these only in a secure migration-capable environment. They must never be exposed to browser code or committed:
+
+```text
+SOURCE_DATABASE_URL
+DEST_DATABASE_URL
+```
+
+Preflight before export/import:
+
+```bash
+: "${SOURCE_DATABASE_URL:?SOURCE_DATABASE_URL is required}"
+: "${DEST_DATABASE_URL:?DEST_DATABASE_URL is required}"
+```
+
+`SOURCE_DATABASE_URL` points to the current managed Supabase/PostgreSQL source with permissions sufficient to export the dos A schema. `DEST_DATABASE_URL` points to the approved migration destination with permissions sufficient to restore and verify it.
+
+## Future self-hosted runtime
+
+A self-hosted runtime may introduce server-side names such as:
 
 ```text
 DATABASE_URL
