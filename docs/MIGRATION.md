@@ -21,6 +21,7 @@ Current Supabase-specific production migrations:
 - `20260724072000_dosa_supabase_lead_intake.sql`
 - `20260724073500_dosa_explicit_deny_rls_policies.sql`
 - `20260724074500_dosa_intake_requests_lead_index.sql`
+- `20260724075000_dosa_restrictive_policies_and_rate_limit.sql`
 
 The Edge Function source is under:
 
@@ -43,11 +44,20 @@ The function is server-only. `EXECUTE` must remain revoked from `PUBLIC`, `anon`
 
 ### RLS
 
-All `dosa.*` tables have RLS enabled and forced. Explicit deny policies exist for SELECT, INSERT, UPDATE, and DELETE for `anon` and `authenticated`. Browser clients must not write directly to these tables.
+All `dosa.*` tables have RLS enabled and forced. Explicit **RESTRICTIVE** deny policies exist for SELECT, INSERT, UPDATE, and DELETE for `anon` and `authenticated`. Browser clients must not write directly to these tables.
+
+## Migration preflight
+
+Provision the migration-only URLs in a secure environment and fail closed before any export or import:
+
+```bash
+: "${SOURCE_DATABASE_URL:?SOURCE_DATABASE_URL is required}"
+: "${DEST_DATABASE_URL:?DEST_DATABASE_URL is required}"
+```
+
+Confirm both endpoints are the approved source/destination before continuing.
 
 ## Export
-
-Preferred schema-only/data export for migration planning:
 
 ```bash
 pg_dump --schema=dosa --format=custom "$SOURCE_DATABASE_URL" > dosa.dump
@@ -67,12 +77,13 @@ Then apply/verify server-only function grants, Edge Function/runtime integration
 
 - required `dosa` tables exist;
 - RLS enabled and forced;
-- explicit deny policies present;
+- exact restrictive deny-policy matrix present;
 - `anon` and `authenticated` have no table grants on `dosa.*`;
 - only approved server role can execute `public.dosa_create_public_lead`;
 - controlled lead creation succeeds;
 - exact idempotency replay returns the original lead as duplicate;
 - mismatched payload reuse is rejected;
+- proactive rate limiting works when source-IP hash is present;
 - `chispa.*` remains inaccessible to dos A runtime;
 - production quote form succeeds only after durable save.
 
