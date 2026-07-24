@@ -4,19 +4,25 @@ import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/lib/language";
 import PublicShell from "./PublicShell";
 
-const projects = [35, 20, 17, 62, 54] as const;
+const projects = [
+  { src: "/images/projects/dosa-recovered-hero-scale.webp", key: "hero" },
+  { src: "/images/projects/dosa-recovered-audio-video.webp", key: "av" },
+  { src: "/images/projects/dosa-recovered-experiential-entry.webp", key: "light" },
+  { src: "/images/projects/dosa-recovered-stand-exhibition.webp", key: "stand" },
+  { src: "/images/projects/dosa-recovered-experiential-entry.webp", key: "entry" },
+] as const;
 const captions = {
   es: [
     "Producción integrada a gran escala",
     "Video y pantallas en contexto",
-    "Iluminación ambiental",
+    "Iluminación y experiencia espacial",
     "Stand y espacio de exposición",
     "Experiencia de entrada",
   ],
   en: [
     "Integrated large-scale production",
     "Video and screens in context",
-    "Ambient lighting",
+    "Lighting and spatial experience",
     "Exhibition stand and space",
     "Entrance experience",
   ],
@@ -32,9 +38,9 @@ export default function PortfolioPage() {
         <p>{lang === "es" ? "Una selección de proyectos para mostrar cómo se integran audio, video, iluminación, espacios y operación en situaciones reales." : "A curated selection showing how audio, video, lighting, spaces, and technical operation come together in real situations."}</p>
       </section>
       <section className="portfolio-grid">
-        {projects.map((id, i) => (
-          <figure key={id}>
-            <img src={`/images/projects/dosa-project-${id}.webp`} alt={captions[lang][i]} loading={i < 2 ? "eager" : "lazy"}/>
+        {projects.map((project, i) => (
+          <figure key={project.key}>
+            <img src={project.src} alt={captions[lang][i]} loading={i < 2 ? "eager" : "lazy"}/>
             <figcaption><span>{String(i + 1).padStart(2, "0")}</span>{captions[lang][i]}</figcaption>
           </figure>
         ))}
