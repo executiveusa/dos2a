@@ -11,14 +11,26 @@ export default function HomePage() {
   const { lang } = useLanguage(); const c = siteContent;
   return <PublicShell>
     <section className="hero-orientation">
-      <div className="hero-orientation__image" aria-hidden="true"><img src="/images/projects/dosa-recovered-hero-scale.webp" alt=""/><div/></div>
+      <div className="hero-orientation__image" aria-hidden="true" style={{ background: "#0b0b0c url('/images/hero/dosa-hero-lqip.jpg') center 48% / cover no-repeat" }}>
+        <picture>
+          <source type="image/avif" srcSet="/images/hero/dosa-hero-loreal-1280w.avif 1280w, /images/hero/dosa-hero-loreal-1920w.avif 1920w, /images/hero/dosa-hero-loreal-2508w.avif 2508w" sizes="100vw"/>
+          <source type="image/webp" srcSet="/images/hero/dosa-hero-loreal-1280w.webp 1280w, /images/hero/dosa-hero-loreal-1920w.webp 1920w, /images/hero/dosa-hero-loreal-2508w.webp 2508w" sizes="100vw"/>
+          <img src="/images/hero/dosa-hero-loreal-1920w.jpg" alt="" width={2508} height={1374} fetchPriority="high" decoding="async"/>
+        </picture>
+        <div/>
+      </div>
       <div className="hero-orientation__content">
         <p className="eyebrow">{c.hero.eyebrow[lang]}</p>
         <h1>{c.hero.title[lang]}</h1>
         <p className="hero-support">{c.hero.support[lang]}</p>
-        <div className="button-row"><Link className="button button--light" href="/cotizar">{c.hero.primary[lang]} <ArrowRight size={17}/></Link><Link className="button button--ghost" href="/cotizar#la-genio"><MessageCircle size={17}/>{c.hero.secondary[lang]}</Link></div>
+        <div className="button-row"><Link className="button button--light" href="/cotizar">{c.hero.primary[lang]} <ArrowRight size={17}/></Link><Link className="text-link hero-secondary" href="/portafolio">{c.hero.secondary[lang]}<ArrowRight size={17}/></Link></div>
         <p className="trust-line">{c.hero.proof[lang]}</p>
       </div>
+    </section>
+    <section className="client-wall" aria-label={lang === "es" ? "Clientes que confían en dos A" : "Clients who trust dos A"}>
+      <p className="client-wall__eyebrow">{c.clients.eyebrow[lang]}</p>
+      <ul>{c.clients.names.map(n => <li key={n}>{n}</li>)}</ul>
+      <p className="client-wall__gov">{c.clients.government[lang]} <span>{c.clients.note[lang]}</span></p>
     </section>
     <CinematicJourney/>
     <section className="section section--paper"><div className="section-heading"><p className="eyebrow eyebrow--dark">{lang === "es" ? "Para proyectos donde la coordinación importa" : "For projects where coordination matters"}</p><h2>{c.audience.title[lang]}</h2></div><div className="three-grid">{c.audience.items.map(item => <article key={item.title.es} className="text-card"><h3>{item.title[lang]}</h3><p>{item.body[lang]}</p></article>)}</div></section>
