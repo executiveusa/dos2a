@@ -6,6 +6,7 @@ import { useLanguage } from "@/lib/language";
 import { siteContent } from "@/lib/site-content";
 import PublicShell from "./PublicShell";
 import CinematicJourney from "./CinematicJourney";
+import BrandMark from "./BrandMark";
 
 export default function HomePage() {
   const { lang } = useLanguage(); const c = siteContent;
@@ -20,6 +21,7 @@ export default function HomePage() {
         <div/>
       </div>
       <div className="hero-orientation__content">
+        <BrandMark className="hero-brand"/>
         <p className="eyebrow">{c.hero.eyebrow[lang]}</p>
         <h1>{c.hero.title[lang]}</h1>
         <p className="hero-support">{c.hero.support[lang]}</p>
