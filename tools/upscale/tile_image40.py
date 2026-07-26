@@ -1,9 +1,13 @@
-"""Split an image into overlapping quadrants for tiled upscaling."""
+"""Split an image into overlapping quadrants for tiled upscaling.
+
+Paths are anchored to the repository root so the script runs from anywhere.
+"""
 from PIL import Image
 from pathlib import Path
 
-src = Path("ops/pptx-media/fullsize/image40.png")
-out = Path("assets/hero/tiles")
+ROOT = Path(__file__).resolve().parents[2]
+src = ROOT / "ops/pptx-media/fullsize/image40.png"
+out = ROOT / "assets/hero/tiles"
 out.mkdir(parents=True, exist_ok=True)
 
 img = Image.open(src).convert("RGB")

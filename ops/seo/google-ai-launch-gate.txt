@@ -1,4 +1,4 @@
-Below is the launch-gate checklist I would standardize across your studio. It deliberately separates **Google requirements, Google recommendations, AI/agent readiness, and unsupported SEO folklore**. Google explicitly says generative-AI Search still rests on co([Google for Developers][1])tional, and `llms.txt` is not used by Google Search. ([Google for Developers][2])riant="document" id="58321"}
+Below is the launch-gate checklist I would standardize across your studio. It deliberately separates **Google requirements, Google recommendations, AI/agent readiness, and unsupported SEO folklore**. Google explicitly says generative-AI Search still rests on conventional Search fundamentals ([Google for Developers][1]), and `llms.txt` is not used by Google Search. ([Google for Developers][2])
 
 # A2A GOOGLE + AI-ERA WEBSITE PRE-LAUNCH GATE
 
@@ -17,7 +17,9 @@ The agent must:
 7. Refuse to declare the site launch-ready unless it reaches **8.5/10 or higher with zero P0 blockers**.
 8. Never claim Google indexing, ranking, AI Overview inclusion, or traffic is guaranteed.
 
-Google explicitly states that satisfying its requirements does **not** guarantee crawling, indexing, serving, or ranking. ([Google for Developers][3])IT RULES
+Google explicitly states that satisfying its requirements does **not** guarantee crawling, indexing, serving, or ranking. ([Google for Developers][3])
+
+## AUDIT RULES
 
 Use these classifications:
 
@@ -68,7 +70,9 @@ Google's minimum technical requirements are:
 2. The page returns a working HTTP `200`.
 3. The page contains indexable content.
 
-Meeting them creates eligibility, not guaranteed indexing. ([Google for Developers][1])1 Production accessibility
+Meeting them creates eligibility, not guaranteed indexing. ([Google for Developers][1])
+
+### [MUST] 1.1 Production accessibility
 
 Check:
 
@@ -99,7 +103,9 @@ Remember:
 
 `robots.txt` primarily controls **crawling**, not reliable removal from Google's index.
 
-Use `noindex` when an accessible page should not appear in Search. ([Google for Developers][4])3 Index directives
+Use `noindex` when an accessible page should not appear in Search. ([Google for Developers][4])
+
+### [MUST] 1.3 Index directives
 
 Inspect critical templates for:
 
@@ -113,7 +119,9 @@ Also inspect snippet controls.
 
 Important:
 
-`nosnippet` also prevents content from being used as a direct input for Google AI Overviews and AI Mode. ([Google for Developers][4])4 Indexable primary content
+`nosnippet` also prevents content from being used as a direct input for Google AI Overviews and AI Mode. ([Google for Developers][4])
+
+### [MUST] 1.4 Indexable primary content
 
 Confirm that meaningful page content exists in Google's rendered version.
 
@@ -125,7 +133,9 @@ Do not pass pages whose useful content exists only after:
 * login
 * unsupported client interaction
 
-Google explicitly warns that primary content requiring user interaction to load may not be seen during crawling/rendering. ([Google for Developers][5]) ARCHITECTURE, CANONICALIZATION + DISCOVERY — 10 POINTS
+Google explicitly warns that primary content requiring user interaction to load may not be seen during crawling/rendering. ([Google for Developers][5])
+
+# 2. URL ARCHITECTURE, CANONICALIZATION + DISCOVERY — 10 POINTS
 
 ### [SHOULD] 2.1 Every important resource has a stable URL
 
@@ -152,7 +162,9 @@ For representative pages inspect:
 * sitemap and canonical agree
 * staging/previews are not canonical targets
 
-Google performs canonicalization itself, but site owners can provide canonical signals. Duplicate content is normal and is not automatically a spam violation. ([Google for Developers][6])ULD] 2.3 Redirect integrity
+Google performs canonicalization itself, but site owners can provide canonical signals. Duplicate content is normal and is not automatically a spam violation. ([Google for Developers][6])
+
+### [SHOULD] 2.3 Redirect integrity
 
 Check:
 
@@ -171,7 +183,7 @@ Important navigation links should generally be real:
 
 Every important page should be reachable from at least one other crawlable page.
 
-Google says links help it both **discover pages** and understand relevance. ([Google for Developers][7])phan pages
+Google says links help it both **discover pages** and understand relevance. ([Google for Developers][7]) Avoid orphan pages.
 
 * onclick-only navigation
 * empty anchors
@@ -191,7 +203,9 @@ Avoid repeatedly using:
 
 when a more descriptive label makes sense.
 
-Do not keyword-stuff anchors. ([Google for Developers][7])EMAP + DISCOVERY SIGNALS — 5 POINTS
+Do not keyword-stuff anchors. ([Google for Developers][7])
+
+# 3. SITEMAP + DISCOVERY SIGNALS — 5 POINTS
 
 ### [SHOULD] 3.1 XML sitemap
 
@@ -208,7 +222,9 @@ Check:
 * absolute URLs
 * accurate `lastmod` when used
 
-Google says sitemaps help communicate new or updated URLs, but they are suggestions rather than guarantees that every URL will be crawled. ([Google for Developers][8])3.2 robots.txt sitemap reference
+Google says sitemaps help communicate new or updated URLs, but they are suggestions rather than guarantees that every URL will be crawled. ([Google for Developers][8])
+
+### [SHOULD] 3.2 robots.txt sitemap reference
 
 Where appropriate verify:
 
@@ -222,7 +238,9 @@ When access exists:
 * submit sitemap
 * confirm sitemap processing status
 
-Google notes pages can be discovered without sitemap submission, though submitting one can help discovery and monitoring. ([Google for Developers][9])ASCRIPT + RENDERING — 8 POINTS
+Google notes pages can be discovered without sitemap submission, though submitting one can help discovery and monitoring. ([Google for Developers][9])
+
+# 4. JAVASCRIPT + RENDERING — 8 POINTS
 
 ### [MUST] 4.1 Rendered content exists
 
@@ -239,7 +257,9 @@ Verify that Google can ultimately see:
 * important images
 * navigation
 
-Google crawls, renders JavaScript with a modern Chrome environment, then processes content, but JavaScript sites introduce additional complexity. ([Google for Developers][10])4.2 Critical content is resilient
+Google crawls, renders JavaScript with a modern Chrome environment, then processes content, but JavaScript sites introduce additional complexity. ([Google for Developers][10])
+
+### [MUST] 4.2 Critical content is resilient
 
 Prefer architectures where essential discoverable content is not unnecessarily dependent on fragile client-side execution.
 
@@ -282,7 +302,9 @@ Avoid:
 * stale dates
 * excessive boilerplate
 
-Google automatically creates title links using multiple signals, including `<title>`, visible headings, page text, anchors, and other prominent content. ([Google for Developers][11])5.2 Clear primary page heading
+Google automatically creates title links using multiple signals, including `<title>`, visible headings, page text, anchors, and other prominent content. ([Google for Developers][11])
+
+### [SHOULD] 5.2 Clear primary page heading
 
 Verify:
 
@@ -301,7 +323,9 @@ Verify important pages have useful, accurate descriptions when appropriate.
 
 Do not assume Google will always display them.
 
-Google primarily generates snippets automatically from page content and may use the meta description when it better describes the page. ([Google for Developers][12])CORE] Meta keywords
+Google primarily generates snippets automatically from page content and may use the meta description when it better describes the page. ([Google for Developers][12])
+
+### [DO NOT SCORE] Meta keywords
 
 Do not award points for:
 
@@ -315,7 +339,9 @@ Do not recommend adding it as an SEO tactic.
 
 This is a major scoring category.
 
-Google says its ranking systems are designed to prioritize helpful, reliable, people-first information rather than content created primarily to manipulate rankings. ([Google for Developers][13])6.1 Clear visitor purpose
+Google says its ranking systems are designed to prioritize helpful, reliable, people-first information rather than content created primarily to manipulate rankings. ([Google for Developers][13])
+
+### [SHOULD] 6.1 Clear visitor purpose
 
 For every major page ask:
 
@@ -341,7 +367,9 @@ Look for:
 * unique tools/features
 * documented outcomes
 
-Google's current generative-AI guidance specifically emphasizes **unique, valuable, non-commodity content** and warns against simply recycling what already exists online. ([Google for Developers][14])ICY] 6.3 No scaled low-value AI content
+Google's current generative-AI guidance specifically emphasizes **unique, valuable, non-commodity content** and warns against simply recycling what already exists online. ([Google for Developers][14])
+
+### [MUST/POLICY] 6.3 No scaled low-value AI content
 
 Search for:
 
@@ -353,7 +381,9 @@ Search for:
 * fake expertise
 * content created mainly to capture every query variation
 
-Google defines scaled content abuse based on producing large amounts of low-value content primarily to manipulate rankings, regardless of whether AI, automation, humans, or combinations produced it. ([Google for Developers][15])6.4 AI factual QA
+Google defines scaled content abuse based on producing large amounts of low-value content primarily to manipulate rankings, regardless of whether AI, automation, humans, or combinations produced it. ([Google for Developers][15])
+
+### [MUST] 6.4 AI factual QA
 
 For AI-assisted content:
 
@@ -368,7 +398,9 @@ Verify:
 * invented testimonials do not exist
 * fake statistics are absent
 
-Google recommends accuracy, quality, and relevance for automatically generated content and metadata. ([Google for Developers][16])6.5 Natural language
+Google recommends accuracy, quality, and relevance for automatically generated content and metadata. ([Google for Developers][16])
+
+### [SHOULD] 6.5 Natural language
 
 Write for the user.
 
@@ -379,7 +411,9 @@ Do not:
 * produce dozens of pages for lexical variations
 * rewrite content solely “for AI”
 
-Google says its AI/Search systems understand synonyms and meaning and specifically rejects the need to capture every long-tail variation. ([Google for Developers][2])UCTURED DATA + MACHINE UNDERSTANDING — 8 POINTS
+Google says its AI/Search systems understand synonyms and meaning and specifically rejects the need to capture every long-tail variation. ([Google for Developers][2])
+
+# 7. STRUCTURED DATA + MACHINE UNDERSTANDING — 8 POINTS
 
 ### [CONDITIONAL/SHOULD] 7.1 Correct schema
 
@@ -397,7 +431,9 @@ Examples when applicable:
 * Video
 * ProfilePage
 
-Google says structured data provides explicit clues about page meaning and can make pages eligible for richer Search experiences. ([Google for Developers][17])implemented] 7.2 Structured data truthfulness
+Google says structured data provides explicit clues about page meaning and can make pages eligible for richer Search experiences. ([Google for Developers][17])
+
+### [MUST] 7.2 Structured data truthfulness
 
 Verify structured data:
 
@@ -422,9 +458,13 @@ Do **not** call schema a guaranteed ranking boost.
 
 Do **not** create fake or excessive schema simply to “feed AI.”
 
-Google states there is no special schema required for generative-AI Search. ([Google for Developers][2])ILE + PAGE EXPERIENCE + CORE WEB VITALS — 12 POINTS
+Google states there is no special schema required for generative-AI Search. ([Google for Developers][2])
 
-Google uses the mobile version of site content for indexing and ranking. ([Google for Developers][5])ULD] 8.1 Mobile equivalence
+# 8. MOBILE + PAGE EXPERIENCE + CORE WEB VITALS — 12 POINTS
+
+Google uses the mobile version of site content for indexing and ranking. ([Google for Developers][5])
+
+### [SHOULD] 8.1 Mobile equivalence
 
 Verify mobile contains the same essential:
 
@@ -464,7 +504,9 @@ Target Google's “good” thresholds:
 
 Use field data when available; supplement with lab diagnostics.
 
-Google recommends good Core Web Vitals but explicitly says perfect scores do not guarantee top rankings. ([Google for Developers][19])8.4 Overall page experience
+Google recommends good Core Web Vitals but explicitly says perfect scores do not guarantee top rankings. ([Google for Developers][19])
+
+### [SHOULD] 8.4 Overall page experience
 
 Check:
 
@@ -475,7 +517,9 @@ Check:
 * ability to distinguish main content
 * major usability barriers
 
-Google says there is no single “page experience” signal; multiple aspects contribute to overall experience. ([Google for Developers][20])GES, VIDEO + MULTIMODAL DISCOVERY — 5 POINTS
+Google says there is no single “page experience” signal; multiple aspects contribute to overall experience. ([Google for Developers][20])
+
+# 9. IMAGES, VIDEO + MULTIMODAL DISCOVERY — 5 POINTS
 
 ### [SHOULD] 9.1 Images are technically discoverable
 
@@ -494,7 +538,9 @@ Alt text must primarily serve accessibility and accurately describe meaningful i
 
 Do not stuff keywords.
 
-For linked images, Google can use image alt text as anchor context. ([Google for Developers][7])9.3 Original multimedia
+For linked images, Google can use image alt text as anchor context. ([Google for Developers][7])
+
+### [SHOULD] 9.3 Original multimedia
 
 Reward relevant:
 
@@ -506,7 +552,9 @@ Reward relevant:
 
 especially where they add information not present in generic text.
 
-Google says images and video can create additional opportunities for visibility in generative AI Search experiences. ([Google for Developers][14]) SEARCH + GENERATIVE SEARCH READINESS — 5 POINTS
+Google says images and video can create additional opportunities for visibility in generative AI Search experiences. ([Google for Developers][14])
+
+# 10. AI SEARCH + GENERATIVE SEARCH READINESS — 5 POINTS
 
 ### [MUST FOUNDATION] 10.1 Normal Search eligibility first
 
@@ -514,7 +562,9 @@ Do not create a separate fake “GEO score” disconnected from Search fundament
 
 To be eligible as supporting content in Google's generative AI Search experiences, pages must first satisfy normal Search/indexing eligibility requirements.
 
-Google says generative AI Search features are rooted in core Search ranking and quality systems. ([Google for Developers][2])10.2 Citation-worthy page quality
+Google says generative AI Search features are rooted in core Search ranking and quality systems. ([Google for Developers][2])
+
+### [SHOULD] 10.2 Citation-worthy page quality
 
 Ask:
 
@@ -543,7 +593,9 @@ Do **not** penalize a site for lacking:
 
 Google explicitly states Google Search does not use these files and that adding them neither helps nor hurts Google Search visibility or ranking.
 
-They may optionally be maintained for **other systems that explicitly support them**, but not as a Google optimization. ([Google for Developers][2])CORE] 10.4 Fake GEO/AEO hacks
+They may optionally be maintained for **other systems that explicitly support them**, but not as a Google optimization. ([Google for Developers][2])
+
+### [DO NOT SCORE] 10.4 Fake GEO/AEO hacks
 
 Do not recommend:
 
@@ -554,13 +606,17 @@ Do not recommend:
 * unsupported “AI schema”
 * third-party proprietary authority scores presented as Google metrics
 
-Google's current guidance explicitly warns against several of these supposed generative-AI optimization hacks. ([Google for Developers][2])OWSER AGENT READINESS — 5 POINTS
+Google's current guidance explicitly warns against several of these supposed generative-AI optimization hacks. ([Google for Developers][2])
+
+# 11. BROWSER AGENT READINESS — 5 POINTS
 
 This category concerns agents acting as web users.
 
 Do **not** misrepresent these items as confirmed Google ranking factors.
 
-Google's web.dev guidance explains that modern browser agents may inspect screenshots, DOM structure, and the accessibility tree. ([web.dev][21])1.1 Semantic controls
+Google's web.dev guidance explains that modern browser agents may inspect screenshots, DOM structure, and the accessibility tree. ([web.dev][21])
+
+### [AGENT] 11.1 Semantic controls
 
 Prefer real semantic elements:
 
@@ -627,7 +683,9 @@ Search for:
 * site reputation abuse
 * misleading functionality
 
-Google's spam policies can result in reduced ranking or removal from Search. ([Google for Developers][15]).3 Paid/user-generated links
+Google's spam policies can result in reduced ranking or removal from Search. ([Google for Developers][15])
+
+### [MUST/POLICY] 12.3 Paid/user-generated links
 
 Where applicable use appropriate relationship attributes such as:
 
@@ -637,13 +695,17 @@ Where applicable use appropriate relationship attributes such as:
 
 Do not automatically nofollow every legitimate external citation.
 
-Google provides specific guidance for qualifying commercial and user-generated links. ([Google for Developers][22])12.4 External factual citations
+Google provides specific guidance for qualifying commercial and user-generated links. ([Google for Developers][22])
+
+### [SHOULD] 12.4 External factual citations
 
 Where factual claims require evidence, cite trustworthy primary sources.
 
 Do not invent sources.
 
-Google's link guidance explicitly notes that external links can help establish trustworthiness when used naturally to cite sources. ([Google for Developers][7])SINESS-SPECIFIC SEARCH SURFACES — CONDITIONAL
+Google's link guidance explicitly notes that external links can help establish trustworthiness when used naturally to cite sources. ([Google for Developers][7])
+
+# 13. BUSINESS-SPECIFIC SEARCH SURFACES — CONDITIONAL
 
 Only score applicable modules.
 
@@ -711,7 +773,9 @@ Inspect representative important pages for:
 * rendered resources
 * live-test issues
 
-Google describes URL Inspection as the preferred page-level debugging source for crawl/index information. ([Google for Developers][9])14.3 Indexing reports
+Google describes URL Inspection as the preferred page-level debugging source for crawl/index information. ([Google for Developers][9])
+
+### [SHOULD] 14.3 Indexing reports
 
 Review:
 
@@ -736,7 +800,9 @@ Establish baseline measurement for:
 
 Review Google's Generative AI performance report when the property has access.
 
-Google announced dedicated reporting for visibility in AI Overviews, AI Mode, and generative AI features in Discover, initially rolling it out to a subset of sites. ([Google for Developers][23])G SYSTEM
+Google announced dedicated reporting for visibility in AI Overviews, AI Mode, and generative AI features in Discover, initially rolling it out to a subset of sites. ([Google for Developers][23])
+
+## SCORING SYSTEM
 
 Calculate only applicable points.
 
@@ -1004,11 +1070,25 @@ The agent must never award SEO points merely because:
 * backlinks were purchased
 * the site was submitted to a “search submission service”
 
-Google's own documentation emphasizes Search eligibility, crawlability, helpful and original content, natural linking, valid technical implementation, good overall page experience, and policy compliance rather than magical optimization tricks. ([Google for Developers][3])OGLE SOURCE SET
+Google's own documentation emphasizes Search eligibility, crawlability, helpful and original content, natural linking, valid technical implementation, good overall page experience, and policy compliance rather than magical optimization tricks. ([Google for Developers][3])
+
+## GOOGLE SOURCE SET
 
 Use these as the audit's source of truth:
 
-* **Google Search Essentials** — core technical requirements, spam policies, and key practices. ([Google for Developers][3]) Search Works** — discovery, crawling, rendering, indexing, canonicalization, and serving. ([Google for Developers][10])hnical Requirements** — Googlebot access, HTTP 200, indexable content. ([Google for Developers][1])erative AI Optimization Guide** — current official AI Search/GEO/AEO/llms.txt guidance. ([Google for Developers][2])eliable, People-First Content** — content-quality self-assessment. ([Google for Developers][13])Generated Content Guidance** — accuracy, relevance, quality, automation risks. ([Google for Developers][16])Practices** — discovery, crawlable links, anchor text, internal linking. ([Google for Developers][7])st Indexing** — mobile content used for indexing/ranking. ([Google for Developers][5])itals + Page Experience** — performance and UX guidance. ([Google for Developers][19]) Data Documentation** — understanding, rich-result eligibility, validation and policies. ([Google for Developers][17])sole Documentation** — indexing, URL Inspection, sitemaps, performance and monitoring. ([Google for Developers][9]).dev Agent-Friendly Websites** — DOM, semantic controls, accessibility tree, browser-agent interaction. ([web.dev][21])archy rule:** when SEO tools, blog posts, influencers, AI systems, or agency checklists conflict with current Google primary documentation, flag the disagreement and default to current primary-source Google guidance unless independently proven otherwise.
+* **Google Search Essentials** — core technical requirements, spam policies, and key practices. ([Google for Developers][3])
+* **How Search Works** — discovery, crawling, rendering, indexing, canonicalization, and serving. ([Google for Developers][10])
+* **Technical Requirements** — Googlebot access, HTTP 200, indexable content. ([Google for Developers][1])
+* **Generative AI Optimization Guide** — current official AI Search/GEO/AEO/llms.txt guidance. ([Google for Developers][2])
+* **Reliable, People-First Content** — content-quality self-assessment. ([Google for Developers][13])
+* **AI-Generated Content Guidance** — accuracy, relevance, quality, automation risks. ([Google for Developers][16])
+* **Link Best Practices** — discovery, crawlable links, anchor text, internal linking. ([Google for Developers][7])
+* **Mobile-First Indexing** — mobile content used for indexing/ranking. ([Google for Developers][5])
+* **Core Web Vitals + Page Experience** — performance and UX guidance. ([Google for Developers][19])
+* **Structured Data Documentation** — understanding, rich-result eligibility, validation and policies. ([Google for Developers][17])
+* **Search Console Documentation** — indexing, URL Inspection, sitemaps, performance and monitoring. ([Google for Developers][9])
+* **web.dev Agent-Friendly Websites** — DOM, semantic controls, accessibility tree, browser-agent interaction. ([web.dev][21])
+* **Hierarchy rule:** when SEO tools, blog posts, influencers, AI systems, or agency checklists conflict with current Google primary documentation, flag the disagreement and default to current primary-source Google guidance unless independently proven otherwise.
   :::
 
 ## DECISION
@@ -1021,7 +1101,11 @@ The important change from a normal SEO checklist is that this evaluates four sep
 
 **Search eligibility → Search understanding/quality → AI Search readiness → browser-agent usability.**
 
-It also explicitly gives **zero credit to `llms.txt` for Google**, because Google's July 2026 guidance says Google Search ignores it. ([Google for Developers][2]) framework is grounded primarily in current Google Search Central documentation, including the July 10, 2026 generative-AI optimization guidance, Search Essentials, technical requirements, Search Console, structured-data policies, mobile-first indexing, Core Web Vitals, and Google's April 2026 agent-friendly web guidance. ([Google for Developers][14])Workflow specification: ready. Actual site score: not yet measured**, because this request did not identify a specific production URL to audit.
+It also explicitly gives **zero credit to `llms.txt` for Google**, because Google's July 2026 guidance says Google Search ignores it. ([Google for Developers][2])
+
+This framework is grounded primarily in current Google Search Central documentation, including the July 10, 2026 generative-AI optimization guidance, Search Essentials, technical requirements, Search Console, structured-data policies, mobile-first indexing, Core Web Vitals, and Google's April 2026 agent-friendly web guidance. ([Google for Developers][14])
+
+**Workflow specification: ready. Actual site score: not yet measured**, because this request did not identify a specific production URL to audit.
 
 ## COMMERCIAL IMPACT
 
@@ -1029,7 +1113,9 @@ This can become one standardized QA skill across your studio instead of buying s
 
 ## RISKS
 
-Google explicitly does not guarantee crawling, indexing, ranking, or AI-feature inclusion. A 10/10 therefore means **verified optimization against documented requirements and best practices**, not guaranteed rankings. ([Google for Developers][10])The audit itself is read-only. Any automated remediation should require a git commit/PR, deployment preview, before/after evidence, and reversible rollback.
+Google explicitly does not guarantee crawling, indexing, ranking, or AI-feature inclusion. A 10/10 therefore means **verified optimization against documented requirements and best practices**, not guaranteed rankings. ([Google for Developers][10])
+
+The audit itself is read-only. Any automated remediation should require a git commit/PR, deployment preview, before/after evidence, and reversible rollback.
 
 ## NEXT
 

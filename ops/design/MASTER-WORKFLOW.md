@@ -57,10 +57,10 @@ Source: github.com/hardikpandya/stop-slop — activated for this build.
 
 ## PHASE 6 — BUILD VERIFICATION (shift feedback left)
 
-- [ ] Responsive images: srcset (1280/1920/2560w), AVIF + WebP, `fetchpriority=high` on LCP image only. Design for the viewport, not the spec sheet.
+- [ ] Responsive images: srcset (1280/1920/2508w — ship the widths the asset contract actually produces), AVIF + WebP, `fetchpriority=high` on LCP image only. Design for the viewport, not the spec sheet.
 - [ ] Budget: **LCP ≤ 2.5s, INP < 200ms, CLS < 0.1** — measured, not assumed.
 - [ ] Semantic HTML: real `<a>`, `<button>`, `<label>`; accessibility tree makes sense (browser-agent readiness).
-- [ ] Run cheapest checks first: format → lint → typecheck → tests → build → browser smoke on critical journeys.
+- [ ] Run cheapest checks first: format → lint → typecheck → targeted unit tests → targeted integration tests → secret scan → dependency/security scan when dependencies changed → OpenSpec validation → static/policy checks → build → browser smoke on critical journeys.
 - [ ] Mobile = same essential content as desktop (mobile-first indexing).
 
 ## PHASE 7 — LAUNCH GATE (ops/seo/google-ai-launch-gate.txt)
