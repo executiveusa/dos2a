@@ -31,7 +31,7 @@ export default function QuoteForm() {
       </div>
       <label><span>{lang === "es" ? "Tipo de evento" : "Event type"}</span><select name="eventType" required value={form.eventType} onChange={change}><option value="">{lang === "es" ? "Selecciona una opción" : "Choose an option"}</option><option>{lang === "es" ? "Corporativo / congreso" : "Corporate / conference"}</option><option>{lang === "es" ? "Lanzamiento / activación" : "Launch / activation"}</option><option>{lang === "es" ? "Stand / exposición" : "Stand / exhibition"}</option><option>{lang === "es" ? "Escenario / experiencia en vivo" : "Stage / live experience"}</option><option>{lang === "es" ? "Otro" : "Other"}</option></select></label>
       <div className="field-grid">
-        <label><span>{lang === "es" ? "Fecha o fecha aproximada" : "Date or approximate date"}</span><input name="date" type="date" value={form.date} onChange={change}/></label>
+        <label><span>{lang === "es" ? "Fecha o fecha aproximada" : "Date or approximate date"}</span><input name="date" type="date" lang="es-MX" value={form.date} onChange={change}/></label>
         <label><span>{lang === "es" ? "Ciudad / lugar" : "City / venue"}</span><input name="location" value={form.location} onChange={change}/></label>
       </div>
       <label><span>{lang === "es" ? "Asistentes aproximados" : "Approximate guests"}</span><input name="guests" inputMode="numeric" value={form.guests} onChange={change}/></label>
