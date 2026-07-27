@@ -14,11 +14,11 @@
       "publishable": true
     },
     {
-      "claim": "Más de 10 años de experiencia.",
-      "status": "owner_approved_not_independently_corroborated",
-      "source": "owner statement",
+      "claim": "Más de 15 años de experiencia.",
+      "status": "owner_confirmed",
+      "source": "owner statement, confirmed explicitly 2026-07-25 during Phase 11 review (supersedes earlier 10+ años wording)",
       "publishable": true,
-      "constraint": "Do not increase to 15+ or 25+ years without evidence."
+      "constraint": "Do not increase beyond 15+ without new owner-confirmed evidence."
     },
     {
       "claim": "Primary audience includes corporate event/marketing teams and event agencies/producers",
@@ -51,7 +51,6 @@
     "2,400+ gigs booked",
     "4.9 average DJ rating",
     "15 minute average quote time",
-    "more than 15 years experience",
     "25+ years experience",
     "any client outcome or testimonial not backed by evidence"
   ]

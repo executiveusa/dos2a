@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/lib/language";
 import { siteContent } from "@/lib/site-content";
+import BrandMark from "./BrandMark";
 
 export default function SiteNav() {
   const { lang, setLang } = useLanguage();
@@ -20,7 +21,7 @@ export default function SiteNav() {
     <header className="site-header">
       <div className="site-header__inner">
         <Link className="brand-lockup" href="/" aria-label="dos A — inicio">
-          <strong>dos A</strong>
+          <BrandMark className="brand-mark" />
           <span>{siteContent.brand.tagline[lang]}</span>
         </Link>
         <nav className="desktop-nav" aria-label={lang === "es" ? "Navegación principal" : "Main navigation"}>
