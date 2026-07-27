@@ -6,7 +6,7 @@ export const siteContent = {
   brand: {
     name: "dos A",
     tagline: { es: "audio · iluminación · video", en: "audio · lighting · video" } as Bilingual,
-    whatsapp: "",
+    whatsapp: "525500000000",
     email: "2audioiluminacion@gmail.com",
   },
   nav: {
