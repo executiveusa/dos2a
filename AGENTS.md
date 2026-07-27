@@ -8,6 +8,46 @@ This repository is operated under **GRINIONS™ — Governed Recursive Implement
 
 Do not optimize for generated code volume, commit count, or visible activity. Optimize for verified commercial outcomes, small reversible changes, working software, security, owner control, maintainability, evidence, repeatability, and recoverability.
 
+## Mandatory Beads + Atomic workflow (owner-adopted 2026-07-27)
+
+This project uses **Beads (`bd`)** + **Atomic (`atomic`)** for all agent work.
+
+| Layer | Tool | Owns |
+|-------|------|------|
+| Work graph | Beads | Tasks, blockers, claims, memory, session context |
+| Change graph | Atomic | Code changes, views, provenance, model/cost, attestations |
+
+**Hard rule:** Do **not** write, edit, delete, refactor, or generate project code until the **Pre-Code Gate** passes. If either tool is missing, uninitialized, or failing → **STOP**, report the failure, and wait for the owner. No fallbacks. No markdown TODO files for task tracking.
+
+### Pre-Code Gate (every session, before any code)
+
+```bash
+bd --version && atomic --version
+test -d .beads && test -d .atomic
+bd prime && bd ready --json
+atomic status
+```
+
+Pass = both CLIs respond, `.beads/` and `.atomic/` exist, and you hold a claimed bead from `bd ready` (or create + claim one first). Fail = stop and tell the owner which check failed.
+
+### Session protocol
+
+1. **Boot:** `bd prime` → `bd ready --json` → claim one bead (`bd update <id> --claim`) or `bd create` then claim → `atomic vault goal start --title "<bead title>" --intent <bead-id>`.
+2. **During:** implement only the claimed bead. Progress → `bd update <id> --notes "..."` and `atomic record -m "<type>: <summary> (<bead-id>)"`. New work discovered → new beads + deps, never chat-only. Durable knowledge → `bd remember` / `atomic vault memory add`.
+3. **Close:** run project checks, then `bd close <id> --reason "..."` and `atomic vault goal stop --promote`.
+4. **Handoff truth order:** `bd prime` + ready beads → `atomic log` / attestations → chat history is disposable.
+
+### ID cross-linking (required)
+
+Every Atomic record and every git commit/PR title carries the bead ID: `feat: add contact page (repo-zme)`. Bead notes carry change hashes when useful. No orphan code: if it shipped, a bead was claimed and closed (or explicitly deferred).
+
+### Reconciliation with this contract
+
+- **Git/GitHub remains the canonical release truth** (protected `master`, PRs, squash merges). Atomic is the mandatory provenance/attestation layer on top; it does not replace Git/GitHub or Beads.
+- Where this section and the rest of `AGENTS.md` differ, the **stricter rule wins**.
+- Atomic agent hooks support Claude Code, Gemini CLI, OpenCode, Codex, Copilot, Cursor, Cline, Pi — if the active agent is unsupported (e.g. Kimi), record turns manually with `atomic record` and note the gap in the bead.
+- Forbidden: coding before the gate passes, markdown TODO files as the task system, `MEMORY.md` instead of `bd remember`/vault memory, working without a claimed bead, "tiny fixes" outside Beads + Atomic, closing beads without verification notes, disabling Atomic hooks, inventing bead IDs or faking gate output.
+
 ## Governance precedence
 
 Resolve instructions in this order:
@@ -51,7 +91,7 @@ Use one system for one primary responsibility:
 - **Ralphy** — bounded implementation loop for one approved bead/task at a time.
 - **Absurd** — durable orchestration state for long-running/multi-phase workflows, CI/review waits, retries, merge/post-merge steps, and rollback checkpoints.
 - **Git/GitHub** — canonical release truth: protected main, PRs, checks, review threads, squash merges, revert history.
-- **Atomic** — optional provenance/attestation shadow layer only after compatibility is validated; it does not replace Git/GitHub or Beads in v1.
+- **Atomic** — mandatory provenance/attestation layer per the Beads + Atomic workflow above; it does not replace Git/GitHub or Beads.
 - **Optio** — orchestration reference pattern for task → isolated run → PR → CI/review/conflict repair → squash merge. Do not install the full stack unless scale justifies it.
 - **JCodeMunch** — first-choice code-context microscope before broad repository reads.
 - **ast-grep** — structural search/refactor where AST-aware changes are safer than text replacement.
@@ -468,6 +508,8 @@ Before the repository can be considered fully agent-operable and shippable, ensu
 ├── README.md
 ├── openspec/
 ├── icm/
+├── .beads/
+├── .atomic/
 ├── ops/
 │   ├── reports/
 │   ├── receipts/

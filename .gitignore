@@ -31,3 +31,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 __pycache__/
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+.beads/proxieddb/
+
+# Atomic VCS pristine store is machine-local (96MB+); each clone runs atomic init
+.atomic/
