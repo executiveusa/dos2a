@@ -12,11 +12,11 @@ export default function SiteFooter() {
         <div className="brand-lockup brand-lockup--footer"><BrandMark className="footer-brand"/><span>{siteContent.brand.tagline[lang]}</span></div>
         <div className="footer-links">
           <Link href="/servicios">{siteContent.nav.services[lang]}</Link>
-          <Link href="/eventos">{siteContent.nav.events[lang]}</Link>
           <Link href="/portafolio">{siteContent.nav.portfolio[lang]}</Link>
+          <Link href="/contacto">{siteContent.nav.contact[lang]}</Link>
           <Link href="/cotizar">{siteContent.nav.quote[lang]}</Link>
         </div>
-        <p className="footer-note">{lang === "es" ? "Ciudad de México · proyectos en todo México" : "Mexico City · projects across Mexico"}<br/><a href="mailto:2audioiluminacion@gmail.com">2audioiluminacion@gmail.com</a></p>
+        <p className="footer-note">{lang === "es" ? "Ciudad de México · proyectos en todo México" : "Mexico City · projects across Mexico"}<br/><a href="mailto:2audioiluminacion@gmail.com">2audioiluminacion@gmail.com</a>{siteContent.brand.whatsapp && <><br/><a href={`https://wa.me/${siteContent.brand.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp</a></>}</p>
       </div>
       <div className="site-footer__bottom"><span>© {new Date().getFullYear()} dos A</span><span>{lang === "es" ? "audio · iluminación · video" : "audio · lighting · video"}</span></div>
     </footer>
