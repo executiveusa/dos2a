@@ -55,3 +55,5 @@
 .contact-card .button{align-self:flex-start}
 .contact-location{max-width:var(--max);margin:0 auto;padding:0 clamp(18px,5vw,72px) clamp(80px,10vw,130px);display:flex;align-items:center;gap:9px;color:var(--muted);font-size:.86rem}
 @media(max-width:900px){.contact-methods{grid-template-columns:1fr;gap:16px}}
+
+.contact-card .button{max-width:100%;white-space:normal;text-align:left;line-height:1.35}
