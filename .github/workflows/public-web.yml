@@ -29,20 +29,19 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm build
-      - name: Start
-        run: |
-          pnpm start > /tmp/dosa-web.log 2>&1 &
-          echo $! > /tmp/dosa-web.pid
-          for i in {1..30}; do
-            if curl -fsS http://127.0.0.1:3000/ >/tmp/home.html; then exit 0; fi
-            sleep 1
-          done
-          cat /tmp/dosa-web.log
-          exit 1
-      - name: Smoke critical routes
+      - name: Start and smoke critical routes
         run: |
           set -e
-          for route in / /servicios /eventos /portafolio /blog /cotizar; do
+          pnpm start > /tmp/dosa-web.log 2>&1 &
+          echo $! > /tmp/dosa-web.pid
+          trap 'kill "$(cat /tmp/dosa-web.pid)" 2>/dev/null || true' EXIT
+          ok=0
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:3000/ >/tmp/home.html; then ok=1; break; fi
+            sleep 1
+          done
+          if [ "$ok" != "1" ]; then cat /tmp/dosa-web.log; exit 1; fi
+          for route in / /servicios /servicios/audio /servicios/iluminacion /servicios/video /servicios/escenarios /portafolio /blog /cotizar /contacto; do
             code="$(curl -sS -o /tmp/route.html -w '%{http_code}' "http://127.0.0.1:3000${route}")"
             test "$code" = "200"
           done
