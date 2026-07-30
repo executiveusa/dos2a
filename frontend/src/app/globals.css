@@ -57,3 +57,29 @@
 @media(max-width:900px){.contact-methods{grid-template-columns:1fr;gap:16px}}
 
 .contact-card .button{max-width:100%;white-space:normal;text-align:left;line-height:1.35}
+
+/* Service detail pages (repo-xru) */
+.breadcrumb{max-width:var(--max);margin:auto;padding:18px clamp(18px,5vw,72px) 0;display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--muted)}
+.breadcrumb a{text-decoration:none;color:var(--muted);display:inline-flex;align-items:center}
+.breadcrumb a:hover{color:var(--paper)}
+.breadcrumb span{color:var(--paper2)}
+.sd-facts{max-width:var(--max);margin:auto;padding:0 clamp(18px,5vw,72px) 20px;display:flex;gap:16px}
+.sd-facts div{flex:1;border:1px solid var(--line);background:var(--ink2);padding:18px;text-align:center;font-size:.86rem;color:var(--paper2)}
+.sd-block{max-width:var(--max);margin:auto;padding:clamp(40px,6vw,70px) clamp(18px,5vw,72px)}
+.sd-block h2{font-family:var(--font-sora),sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.05;letter-spacing:-.04em;font-weight:600;margin:0 0 28px}
+.sd-includes{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.sd-includes li{padding:14px 0;border-bottom:1px solid var(--line);color:var(--paper2)}
+.sd-includes li::before{content:"—";color:var(--amber);margin-right:10px}
+.sd-brands{list-style:none;margin:0;padding:0;display:flex;gap:12px;flex-wrap:wrap}
+.sd-brands li{border:1px solid var(--line);padding:10px 20px;border-radius:10px;font-size:.85rem;color:var(--paper2)}
+.sd-related{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.sd-related img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--ink2)}
+.sd-more{margin-top:16px}
+.sd-faq details{border-bottom:1px solid var(--line);padding:14px 0}
+.sd-faq summary{cursor:pointer;font-weight:600;font-size:.95rem}
+.sd-faq p{color:var(--paper2);font-size:.92rem;margin:10px 0 0;max-width:70ch}
+.service-card-link{text-decoration:none;color:inherit;display:block}
+.service-card--link{transition:background .2s ease}
+.service-card-link:hover .service-card--link{background:var(--ink2)}
+.service-card-more{display:inline-flex;align-items:center;gap:7px;margin-top:18px;font-size:.8rem;color:var(--amber)}
+@media(max-width:640px){.sd-facts{flex-direction:column;gap:10px}.sd-related{grid-template-columns:1fr}}
