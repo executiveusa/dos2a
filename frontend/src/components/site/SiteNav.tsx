@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/lib/language";
 import { siteContent } from "@/lib/site-content";
@@ -10,7 +10,17 @@ import BrandMark from "./BrandMark";
 export default function SiteNav() {
   const { lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const n = siteContent.nav;
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    const onTap = (e: PointerEvent) => { if (headerRef.current && !headerRef.current.contains(e.target as Node)) setOpen(false); };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onTap);
+    return () => { document.removeEventListener("keydown", onKey); document.removeEventListener("pointerdown", onTap); };
+  }, [open]);
   const links = [
     ["/", n.home[lang]],
     ["/servicios", n.services[lang]],
@@ -19,7 +29,7 @@ export default function SiteNav() {
   ] as const;
 
   return (
-    <header className="site-header">
+    <header className="site-header" ref={headerRef}>
       <div className="site-header__inner">
         <Link className="brand-lockup" href="/" aria-label="dos A — inicio">
           <BrandMark className="brand-mark" />
