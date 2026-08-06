@@ -268,7 +268,7 @@ export const siteContent = {
       { n: "04", title: { es: "Producimos y operamos", en: "We produce and operate" }, body: { es: "Coordinamos montaje, pruebas, operación y desmontaje según el proyecto.", en: "We coordinate setup, testing, operation, and teardown for the project." } },
     ],
   },
-  genio: {
+  brief: {
     eyebrow: { es: "Brief del evento", en: "Event brief" },
     title: { es: "¿Todavía no sabes exactamente qué necesitas?", en: "Not sure exactly what you need yet?" },
     body: { es: "Cuéntanos la fecha, el lugar y la idea con tus propias palabras. Ordenaremos lo esencial para preparar el siguiente paso sin pedirte que conozcas términos técnicos.", en: "Share the date, place, and idea in your own words. We will organize the essentials for the next step without making you learn technical terms." },
