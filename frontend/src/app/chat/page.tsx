@@ -1,2 +1,2 @@
 import { redirect } from "next/navigation";
-export default function LegacyChat(){redirect("/cotizar#la-genio")}
+export default function LegacyChat(){redirect("/cotizar#brief")}
