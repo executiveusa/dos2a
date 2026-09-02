@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/lib/language";
 import { siteContent } from "@/lib/site-content";
 import BrandMark from "./BrandMark";
+import styles from "./DosaEditorial.module.css";
 
 export default function SiteNav() {
   const { lang, setLang } = useLanguage();
@@ -29,7 +30,7 @@ export default function SiteNav() {
   ] as const;
 
   return (
-    <header className="site-header" ref={headerRef}>
+    <header className={`site-header ${styles.siteChrome}`} ref={headerRef}>
       <div className="site-header__inner">
         <Link className="brand-lockup" href="/" aria-label="dos A — inicio">
           <BrandMark className="brand-mark" />
