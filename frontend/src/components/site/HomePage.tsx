@@ -12,11 +12,11 @@ import styles from "./DosaEditorial.module.css";
 type Bilingual = { es: string; en: string };
 
 const homeServices: Array<{ n: string; title: Bilingual }> = [
-  { n: "01", title: { es: "Audio e iluminación profesional", en: "Professional audio and lighting" } },
-  { n: "03", title: { es: "Video y pantallas LED", en: "Video and LED screens" } },
-  { n: "04", title: { es: "Escenarios y stands", en: "Stages and stands" } },
-  { n: "05", title: { es: "Operación y coordinación", en: "Operation and coordination" } },
-  { n: "06", title: { es: "Servicios especiales", en: "Special services" } },
+  { n: "01", title: { es: "Audio e Iluminación profesional.", en: "Professional audio and lighting" } },
+  { n: "03", title: { es: "Video y Pantallas LED.", en: "Video and LED screens" } },
+  { n: "04", title: { es: "Escenarios y Stands.", en: "Stages and stands" } },
+  { n: "05", title: { es: "Operación y Coordinación.", en: "Operation and coordination" } },
+  { n: "06", title: { es: "Servicios Especiales.", en: "Special services" } },
 ];
 
 const audiences: Array<{ title: Bilingual; body: Bilingual; image: string; alt: Bilingual }> = [
@@ -75,7 +75,7 @@ export default function HomePage() {
           <div className="hero-orientation__content">
             <BrandMark className="hero-brand" />
             <p className="eyebrow">
-              {lang === "es" ? "Producción audiovisual & event management" : "Audiovisual production & event management"}
+              {lang === "es" ? "PRODUCCIÓN AUDIOVISUAL & EVENT MANAGEMENT" : "Audiovisual production & event management"}
             </p>
             <h1>{lang === "es" ? "Audio, video, iluminación y operación. Un solo equipo." : "Audio, video, lighting, and operation. One team."}</h1>
             <p className="hero-support">
@@ -85,7 +85,7 @@ export default function HomePage() {
             </p>
             <div className="button-row">
               <Link className="button button--light" href="/cotizar">
-                {lang === "es" ? "Cotizar mi evento" : "Get a quote"} <ArrowRight size={17} />
+                {lang === "es" ? "COTIZAR MI EVENTO" : "Get a quote"} <ArrowRight size={17} />
               </Link>
             </div>
           </div>
@@ -94,7 +94,7 @@ export default function HomePage() {
         <section className="section" aria-labelledby="home-services-title">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(360px,1.1fr)] lg:items-end">
             <div className="section-heading !mb-0">
-              <p className="eyebrow">{lang === "es" ? "Servicios" : "Services"}</p>
+              <p className="eyebrow">{lang === "es" ? "SERVICIOS" : "Services"}</p>
               <h2 id="home-services-title">
                 {lang === "es"
                   ? "La parte técnica de tu evento, coordinada de principio a fin."
@@ -142,20 +142,14 @@ export default function HomePage() {
         <section className="section section--paper" aria-labelledby="about-dosa-title">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)] lg:items-center">
             <div className="section-heading !mb-0 !max-w-[820px]">
-              <p className="eyebrow eyebrow--dark">dos A</p>
-              <h2 id="about-dosa-title">
+              <p id="about-dosa-title">
                 {lang === "es"
-                  ? "Somos una agencia mexicana especializada en la producción integral de eventos."
+                  ? "Somos una agencia mexicana especializada en la producción integral de eventos corporativos, gubernamentales, sociales y masivos. Con más de 25 años de experiencia en el mercado , nos destacamos por ofrecer soluciones tecnológicas a la medida para presentaciones en espacios abiertos, cerrados, hoteles y empresas."
                   : "We are a Mexican agency specializing in end-to-end event production."}
-              </h2>
-              <p>
-                {lang === "es"
-                  ? "Con más de 25 años de experiencia en el mercado, producimos eventos corporativos, gubernamentales, sociales y masivos con soluciones tecnológicas a la medida para espacios abiertos, cerrados, hoteles y empresas."
-                  : "With more than 25 years in the market, we produce corporate, government, social, and large-scale events with tailored technical solutions for open-air venues, indoor spaces, hotels, and companies."}
               </p>
               <p className="mt-5 text-[#55534e]">
                 {lang === "es"
-                  ? "Nuestra filosofía se basa en cuidar los pequeños detalles que marcan la gran diferencia. Desde una junta privada de altos ejecutivos hasta un concierto multitudinario, buscamos una ejecución impecable, fresca y elegante."
+                  ? "Nuestra filosofía se basa en cuidar los pequeños detalles que marcan la gran diferencia. Desde una junta privada de altos ejecutivos hasta un concierto multitudinario, nos aseguramos de brindar una ejecución impecable, fresca y elegante."
                   : "Our philosophy is to care for the small details that create the biggest difference. From a private executive meeting to a large concert, we aim for an execution that is precise, fresh, and elegant."}
               </p>
             </div>
@@ -175,7 +169,7 @@ export default function HomePage() {
 
         <section className="client-wall" aria-labelledby="client-proof-title">
           <p className="client-wall__eyebrow" id="client-proof-title">
-            {lang === "es" ? "Marcas y organismos que confían en dos A" : "Brands and organizations that trust dos A"}
+            {lang === "es" ? "MARCAS Y ORGANISMOS QUE CONFÍAN EN DOS2A" : "Brands and organizations that trust dos A"}
           </p>
           <ul>
             <li><img src="/brand/clients/coca-cola.png" alt="Coca-Cola" width={240} height={96} loading="lazy" decoding="async" /></li>
@@ -186,16 +180,18 @@ export default function HomePage() {
             <li className="client-wall__tall"><img src="/brand/clients/veci.png" alt="Viajes El Corte Inglés México" width={340} height={131} loading="lazy" decoding="async" /></li>
           </ul>
           <p className="client-wall__gov">
-            CONAHCYT · CONAVI · IFT · CONAPRED <span>{lang === "es" ? "y dependencias del sector público" : "and public-sector organizations"}</span>
+            {lang === "es"
+              ? "Producción técnica para dependencias del sector público como CONAHCYT, CONAVI, IFT y CONAPRED"
+              : "Technical production for public-sector organizations including CONAHCYT, CONAVI, IFT, and CONAPRED"}
           </p>
         </section>
 
         <section className="section section--paper" aria-labelledby="audience-title">
           <div className="section-heading">
-            <p className="eyebrow eyebrow--dark">{lang === "es" ? "Soluciones audiovisuales a la medida" : "Tailored audiovisual solutions"}</p>
+            <p className="eyebrow eyebrow--dark">{lang === "es" ? "SOLUCIONES AUDIOVISUALES A LA MEDIDA" : "Tailored audiovisual solutions"}</p>
             <h2 id="audience-title">
               {lang === "es"
-                ? "Operación impecable para proyectos que no admiten margen de error."
+                ? "Operación impecable para proyectos que no admiten margen de error"
                 : "Precise operation for projects where there is no room for error."}
             </h2>
           </div>
@@ -243,7 +239,6 @@ export default function HomePage() {
         </section>
 
         <section className="closing-cta">
-          <p className="eyebrow">{lang === "es" ? "Tu próximo evento" : "Your next event"}</p>
           <h2>
             {lang === "es"
               ? "Hacemos realidad la producción técnica de tu próximo evento."
@@ -258,7 +253,7 @@ export default function HomePage() {
               : "You do not need to master technical terminology. Tell us what you want to accomplish and our team will define the right audio, screen, and lighting solution for your budget."}
           </p>
           <Link className="button button--light" href="/cotizar">
-            {lang === "es" ? "Cotizar mi evento" : "Get a quote"} <ArrowRight size={17} />
+            {lang === "es" ? "COTIZAR MI EVENTO" : "Get a quote"} <ArrowRight size={17} />
           </Link>
         </section>
       </div>
