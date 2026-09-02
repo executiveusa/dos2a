@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/lib/language";
 import { siteContent } from "@/lib/site-content";
 import PublicShell from "./PublicShell";
+import styles from "./DosaEditorial.module.css";
 
 type Bilingual = { es: string; en: string };
 
@@ -99,106 +100,108 @@ export default function ServicesPage() {
 
   return (
     <PublicShell>
-      <section className="page-hero">
-        <p className="eyebrow">{lang === "es" ? "Servicios" : "Services"}</p>
-        <h1>
-          {lang === "es"
-            ? "Soluciones audiovisuales de alta precisión para cada escala de evento."
-            : "High-precision audiovisual solutions for every scale of event."}
-        </h1>
-        <p>
-          {lang === "es"
-            ? "En dos A transformamos cualquier espacio en una experiencia memorable a través de soluciones audiovisuales de alta precisión. Especializados en la renta de equipo de audio e iluminación profesional para eventos corporativos, sociales y masivos. Integramos tecnología de vanguardia, producción de video y diseño de escenarios bajo la supervisión de un equipo experto con más de 25 años de trayectoria en México."
-            : "At dos A, we transform spaces through precise audiovisual production. We specialize in professional audio and lighting rental for corporate, social, and large-scale events, integrating current technology, video production, and stage design with more than 25 years of experience in Mexico."}
-        </p>
-      </section>
+      <div className={styles.services}>
+        <section className="page-hero">
+          <p className="eyebrow">{lang === "es" ? "Servicios" : "Services"}</p>
+          <h1>
+            {lang === "es"
+              ? "Soluciones audiovisuales de alta precisión para cada escala de evento."
+              : "High-precision audiovisual solutions for every scale of event."}
+          </h1>
+          <p>
+            {lang === "es"
+              ? "En dos A transformamos cualquier espacio en una experiencia memorable a través de soluciones audiovisuales de alta precisión. Especializados en la renta de equipo de audio e iluminación profesional para eventos corporativos, sociales y masivos. Integramos tecnología de vanguardia, producción de video y diseño de escenarios bajo la supervisión de un equipo experto con más de 25 años de trayectoria en México."
+              : "At dos A, we transform spaces through precise audiovisual production. We specialize in professional audio and lighting rental for corporate, social, and large-scale events, integrating current technology, video production, and stage design with more than 25 years of experience in Mexico."}
+          </p>
+        </section>
 
-      <section className="section !pt-0" aria-label={lang === "es" ? "Servicios audiovisuales" : "Audiovisual services"}>
-        <div className="border-t border-[var(--line)]">
-          {services.map((service, index) => {
-            const isStar = index === 0;
-            return (
-              <article
-                key={service.n}
-                className={`grid gap-0 border-b border-[var(--line)] ${isStar ? "lg:grid-cols-[minmax(0,1.12fr)_minmax(340px,0.88fr)]" : "lg:grid-cols-[120px_minmax(0,1fr)_minmax(300px,0.75fr)]"}`}
-              >
-                {isStar ? (
-                  <div className="py-8 pr-0 md:py-12 lg:pr-12">
-                    <div className="mb-8 flex items-center gap-4">
-                      <span className="text-xs tracking-[0.12em] text-[var(--muted)]">{service.n}</span>
-                      <span className="border border-[var(--line)] px-3 py-1 text-[0.7rem] uppercase tracking-[0.12em] text-[var(--paper2)]">
-                        {service.label?.[lang]}
-                      </span>
-                    </div>
-                    <p className="eyebrow">{service.overline[lang]}</p>
-                    <h2 className="m-0 max-w-[18ch] font-[var(--font-sora)] text-[clamp(2.2rem,4.8vw,5rem)] font-semibold leading-[1] tracking-[-0.05em]">
-                      {service.title[lang]}
-                    </h2>
-                    <p className="mt-6 max-w-[720px] text-[1.05rem] text-[var(--paper2)]">{service.body[lang]}</p>
-                  </div>
-                ) : (
-                  <>
-                    <div className="pt-8 text-xs tracking-[0.12em] text-[var(--muted)] lg:py-10">{service.n}</div>
-                    <div className="py-6 lg:py-10 lg:pr-12">
+        <section className="section !pt-0" aria-label={lang === "es" ? "Servicios audiovisuales" : "Audiovisual services"}>
+          <div className="border-t border-[var(--line)]">
+            {services.map((service, index) => {
+              const isStar = index === 0;
+              return (
+                <article
+                  key={service.n}
+                  className={`grid gap-0 border-b border-[var(--line)] ${isStar ? "lg:grid-cols-[minmax(0,1.12fr)_minmax(340px,0.88fr)]" : "lg:grid-cols-[120px_minmax(0,1fr)_minmax(300px,0.75fr)]"}`}
+                >
+                  {isStar ? (
+                    <div className="py-8 pr-0 md:py-12 lg:pr-12">
+                      <div className="mb-8 flex items-center gap-4">
+                        <span className="text-xs tracking-[0.12em] text-[var(--muted)]">{service.n}</span>
+                        <span className="border border-[var(--line)] px-3 py-1 text-[0.7rem] uppercase tracking-[0.12em] text-[var(--paper2)]">
+                          {service.label?.[lang]}
+                        </span>
+                      </div>
                       <p className="eyebrow">{service.overline[lang]}</p>
-                      <h2 className="m-0 max-w-[24ch] font-[var(--font-sora)] text-[clamp(1.75rem,3vw,3rem)] font-semibold leading-[1.05] tracking-[-0.045em]">
+                      <h2 className="m-0 max-w-[18ch] font-[var(--font-sora)] text-[clamp(2.2rem,4.8vw,5rem)] font-semibold leading-[1] tracking-[-0.05em]">
                         {service.title[lang]}
                       </h2>
-                      <p className="mt-5 max-w-[720px] text-[var(--paper2)]">{service.body[lang]}</p>
+                      <p className="mt-6 max-w-[720px] text-[1.05rem] text-[var(--paper2)]">{service.body[lang]}</p>
                     </div>
-                  </>
-                )}
+                  ) : (
+                    <>
+                      <div className="pt-8 text-xs tracking-[0.12em] text-[var(--muted)] lg:py-10">{service.n}</div>
+                      <div className="py-6 lg:py-10 lg:pr-12">
+                        <p className="eyebrow">{service.overline[lang]}</p>
+                        <h2 className="m-0 max-w-[24ch] font-[var(--font-sora)] text-[clamp(1.75rem,3vw,3rem)] font-semibold leading-[1.05] tracking-[-0.045em]">
+                          {service.title[lang]}
+                        </h2>
+                        <p className="mt-5 max-w-[720px] text-[var(--paper2)]">{service.body[lang]}</p>
+                      </div>
+                    </>
+                  )}
 
-                {service.image ? (
-                  <figure className={`m-0 overflow-hidden bg-[var(--ink2)] ${isStar ? "min-h-[360px] lg:min-h-[620px]" : "min-h-[260px] lg:my-8"}`}>
-                    <img
-                      src={service.image}
-                      alt={service.alt?.[lang] ?? ""}
-                      width={1400}
-                      height={900}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-full min-h-[260px] w-full object-cover"
-                    />
-                  </figure>
-                ) : (
-                  <div className="hidden lg:block" aria-hidden="true" />
-                )}
-              </article>
-            );
-          })}
-        </div>
-      </section>
+                  {service.image ? (
+                    <figure className={`m-0 overflow-hidden bg-[var(--ink2)] ${isStar ? "min-h-[360px] lg:min-h-[620px]" : "min-h-[260px] lg:my-8"}`}>
+                      <img
+                        src={service.image}
+                        alt={service.alt?.[lang] ?? ""}
+                        width={1400}
+                        height={900}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full min-h-[260px] w-full object-cover"
+                      />
+                    </figure>
+                  ) : (
+                    <div className="hidden lg:block" aria-hidden="true" />
+                  )}
+                </article>
+              );
+            })}
+          </div>
+        </section>
 
-      <section className="section section--paper">
-        <div className="section-heading">
-          <p className="eyebrow eyebrow--dark">{lang === "es" ? "Proceso" : "Process"}</p>
-          <h2>{process.title[lang]}</h2>
-        </div>
-        <ol className="process-list">
-          {process.steps.map((step) => (
-            <li key={step.n}>
-              <span>{step.n}</span>
-              <div>
-                <h3>{step.title[lang]}</h3>
-                <p>{step.body[lang]}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
+        <section className="section section--paper">
+          <div className="section-heading">
+            <p className="eyebrow eyebrow--dark">{lang === "es" ? "Proceso" : "Process"}</p>
+            <h2>{process.title[lang]}</h2>
+          </div>
+          <ol className="process-list">
+            {process.steps.map((step) => (
+              <li key={step.n}>
+                <span>{step.n}</span>
+                <div>
+                  <h3>{step.title[lang]}</h3>
+                  <p>{step.body[lang]}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
 
-      <section className="closing-cta">
-        <h2>{lang === "es" ? "Tu idea en pantalla y escenario. Sin complicaciones." : "Your idea on screen and stage. Without complications."}</h2>
-        <p>
-          {lang === "es"
-            ? "No necesitas ser experto en equipamiento audiovisual. Analizamos tu espacio y aforo para entregar una propuesta técnica lista para operar."
-            : "You do not need to be an audiovisual equipment expert. We analyze your venue and audience size to deliver a technical proposal ready to operate."}
-        </p>
-        <Link className="button button--light" href="/cotizar">
-          {lang === "es" ? "Cotiza tu evento" : "Get a quote"} <ArrowRight size={17} />
-        </Link>
-      </section>
+        <section className="closing-cta">
+          <h2>{lang === "es" ? "Tu idea en pantalla y escenario. Sin complicaciones." : "Your idea on screen and stage. Without complications."}</h2>
+          <p>
+            {lang === "es"
+              ? "No necesitas ser experto en equipamiento audiovisual. Analizamos tu espacio y aforo para entregar una propuesta técnica lista para operar."
+              : "You do not need to be an audiovisual equipment expert. We analyze your venue and audience size to deliver a technical proposal ready to operate."}
+          </p>
+          <Link className="button button--light" href="/cotizar">
+            {lang === "es" ? "Cotiza tu evento" : "Get a quote"} <ArrowRight size={17} />
+          </Link>
+        </section>
+      </div>
     </PublicShell>
   );
 }
