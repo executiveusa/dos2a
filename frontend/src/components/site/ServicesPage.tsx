@@ -138,7 +138,7 @@ export default function ServicesPage() {
                     <div className="py-8 pr-0 md:py-12 lg:pr-12">
                       <div className="mb-8 flex items-center gap-4">
                         <span className="text-xs tracking-[0.12em] text-[var(--muted)]">{service.n}</span>
-                        <span className="border border-[var(--line)] px-3 py-1 text-[0.7rem] uppercase tracking-[0.12em] text-[var(--paper2)]">
+                        <span className="border border-[var(--line)] px-3 py-1 text-[0.7rem] tracking-[0.12em] text-[var(--paper2)]">
                           {service.label[lang]}
                         </span>
                       </div>
