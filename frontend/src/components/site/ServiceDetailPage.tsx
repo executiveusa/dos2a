@@ -8,11 +8,13 @@ import PublicShell from "./PublicShell";
 
 export type ServiceSlug = "audio" | "iluminacion" | "video" | "escenarios";
 
+const WHATSAPP_NUMBER = "525549110045";
+
 export default function ServiceDetailPage({ slug }: { slug: ServiceSlug }) {
   const { lang } = useLanguage();
   const s = siteContent.servicePages[slug];
   const L = siteContent.servicePageLabels;
-  const wa = siteContent.brand.whatsapp;
+  const wa = WHATSAPP_NUMBER;
   const waHref = `https://wa.me/${wa}?text=${encodeURIComponent(s.waMessage[lang])}`;
   return <PublicShell>
     <nav className="breadcrumb" aria-label={lang === "es" ? "Ruta de navegación" : "Breadcrumb"}>
