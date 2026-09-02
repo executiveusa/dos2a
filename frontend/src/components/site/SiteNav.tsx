@@ -12,16 +12,31 @@ export default function SiteNav() {
   const { lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const n = siteContent.nav;
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    const onTap = (e: PointerEvent) => { if (headerRef.current && !headerRef.current.contains(e.target as Node)) setOpen(false); };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        requestAnimationFrame(() => menuButtonRef.current?.focus());
+      }
+    };
+    const onTap = (e: PointerEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) setOpen(false);
+    };
     document.addEventListener("keydown", onKey);
     document.addEventListener("pointerdown", onTap);
-    return () => { document.removeEventListener("keydown", onKey); document.removeEventListener("pointerdown", onTap); };
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onTap);
+    };
   }, [open]);
+
   const links = [
     ["/", n.home[lang]],
     ["/servicios", n.services[lang]],
@@ -42,7 +57,7 @@ export default function SiteNav() {
         <div className="header-actions">
           <button className="language-switch" onClick={() => setLang(lang === "es" ? "en" : "es")} aria-label={lang === "es" ? "Cambiar a inglés" : "Switch to Spanish"}>{lang === "es" ? "EN" : "ES"}</button>
           <Link className="button button--small button--light desktop-quote" href="/cotizar">{n.quote[lang]}</Link>
-          <button className="menu-button" onClick={() => setOpen(v => !v)} aria-expanded={open} aria-controls="mobile-menu" aria-label={open ? "Cerrar menú" : "Abrir menú"}>{open ? <X size={22}/> : <Menu size={22}/>}</button>
+          <button ref={menuButtonRef} className="menu-button" onClick={() => setOpen(v => !v)} aria-expanded={open} aria-controls="mobile-menu" aria-haspopup="true" aria-label={open ? "Cerrar menú" : "Abrir menú"}>{open ? <X size={22}/> : <Menu size={22}/>}</button>
         </div>
       </div>
       {open && (
