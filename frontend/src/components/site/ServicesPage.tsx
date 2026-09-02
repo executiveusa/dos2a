@@ -11,7 +11,7 @@ type Bilingual = { es: string; en: string };
 
 type ServiceBlock = {
   n: string;
-  label?: Bilingual;
+  label: Bilingual;
   overline: Bilingual;
   title: Bilingual;
   body: Bilingual;
@@ -23,7 +23,7 @@ const services: ServiceBlock[] = [
   {
     n: "01",
     label: { es: "Nuestro servicio estrella", en: "Our signature service" },
-    overline: { es: "Audio + Iluminación", en: "Audio + Lighting" },
+    overline: { es: "AUDIO + ILUMINACIÓN", en: "Audio + Lighting" },
     title: {
       es: "Sistemas de sonido e ingeniería acústica calibrados para el aforo, voz, música y formatos híbridos de tu evento.",
       en: "Sound systems and acoustic engineering calibrated for your audience size, speech, music, and hybrid event formats.",
@@ -37,7 +37,8 @@ const services: ServiceBlock[] = [
   },
   {
     n: "02",
-    overline: { es: "Video + Fotografía + Mapping", en: "Video + Photography + Mapping" },
+    label: { es: "Producción de Video & Fotografía", en: "Video & Photography Production" },
+    overline: { es: "VIDEO + FOTOGRAFÍA + MAPPING", en: "Video + Photography + Mapping" },
     title: {
       es: "Pantallas de alta resolución, proyectores, monitores de apoyo para una transmisión visual impecable.",
       en: "High-resolution screens, projectors, and support monitors for a precise visual presentation.",
@@ -51,7 +52,8 @@ const services: ServiceBlock[] = [
   },
   {
     n: "03",
-    overline: { es: "Escenarios + Stands", en: "Stages + Stands" },
+    label: { es: "Escenarios & Stands", en: "Stages & Stands" },
+    overline: { es: "ESCENARIOS + STANDS", en: "Stages + Stands" },
     title: {
       es: "Diseño, estructura y fabricación adaptada a los requerimientos de tu marca o espacio.",
       en: "Design, structure, and fabrication adapted to the requirements of your brand or venue.",
@@ -65,7 +67,8 @@ const services: ServiceBlock[] = [
   },
   {
     n: "04",
-    overline: { es: "Coordinación + Logística + Operación", en: "Coordination + Logistics + Operation" },
+    label: { es: "Coordinación & Logística", en: "Coordination & Logistics" },
+    overline: { es: "COORDINACIÓN + LOGÍSTICA + OPERACIÓN", en: "Coordination + Logistics + Operation" },
     title: { es: "Control total de principio a fin.", en: "Full control from start to finish." },
     body: {
       es: "Gestión integral de proveedores, tiempos y montaje con un profesional dedicado a la operación impecable de tu evento.",
@@ -76,7 +79,8 @@ const services: ServiceBlock[] = [
   },
   {
     n: "05",
-    overline: { es: "Traducción Simultánea", en: "Simultaneous Interpretation" },
+    label: { es: "Traducción Simultánea", en: "Simultaneous Interpretation" },
+    overline: { es: "TRADUCCIÓN SIMULTÁNEA", en: "Simultaneous Interpretation" },
     title: { es: "Comunicación fluida sin fronteras.", en: "Clear communication across languages." },
     body: {
       es: "Sistemas de microfonía parlamentaria y traducción simultánea multilingüe para eventos internacionales y corporativos.",
@@ -85,7 +89,8 @@ const services: ServiceBlock[] = [
   },
   {
     n: "06",
-    overline: { es: "Renta de Cómputo + Publicidad", en: "Computer Rental + Promotional Production" },
+    label: { es: "Servicios Especiales", en: "Special Services" },
+    overline: { es: "RENTA DE CÓMPUTO + PUBLICIDAD", en: "Computer Rental + Promotional Production" },
     title: { es: "Respaldo tecnológico y promocional.", en: "Technical and promotional support." },
     body: {
       es: "Alquiler de equipo informático para logística, además de producción de materiales digitales, impresos y artículos promocionales.",
@@ -105,13 +110,18 @@ export default function ServicesPage() {
           <p className="eyebrow">{lang === "es" ? "Servicios" : "Services"}</p>
           <h1>
             {lang === "es"
-              ? "En dos A transformamos cualquier espacio en una experiencia memorable a través de soluciones audiovisuales de alta precisión."
+              ? "En Dos2A transformamos cualquier espacio en una experiencia memorable a través de soluciones audiovisuales de alta precisión."
               : "At dos A, we transform any space into a memorable experience through high-precision audiovisual solutions."}
           </h1>
           <p>
             {lang === "es"
-              ? "Especializados en la renta de equipo de audio e iluminación profesional para eventos corporativos, sociales y masivos. Integramos tecnología de vanguardia, producción de video y diseño de escenarios bajo la supervisión de un equipo experto con más de 25 años de trayectoria en México."
-              : "We specialize in professional audio and lighting rental for corporate, social, and large-scale events. We integrate current technology, video production, and stage design under the supervision of an experienced team with more than 25 years in Mexico."}
+              ? "Especializados en la renta de equipo de audio e iluminación profesional para eventos corporativos, sociales y masivos."
+              : "We specialize in professional audio and lighting rental for corporate, social, and large-scale events."}
+          </p>
+          <p>
+            {lang === "es"
+              ? "Integramos tecnología de vanguardia, producción de video y diseño de escenarios bajo la supervisión de un equipo experto con más de 25 años de trayectoria en México"
+              : "We integrate current technology, video production, and stage design under the supervision of an experienced team with more than 25 years in Mexico."}
           </p>
         </section>
 
@@ -129,7 +139,7 @@ export default function ServicesPage() {
                       <div className="mb-8 flex items-center gap-4">
                         <span className="text-xs tracking-[0.12em] text-[var(--muted)]">{service.n}</span>
                         <span className="border border-[var(--line)] px-3 py-1 text-[0.7rem] uppercase tracking-[0.12em] text-[var(--paper2)]">
-                          {service.label?.[lang]}
+                          {service.label[lang]}
                         </span>
                       </div>
                       <p className="eyebrow">{service.overline[lang]}</p>
@@ -142,6 +152,7 @@ export default function ServicesPage() {
                     <>
                       <div className="pt-8 text-xs tracking-[0.12em] text-[var(--muted)] lg:py-10">{service.n}</div>
                       <div className="py-6 lg:py-10 lg:pr-12">
+                        <p className="mb-4 font-[var(--font-sora)] text-sm font-semibold tracking-[-0.015em] text-[var(--paper)]">{service.label[lang]}</p>
                         <p className="eyebrow">{service.overline[lang]}</p>
                         <h2 className="m-0 max-w-[24ch] font-[var(--font-sora)] text-[clamp(1.75rem,3vw,3rem)] font-semibold leading-[1.05] tracking-[-0.045em]">
                           {service.title[lang]}
