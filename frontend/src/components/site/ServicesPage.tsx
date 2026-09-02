@@ -105,13 +105,13 @@ export default function ServicesPage() {
           <p className="eyebrow">{lang === "es" ? "Servicios" : "Services"}</p>
           <h1>
             {lang === "es"
-              ? "Soluciones audiovisuales de alta precisión para cada escala de evento."
-              : "High-precision audiovisual solutions for every scale of event."}
+              ? "En dos A transformamos cualquier espacio en una experiencia memorable a través de soluciones audiovisuales de alta precisión."
+              : "At dos A, we transform any space into a memorable experience through high-precision audiovisual solutions."}
           </h1>
           <p>
             {lang === "es"
-              ? "En dos A transformamos cualquier espacio en una experiencia memorable a través de soluciones audiovisuales de alta precisión. Especializados en la renta de equipo de audio e iluminación profesional para eventos corporativos, sociales y masivos. Integramos tecnología de vanguardia, producción de video y diseño de escenarios bajo la supervisión de un equipo experto con más de 25 años de trayectoria en México."
-              : "At dos A, we transform spaces through precise audiovisual production. We specialize in professional audio and lighting rental for corporate, social, and large-scale events, integrating current technology, video production, and stage design with more than 25 years of experience in Mexico."}
+              ? "Especializados en la renta de equipo de audio e iluminación profesional para eventos corporativos, sociales y masivos. Integramos tecnología de vanguardia, producción de video y diseño de escenarios bajo la supervisión de un equipo experto con más de 25 años de trayectoria en México."
+              : "We specialize in professional audio and lighting rental for corporate, social, and large-scale events. We integrate current technology, video production, and stage design under the supervision of an experienced team with more than 25 years in Mexico."}
           </p>
         </section>
 
