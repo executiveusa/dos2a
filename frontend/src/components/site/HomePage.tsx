@@ -12,11 +12,11 @@ import styles from "./DosaEditorial.module.css";
 type Bilingual = { es: string; en: string };
 
 const homeServices: Array<{ n: string; title: Bilingual }> = [
-  { n: "01", title: { es: "Audio e Iluminación profesional.", en: "Professional audio and lighting" } },
-  { n: "03", title: { es: "Video y Pantallas LED.", en: "Video and LED screens" } },
-  { n: "04", title: { es: "Escenarios y Stands.", en: "Stages and stands" } },
-  { n: "05", title: { es: "Operación y Coordinación.", en: "Operation and coordination" } },
-  { n: "06", title: { es: "Servicios Especiales.", en: "Special services" } },
+  { n: "01.", title: { es: "Audio e Iluminación profesional.", en: "Professional audio and lighting" } },
+  { n: "03.", title: { es: "Video y Pantallas LED.", en: "Video and LED screens" } },
+  { n: "04.", title: { es: "Escenarios y Stands.", en: "Stages and stands" } },
+  { n: "05.", title: { es: "Operación y Coordinación.", en: "Operation and coordination" } },
+  { n: "06.", title: { es: "Servicios Especiales.", en: "Special services" } },
 ];
 
 const audiences: Array<{ title: Bilingual; body: Bilingual; image: string; alt: Bilingual }> = [
