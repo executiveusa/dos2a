@@ -5,6 +5,14 @@ import { siteContent } from "@/lib/site-content";
 import BrandMark from "./BrandMark";
 import socialStyles from "./FooterSocial.module.css";
 
+const WHATSAPP_NUMBER = "525549110045";
+
+const SOCIAL_LINKS = {
+  facebook: "https://www.facebook.com/share/1DXS9JAjkr/?mibextid=wwXIfr",
+  instagram: "https://www.instagram.com/dos2a?igsi=MXdtenNheXNscTg2bQ==",
+  tiktok: "https://www.tiktok.com/@2audio.iluminacin?_r=1&_t=ZS-99PERZGaisG",
+} as const;
+
 function FacebookIcon() {
   return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>;
 }
@@ -30,11 +38,11 @@ export default function SiteFooter() {
           <Link href="/cotizar">{siteContent.nav.quote[lang]}</Link>
         </div>
         <div className="footer-note">
-          <p>{lang === "es" ? "Ciudad de México · proyectos en todo México" : "Mexico City · projects across Mexico"}<br/><a href="mailto:2audioiluminacion@gmail.com">2audioiluminacion@gmail.com</a>{siteContent.brand.whatsapp && <><br/><a href={`https://wa.me/${siteContent.brand.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp</a></>}</p>
+          <p>{lang === "es" ? "Ciudad de México · proyectos en todo México" : "Mexico City · projects across Mexico"}<br/><a href="mailto:2audioiluminacion@gmail.com">2audioiluminacion@gmail.com</a><br/><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
           <div className={socialStyles.social} aria-label={lang === "es" ? "Redes sociales" : "Social media"}>
-            <span className={socialStyles.mark} role="img" aria-label="Facebook"><FacebookIcon/></span>
-            <span className={socialStyles.mark} role="img" aria-label="Instagram"><InstagramIcon/></span>
-            <span className={socialStyles.mark} role="img" aria-label="TikTok"><TikTokIcon/></span>
+            <a className={socialStyles.mark} href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FacebookIcon/></a>
+            <a className={socialStyles.mark} href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><InstagramIcon/></a>
+            <a className={socialStyles.mark} href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok"><TikTokIcon/></a>
           </div>
         </div>
       </div>
