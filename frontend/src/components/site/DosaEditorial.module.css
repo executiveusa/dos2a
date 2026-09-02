@@ -81,13 +81,6 @@
     gap: clamp(28px, 4vw, 64px);
   }
 
-  .home :global(.client-wall li) {
-    height: auto;
-    padding: 0;
-    background: transparent;
-    border-radius: 0;
-  }
-
   .home :global(.client-wall img) {
     max-height: 48px;
     width: auto;
@@ -355,16 +348,14 @@
   .home :global(.client-wall ul) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 28px 20px;
-    justify-items: start;
+    gap: 20px 12px;
+    justify-items: stretch;
   }
 
   .home :global(.client-wall li) {
-    height: 44px;
-    padding: 0;
-    background: transparent;
-    border-radius: 0;
-    justify-content: flex-start;
+    min-width: 0;
+    padding-left: 14px;
+    padding-right: 14px;
   }
 
   .home :global(.client-wall li img),
