@@ -1,0 +1,161 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  background: #080909;
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 800ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.exiting {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.media,
+.signatureStage,
+.blackout {
+  position: absolute;
+  inset: 0;
+}
+
+.media {
+  background: #080909;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 900ms ease, transform 1400ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.mediaVisible {
+  opacity: 1;
+}
+
+.mediaDimmed {
+  opacity: .22;
+  transform: scale(1.012);
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  filter: saturate(.82) contrast(1.06) brightness(.72);
+  transform: scale(1.035);
+  transition:
+    opacity 650ms cubic-bezier(.22, 1, .36, 1),
+    transform 1800ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.active {
+  opacity: 1;
+  transform: scale(1.075);
+}
+
+.frameOne {
+  object-position: 54% center;
+}
+
+.frameTwo {
+  object-position: center;
+}
+
+.frameThree {
+  object-position: 58% center;
+}
+
+.video {
+  object-position: center;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(8, 9, 9, .32), rgba(8, 9, 9, .06) 58%, rgba(8, 9, 9, .22)),
+    linear-gradient(to top, rgba(8, 9, 9, .46), transparent 44%);
+  pointer-events: none;
+}
+
+.signatureStage {
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  background: rgba(8, 9, 9, .18);
+  transition: opacity 700ms ease;
+}
+
+.signatureActive {
+  opacity: 1;
+}
+
+.signature {
+  display: block;
+  width: clamp(150px, 16vw, 250px);
+  height: auto;
+  color: #f5f3ee;
+  filter: drop-shadow(0 14px 42px rgba(0, 0, 0, .28));
+}
+
+.signature :global(.bm-dos path) {
+  opacity: 0;
+}
+
+.signatureActive .signature :global(.bm-dos path) {
+  animation: dosa-mark-fade .5s ease .4s forwards;
+}
+
+.signatureActive .signature :global(.bm-dos path:nth-child(2)) {
+  animation-delay: .8s;
+}
+
+.signatureActive .signature :global(.bm-dos path:nth-child(3)) {
+  animation-delay: 1.2s;
+}
+
+.signature :global(.bm-cable) {
+  clip-path: inset(0 100% 0 0);
+}
+
+.signatureActive .signature :global(.bm-cable) {
+  animation: dosa-cable-draw 2s cubic-bezier(.22, 1, .36, 1) 1.3s forwards;
+}
+
+.blackout {
+  z-index: 4;
+  background: #080909;
+  opacity: 0;
+  transition: opacity 600ms cubic-bezier(.22, 1, .36, 1);
+  pointer-events: none;
+}
+
+.blackoutActive {
+  opacity: 1;
+}
+
+@keyframes dosa-mark-fade {
+  to { opacity: 1; }
+}
+
+@keyframes dosa-cable-draw {
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@media (max-width: 640px) {
+  .frameOne { object-position: 63% center; }
+  .frameTwo { object-position: 52% center; }
+  .frameThree { object-position: 64% center; }
+  .signature { width: clamp(124px, 38vw, 176px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro { display: none; }
+  .signature :global(.bm-dos path) { opacity: 1; animation: none; }
+  .signature :global(.bm-cable) { clip-path: none; animation: none; }
+}
