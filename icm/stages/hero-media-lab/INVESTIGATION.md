@@ -1,6 +1,6 @@
 # DOS A Hero Media Lab — Investigation
 
-Status: investigation and isolated prototype only. Do not modify or merge the approved Ivette redesign from this branch until a hero direction is explicitly selected.
+Status: isolated prototype. The approved Ivette redesign remains frozen separately; do not merge this experiment without explicit visual approval.
 
 ## Preserved source state
 
@@ -111,82 +111,57 @@ The full reels should not be directly autoplayed as the homepage hero. If video 
 
 The next asset-recovery priority is to locate the original files corresponding to those ten ranked 4000×2250 photographs before spending money on enhancement.
 
-## Collins-level prototype pass — completed locally, not wired into site
+## Collins-level prototype decision
 
-Three silent 1280×720 proof cuts were created from factual DOS A source material. These are evaluation artifacts only; they are not committed hero assets and do not change the website.
+Three silent 1280×720 proof cuts were created from factual DOS A source material:
+- A — Still Motion
+- B — Hybrid
+- C — Compact Real Video
 
-### A — Still Motion
+**Selected direction: B — Hybrid.**
 
-Source sequence:
-- `image40.png`
-- `image51.tiff`
-- `image54.jpg`
-- `image85.tiff`
-- `image95.tiff`
+The implementation is intentionally not a looping hero. It is a one-time opening journey layered above the already-approved Ivette homepage.
 
-Motion language:
-- slow 1.00→~1.05 camera push
-- restrained saturation
-- controlled luminance for white-copy legibility
-- short dissolves / one dark transition
-- movement resolves rather than looping indefinitely
+### Locked opening choreography
 
-Prototype weight: ~1.49 MB at 1280×720 H.264. This is only a proof encode; production still-motion would use image assets and browser transforms rather than shipping this video.
+1. Fresh browser session enters on DOS A homepage.
+2. Scroll is temporarily locked while the opening runs.
+3. Three restrained real DOS A still moments establish corporate scale, scenic/LED craft, and branded experiential work.
+4. One brief genuine Mobil motion moment plays.
+5. Motion recedes and the original vector DOS A mark takes over.
+6. The three `bm-dos` paths fade sequentially using the historical timing.
+7. The `bm-cable` path uses the historical one-time draw-on timing.
+8. The complete mark is allowed to register before the image field fades fully to DOS A black.
+9. The black field itself fades away, revealing the unchanged Ivette hero underneath.
+10. All motion stops. The user proceeds through the normal homepage.
 
-### B — Hybrid — current design favorite
+### Replay rule
 
-Uses the same restrained real-still language plus one short genuine Mobil movement interval from `media2.mp4` around 34.4s.
+- Plays once per browser tab/session using `sessionStorage` key `dos2a:hero-intro:v1`.
+- Internal navigation and refreshes in the same session do not replay it.
+- A genuinely new browser session/reopen may play it again.
+- `prefers-reduced-motion: reduce` skips the intro and goes directly to the normal static hero.
 
-Prototype weight: ~1.60 MB at 1280×720 H.264.
+### Prototype implementation files
 
-Why it currently leads:
-- gives unmistakable real motion without turning the homepage into a showreel
-- can preserve a calmer final hero state
-- keeps DOS A's work factual
-- provides more visual range than a single photograph
-- can remain much lighter than a long autoplay reel
+- `frontend/src/components/site/HeroIntro.tsx`
+- `frontend/src/components/site/HeroIntro.module.css`
+- `frontend/src/components/site/PublicShell.tsx` mounts the intro only when pathname is `/`.
 
-### C — Compact Real Video
-
-Short real moments sampled from:
-- `media1.mp4` around 61s
-- `media2.mp4` around 27.2s
-- `media3.mp4` around 15.7s
-- `media4.mp4` around 5.8s
-
-Prototype weight: ~1.62 MB at 1280×720 H.264.
-
-This is useful as a benchmark but currently feels more like a montage/reel and less like the restrained editorial hero direction.
+The experiment currently reuses repository-owned real media so it remains deployable without modifying the approved Ivette hero itself. Higher-quality 4000×2250 still derivatives and a purpose-cut Mobil microclip remain the next optimization pass after visual approval.
 
 ## Collins design rule for this hero
 
-The hero should communicate capability before spectacle. The motion must have a single narrative job: reveal scale, AV craft, physical environments, and operational credibility; then get out of the way so Ivette's exact headline and CTA dominate.
+The hero should communicate capability before spectacle. Motion has one narrative job: reveal scale, AV craft, physical environments, and operational credibility; then get out of the way so Ivette's exact headline and CTA dominate.
 
 Therefore:
-- no infinite rapid slideshow
+- no infinite slideshow
 - no fake camera motion that materially changes the documented scene
 - no decorative particles or generic SaaS animation
 - no loud UI chrome over the work
-- no copy animation that competes with the DOS A mark
-- stop/settle after the opening sequence
-- preserve a static poster for reduced motion, low bandwidth, and failure fallback
-
-## DOS A brand animation to restore
-
-Git history confirms the original hero mark had a one-time draw-on sequence:
-- the three `bm-dos` paths fade sequentially
-- the `bm-cable` path reveals afterward using clip-path
-- reduced-motion users get the fully visible static mark
-
-Restore the original behavior rather than inventing a new logo animation.
-
-Recommended choreography if Hybrid B is selected:
-1. media begins immediately under a dark readability treatment
-2. Ivette hero copy remains stable/readable; do not turn the copy into a kinetic title sequence
-3. media presents 4–5 controlled proof moments over roughly 6–7 seconds
-4. DOS A mark uses the restored original fade/draw-on moment within the opening sequence
-5. media resolves into a single strong static frame
-6. all motion stops
+- no kinetic copy competing with the DOS A mark
+- stop after the opening sequence
+- preserve a static experience for reduced motion and failure fallback
 
 ## Restoration plan
 
