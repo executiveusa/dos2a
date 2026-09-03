@@ -1,28 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import BrandMark from "./BrandMark";
 import styles from "./HeroIntro.module.css";
 
-const SESSION_KEY = "dos2a:hero-intro:v1";
+const SESSION_KEY = "dos2a:hero-intro:v2";
+const EXIT_AT = 2300;
+const END_AT = 3000;
 
-type Phase = "hidden" | "image1" | "image2" | "image3" | "video" | "signature" | "black" | "exit";
-
-const timeline: Array<{ phase: Exclude<Phase, "hidden">; at: number }> = [
-  { phase: "image1", at: 0 },
-  { phase: "image2", at: 1250 },
-  { phase: "image3", at: 2500 },
-  { phase: "video", at: 3750 },
-  { phase: "signature", at: 5050 },
-  { phase: "black", at: 8450 },
-  { phase: "exit", at: 9050 },
-];
-
-const END_AT = 9850;
+type Phase = "hidden" | "signature" | "exit";
 
 export default function HeroIntro() {
   const [phase, setPhase] = useState<Phase>("hidden");
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -44,81 +33,34 @@ export default function HeroIntro() {
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    setPhase("signature");
 
-    const timers = timeline.map(({ phase: nextPhase, at }) =>
-      window.setTimeout(() => setPhase(nextPhase), at),
-    );
+    const exitTimer = window.setTimeout(() => {
+      document.body.style.overflow = previousOverflow;
+      setPhase("exit");
+    }, EXIT_AT);
 
     const endTimer = window.setTimeout(() => {
-      document.body.style.overflow = previousOverflow;
       setPhase("hidden");
     }, END_AT);
 
     return () => {
-      timers.forEach(window.clearTimeout);
+      window.clearTimeout(exitTimer);
       window.clearTimeout(endTimer);
       document.body.style.overflow = previousOverflow;
     };
   }, []);
 
-  useEffect(() => {
-    if (phase !== "video" || !videoRef.current) return;
-
-    const video = videoRef.current;
-    video.currentTime = 0;
-    const playPromise = video.play();
-    playPromise?.catch(() => {
-      // If autoplay is blocked, the still sequence still resolves into the signature.
-    });
-
-    return () => video.pause();
-  }, [phase]);
-
   if (phase === "hidden") return null;
-
-  const mediaVisible = phase === "image1" || phase === "image2" || phase === "image3" || phase === "video";
 
   return (
     <div
       className={`${styles.intro} ${phase === "exit" ? styles.exiting : ""}`}
       aria-hidden="true"
     >
-      <div className={`${styles.media} ${mediaVisible ? styles.mediaVisible : styles.mediaDimmed}`}>
-        <img
-          className={`${styles.frame} ${styles.frameOne} ${phase === "image1" ? styles.active : ""}`}
-          src="/images/hero/dosa-hero-loreal-1920w.webp"
-          alt=""
-          decoding="async"
-          fetchPriority="high"
-        />
-        <img
-          className={`${styles.frame} ${styles.frameTwo} ${phase === "image2" ? styles.active : ""}`}
-          src="/images/projects/led-sculpture-1181w.webp"
-          alt=""
-          decoding="async"
-        />
-        <img
-          className={`${styles.frame} ${styles.frameThree} ${phase === "image3" ? styles.active : ""}`}
-          src="/images/projects/mobil-hologram-1920w.webp"
-          alt=""
-          decoding="async"
-        />
-        <video
-          ref={videoRef}
-          className={`${styles.frame} ${styles.video} ${phase === "video" ? styles.active : ""}`}
-          src="/videos/mobil-reveal-loop.mp4"
-          muted
-          playsInline
-          preload="metadata"
-        />
-        <div className={styles.scrim} />
-      </div>
-
-      <div className={`${styles.signatureStage} ${phase === "signature" ? styles.signatureActive : ""}`}>
+      <div className={`${styles.signatureStage} ${styles.signatureActive}`}>
         <BrandMark className={styles.signature} />
       </div>
-
-      <div className={`${styles.blackout} ${phase === "black" || phase === "exit" ? styles.blackoutActive : ""}`} />
     </div>
   );
 }
