@@ -1,10 +1,10 @@
 .social {
   display: grid;
   grid-template-columns: repeat(3, 44px);
-  gap: 12px;
+  gap: 14px;
   align-items: center;
   justify-content: end;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 .mark {
@@ -12,28 +12,56 @@
   height: 44px;
   display: grid;
   place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--paper2);
+  color: rgba(245, 243, 238, 0.78);
   background: transparent;
+  text-decoration: none;
+  transition: color 160ms ease, transform 160ms cubic-bezier(.22, 1, .36, 1);
 }
 
 .mark svg {
-  width: 20px;
-  height: 20px;
+  width: 23px;
+  height: 23px;
   display: block;
   fill: currentColor;
+}
+
+.mark:nth-child(1) svg {
+  width: 20px;
+}
+
+.mark:nth-child(2) svg {
+  width: 24px;
+  height: 24px;
+}
+
+.mark:nth-child(3) svg {
+  width: 23px;
+  height: 23px;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .mark:hover {
     color: var(--paper);
-    border-color: rgba(245, 243, 238, 0.3);
+    transform: translateY(-2px);
   }
+}
+
+.mark:focus-visible {
+  color: var(--paper);
 }
 
 @media (max-width: 900px) {
   .social {
     justify-content: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark {
+    transition: none;
+  }
+
+  .mark:hover {
+    transform: none;
   }
 }
