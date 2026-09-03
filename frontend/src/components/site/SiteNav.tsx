@@ -17,20 +17,57 @@ export default function SiteNav() {
 
   useEffect(() => {
     if (!open) return;
+
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    const focusFirstMenuItem = window.requestAnimationFrame(() => {
+      const firstLink = headerRef.current?.querySelector<HTMLElement>("#mobile-menu a[href]");
+      firstLink?.focus();
+    });
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setOpen(false);
-        requestAnimationFrame(() => menuButtonRef.current?.focus());
+        window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+        return;
+      }
+
+      if (e.key !== "Tab" || !headerRef.current) return;
+
+      const focusable = Array.from(
+        headerRef.current.querySelectorAll<HTMLElement>(focusableSelector),
+      ).filter((element) => element.offsetParent !== null);
+
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
       }
     };
+
     const onTap = (e: PointerEvent) => {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) setOpen(false);
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
     };
+
     document.addEventListener("keydown", onKey);
     document.addEventListener("pointerdown", onTap);
+
     return () => {
+      window.cancelAnimationFrame(focusFirstMenuItem);
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", onKey);
       document.removeEventListener("pointerdown", onTap);
