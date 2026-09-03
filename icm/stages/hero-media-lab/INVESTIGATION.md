@@ -1,6 +1,6 @@
 # DOS A Hero Media Lab — Investigation
 
-Status: investigation only. Do not modify or merge the approved Ivette redesign from this branch until a hero direction is explicitly selected.
+Status: investigation and isolated prototype only. Do not modify or merge the approved Ivette redesign from this branch until a hero direction is explicitly selected.
 
 ## Preserved source state
 
@@ -71,8 +71,6 @@ The full reels should not be directly autoplayed as the homepage hero. If video 
 
 ## Visual first-pass from recovered deck
 
-Strongest deck-native categories for hero/motion exploration:
-
 ### Tier A — immediate hero/motion candidates
 - L'Oréal gala / corporate room (`image40.png`) — elegant scale, warm dark environment, strong negative space potential
 - Mobil immersive venue (`image38.jpeg`) — strong colored architectural lighting and depth
@@ -113,27 +111,65 @@ Strongest deck-native categories for hero/motion exploration:
 
 The next asset-recovery priority is to locate the original files corresponding to those ten ranked 4000×2250 photographs before spending money on enhancement.
 
-## Hero concepts to prototype after source-image review
+## Collins-level prototype pass — completed locally, not wired into site
 
-### A — Motion graphics from real stills
+Three silent 1280×720 proof cuts were created from factual DOS A source material. These are evaluation artifacts only; they are not committed hero assets and do not change the website.
 
-Use 4–6 selected real DOS A images. Animate only opacity, transform, crop, clip-path/masks, and subtle luminance treatments. Stop motion after ~6–8 seconds and settle on one image.
+### A — Still Motion
 
-Goals:
-- lightweight
-- no invented project content
-- no continuous distraction
-- preserve Ivette copy/layout/CTA
+Source sequence:
+- `image40.png`
+- `image51.tiff`
+- `image54.jpg`
+- `image85.tiff`
+- `image95.tiff`
 
-### B — Hybrid
+Motion language:
+- slow 1.00→~1.05 camera push
+- restrained saturation
+- controlled luminance for white-copy legibility
+- short dissolves / one dark transition
+- movement resolves rather than looping indefinitely
 
-Use 4–5 real stills plus one very short real video moment (roughly 0.8–1.5 seconds) from verified DOS A footage. Then settle to a static frame.
+Prototype weight: ~1.49 MB at 1280×720 H.264. This is only a proof encode; production still-motion would use image assets and browser transforms rather than shipping this video.
 
-The first video candidates are the immersive portions of `media2.mp4`; `media4.mp4` is useful for branded arrival/registration proof. `media1.mp4` is visually atmospheric but much too large as-is.
+### B — Hybrid — current design favorite
 
-### C — Short real-video cut
+Uses the same restrained real-still language plus one short genuine Mobil movement interval from `media2.mp4` around 34.4s.
 
-Build a dedicated compressed 5–7 second silent hero derivative from the strongest real footage. Do not load the 33.7 MB repository reel or 316 MB PowerPoint source directly.
+Prototype weight: ~1.60 MB at 1280×720 H.264.
+
+Why it currently leads:
+- gives unmistakable real motion without turning the homepage into a showreel
+- can preserve a calmer final hero state
+- keeps DOS A's work factual
+- provides more visual range than a single photograph
+- can remain much lighter than a long autoplay reel
+
+### C — Compact Real Video
+
+Short real moments sampled from:
+- `media1.mp4` around 61s
+- `media2.mp4` around 27.2s
+- `media3.mp4` around 15.7s
+- `media4.mp4` around 5.8s
+
+Prototype weight: ~1.62 MB at 1280×720 H.264.
+
+This is useful as a benchmark but currently feels more like a montage/reel and less like the restrained editorial hero direction.
+
+## Collins design rule for this hero
+
+The hero should communicate capability before spectacle. The motion must have a single narrative job: reveal scale, AV craft, physical environments, and operational credibility; then get out of the way so Ivette's exact headline and CTA dominate.
+
+Therefore:
+- no infinite rapid slideshow
+- no fake camera motion that materially changes the documented scene
+- no decorative particles or generic SaaS animation
+- no loud UI chrome over the work
+- no copy animation that competes with the DOS A mark
+- stop/settle after the opening sequence
+- preserve a static poster for reduced motion, low bandwidth, and failure fallback
 
 ## DOS A brand animation to restore
 
@@ -143,6 +179,14 @@ Git history confirms the original hero mark had a one-time draw-on sequence:
 - reduced-motion users get the fully visible static mark
 
 Restore the original behavior rather than inventing a new logo animation.
+
+Recommended choreography if Hybrid B is selected:
+1. media begins immediately under a dark readability treatment
+2. Ivette hero copy remains stable/readable; do not turn the copy into a kinetic title sequence
+3. media presents 4–5 controlled proof moments over roughly 6–7 seconds
+4. DOS A mark uses the restored original fade/draw-on moment within the opening sequence
+5. media resolves into a single strong static frame
+6. all motion stops
 
 ## Restoration plan
 
