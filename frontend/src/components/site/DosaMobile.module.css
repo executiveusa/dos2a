@@ -1,5 +1,7 @@
 .mobileShell {
+  width: 100%;
   min-width: 0;
+  overflow-x: clip;
 }
 
 @media (max-width: 900px) {
@@ -13,6 +15,11 @@
     min-width: 0;
   }
 
+  .mobileShell :global(main) {
+    width: 100%;
+    overflow-x: clip;
+  }
+
   .mobileShell :global(img),
   .mobileShell :global(video),
   .mobileShell :global(svg) {
@@ -24,16 +31,32 @@
     padding-right: max(16px, env(safe-area-inset-right));
   }
 
+  .mobileShell :global(.language-switch),
+  .mobileShell :global(.menu-button),
+  .mobileShell :global(.mobile-menu a),
+  .mobileShell :global(.footer-links a),
+  .mobileShell :global(.footer-note a) {
+    touch-action: manipulation;
+  }
+
   .mobileShell :global(.mobile-menu) {
     overscroll-behavior: contain;
     padding-left: max(18px, env(safe-area-inset-left));
     padding-right: max(18px, env(safe-area-inset-right));
   }
 
-  .mobileShell :global(.mobile-menu a),
-  .mobileShell :global(.footer-links a),
-  .mobileShell :global(.footer-note a) {
-    touch-action: manipulation;
+  .mobileShell :global(.hero-orientation h1),
+  .mobileShell :global(.section-heading h2),
+  .mobileShell :global(.closing-cta h2),
+  .mobileShell :global(.page-hero h1) {
+    text-wrap: balance;
+  }
+
+  .mobileShell :global(.hero-support),
+  .mobileShell :global(.section-heading > p:not(.eyebrow)),
+  .mobileShell :global(.closing-cta > p),
+  .mobileShell :global(.client-wall__gov) {
+    text-wrap: pretty;
   }
 
   .mobileShell :global(.site-footer) {
@@ -57,6 +80,52 @@
 }
 
 @media (max-width: 640px) {
+  .mobileShell :global(.hero-orientation) {
+    min-height: calc(100svh - 64px);
+    min-height: calc(100dvh - 64px);
+    align-items: center;
+  }
+
+  .mobileShell :global(.hero-orientation__content) {
+    padding: clamp(48px, 7svh, 72px) 18px max(36px, env(safe-area-inset-bottom));
+  }
+
+  .mobileShell :global(.hero-brand) {
+    width: clamp(104px, 30vw, 124px);
+    margin-bottom: 22px;
+  }
+
+  .mobileShell :global(.hero-orientation .eyebrow) {
+    max-width: 28ch;
+    margin-bottom: 12px;
+    font-size: 0.64rem;
+    line-height: 1.42;
+  }
+
+  .mobileShell :global(.hero-orientation h1) {
+    max-width: 10.4ch;
+    margin-bottom: 18px;
+    font-size: clamp(2.38rem, 10.8vw, 3.15rem);
+    line-height: 0.95;
+    letter-spacing: -0.052em;
+  }
+
+  .mobileShell :global(.hero-support) {
+    max-width: 33ch;
+    margin-bottom: 26px;
+    font-size: 0.95rem;
+    line-height: 1.52;
+  }
+
+  .mobileShell :global(.hero-orientation .button-row) {
+    width: 100%;
+  }
+
+  .mobileShell :global(.hero-orientation .button) {
+    width: 100%;
+    min-height: 52px;
+  }
+
   .mobileShell :global(.page-hero) {
     padding-left: 18px;
     padding-right: 18px;
@@ -75,6 +144,21 @@
     line-height: 1.62;
   }
 
+  .mobileShell :global(.section-heading h2),
+  .mobileShell :global(.closing-cta h2) {
+    max-width: 12.5ch;
+  }
+
+  .mobileShell :global(.section-heading > p:not(.eyebrow)),
+  .mobileShell :global(.closing-cta > p:not(.eyebrow)) {
+    max-width: 36ch;
+  }
+
+  .mobileShell :global(.section > div > figure img),
+  .mobileShell :global(section[aria-labelledby="audience-title"] article img) {
+    object-position: center center;
+  }
+
   .mobileShell :global(.portfolio-grid) {
     padding-left: 18px;
     padding-right: 18px;
@@ -85,6 +169,13 @@
   .mobileShell :global(.portfolio-grid figure),
   .mobileShell :global(.portfolio-grid figcaption) {
     min-width: 0;
+  }
+
+  .mobileShell :global(.portfolio-grid img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
   }
 
   .mobileShell :global(.portfolio-grid figcaption) {
@@ -187,8 +278,10 @@
   }
 
   .mobileShell :global(.site-footer__bottom) {
-    align-items: flex-start;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 10px;
     margin-top: 34px;
   }
 }
@@ -201,6 +294,25 @@
 
   .mobileShell :global(.header-actions) {
     gap: 6px;
+  }
+
+  .mobileShell :global(.hero-orientation__content) {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .mobileShell :global(.hero-brand) {
+    width: 98px;
+    margin-bottom: 18px;
+  }
+
+  .mobileShell :global(.hero-orientation h1) {
+    max-width: 10.8ch;
+    font-size: clamp(2.12rem, 10.6vw, 2.55rem);
+  }
+
+  .mobileShell :global(.hero-support) {
+    font-size: 0.91rem;
   }
 
   .mobileShell :global(.page-hero h1) {
@@ -220,6 +332,7 @@
 @media (max-width: 900px) and (orientation: landscape) and (max-height: 520px) {
   .mobileShell :global(.hero-orientation) {
     min-height: 560px;
+    align-items: center;
   }
 
   .mobileShell :global(.hero-orientation__content) {
