@@ -1,0 +1,252 @@
+.mobileShell {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .mobileShell :global(main),
+  .mobileShell :global(section),
+  .mobileShell :global(article),
+  .mobileShell :global(figure),
+  .mobileShell :global(form),
+  .mobileShell :global(.site-footer__grid),
+  .mobileShell :global(.site-footer__bottom) {
+    min-width: 0;
+  }
+
+  .mobileShell :global(img),
+  .mobileShell :global(video),
+  .mobileShell :global(svg) {
+    max-width: 100%;
+  }
+
+  .mobileShell :global(.site-header__inner) {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+
+  .mobileShell :global(.mobile-menu) {
+    overscroll-behavior: contain;
+    padding-left: max(18px, env(safe-area-inset-left));
+    padding-right: max(18px, env(safe-area-inset-right));
+  }
+
+  .mobileShell :global(.mobile-menu a),
+  .mobileShell :global(.footer-links a),
+  .mobileShell :global(.footer-note a) {
+    touch-action: manipulation;
+  }
+
+  .mobileShell :global(.site-footer) {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  .mobileShell :global(.footer-links a) {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .mobileShell :global(.footer-note a) {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 640px) {
+  .mobileShell :global(.page-hero) {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .mobileShell :global(.page-hero h1) {
+    max-width: 13ch;
+    font-size: clamp(2.25rem, 10.6vw, 3.2rem);
+    line-height: 0.98;
+    overflow-wrap: break-word;
+  }
+
+  .mobileShell :global(.page-hero > p:not(.eyebrow)) {
+    max-width: 38ch;
+    font-size: 0.98rem;
+    line-height: 1.62;
+  }
+
+  .mobileShell :global(.portfolio-grid) {
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom: 88px;
+    gap: 32px;
+  }
+
+  .mobileShell :global(.portfolio-grid figure),
+  .mobileShell :global(.portfolio-grid figcaption) {
+    min-width: 0;
+  }
+
+  .mobileShell :global(.portfolio-grid figcaption) {
+    flex-wrap: wrap;
+    row-gap: 4px;
+    line-height: 1.45;
+  }
+
+  .mobileShell :global(.quote-layout) {
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom: calc(88px + env(safe-area-inset-bottom));
+    gap: 28px;
+  }
+
+  .mobileShell :global(.quote-helper) {
+    padding-top: 0;
+  }
+
+  .mobileShell :global(.quote-helper h2) {
+    max-width: 15ch;
+    font-size: clamp(1.8rem, 8.5vw, 2.4rem);
+    line-height: 1.03;
+  }
+
+  .mobileShell :global(.quote-form) {
+    gap: 16px;
+    padding: 20px 18px;
+  }
+
+  .mobileShell :global(.field-grid) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .mobileShell :global(.quote-form input),
+  .mobileShell :global(.quote-form select),
+  .mobileShell :global(.quote-form textarea) {
+    min-height: 52px;
+    font-size: 16px;
+    padding: 12px 13px;
+  }
+
+  .mobileShell :global(.quote-form textarea) {
+    min-height: 156px;
+  }
+
+  .mobileShell :global(.quote-form .button) {
+    min-height: 52px;
+  }
+
+  .mobileShell :global(.form-error) {
+    align-items: flex-start;
+  }
+
+  .mobileShell :global(.form-error .button) {
+    width: 100%;
+  }
+
+  .mobileShell :global(.form-state) {
+    padding: 28px 20px;
+  }
+
+  .mobileShell :global(.form-state h2) {
+    font-size: clamp(1.75rem, 8vw, 2.2rem);
+    line-height: 1.05;
+  }
+
+  .mobileShell :global(.event-list article),
+  .mobileShell :global(.signal-list article) {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 12px;
+    padding: 26px 0;
+  }
+
+  .mobileShell :global(.site-footer) {
+    padding-top: 48px;
+  }
+
+  .mobileShell :global(.site-footer__grid) {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 28px;
+  }
+
+  .mobileShell :global(.footer-links) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 18px;
+  }
+
+  .mobileShell :global(.footer-links a) {
+    width: 100%;
+  }
+
+  .mobileShell :global(.footer-note) {
+    max-width: 100%;
+    text-align: left;
+    overflow-wrap: anywhere;
+  }
+
+  .mobileShell :global(.site-footer__bottom) {
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 34px;
+  }
+}
+
+@media (max-width: 359px) {
+  .mobileShell :global(.site-header__inner) {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+
+  .mobileShell :global(.header-actions) {
+    gap: 6px;
+  }
+
+  .mobileShell :global(.page-hero h1) {
+    font-size: clamp(2.05rem, 10.8vw, 2.55rem);
+  }
+
+  .mobileShell :global(.quote-form) {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .mobileShell :global(.footer-links) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 520px) {
+  .mobileShell :global(.hero-orientation) {
+    min-height: 560px;
+  }
+
+  .mobileShell :global(.hero-orientation__content) {
+    padding-top: 34px;
+    padding-bottom: max(28px, env(safe-area-inset-bottom));
+  }
+
+  .mobileShell :global(.hero-brand) {
+    width: 92px;
+    margin-bottom: 16px;
+  }
+
+  .mobileShell :global(.hero-orientation h1) {
+    max-width: 14ch;
+    font-size: clamp(2.25rem, 7vw, 3.1rem);
+    margin-bottom: 14px;
+  }
+
+  .mobileShell :global(.hero-support) {
+    max-width: 56ch;
+    margin-bottom: 18px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileShell :global(*) {
+    scroll-behavior: auto;
+  }
+}

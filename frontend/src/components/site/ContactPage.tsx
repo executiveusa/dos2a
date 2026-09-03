@@ -6,10 +6,12 @@ import { useLanguage } from "@/lib/language";
 import { siteContent } from "@/lib/site-content";
 import PublicShell from "./PublicShell";
 
+const WHATSAPP_NUMBER = "525549110045";
+
 export default function ContactPage() {
   const { lang } = useLanguage();
   const c = siteContent.contact;
-  const wa = siteContent.brand.whatsapp;
+  const wa = WHATSAPP_NUMBER;
   const waHref = `https://wa.me/${wa}?text=${encodeURIComponent(c.waMessage[lang])}`;
   const mailHref = `mailto:${siteContent.brand.email}`;
   return <PublicShell>

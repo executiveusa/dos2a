@@ -40,7 +40,6 @@ export default function CinematicJourney() {
               <p className="eyebrow">{scene.eyebrow[lang]}</p>
               <h2>{scene.title[lang]}</h2>
               <p>{scene.body[lang]}</p>
-              <span className="proof-label">{lang === "es" ? "Proyecto real · archivo dos A" : "Real project · dos A archive"}</span>
             </div>
           </article>
         ))}

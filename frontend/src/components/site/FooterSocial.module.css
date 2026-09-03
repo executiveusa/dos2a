@@ -1,0 +1,39 @@
+.social {
+  display: grid;
+  grid-template-columns: repeat(3, 44px);
+  gap: 12px;
+  align-items: center;
+  justify-content: end;
+  margin-top: 16px;
+}
+
+.mark {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--paper2);
+  background: transparent;
+}
+
+.mark svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: currentColor;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mark:hover {
+    color: var(--paper);
+    border-color: rgba(245, 243, 238, 0.3);
+  }
+}
+
+@media (max-width: 900px) {
+  .social {
+    justify-content: start;
+  }
+}
