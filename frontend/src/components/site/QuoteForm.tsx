@@ -4,6 +4,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Send, Mail, CheckCircle2, AlertCircle } from "lucide-react";
 import { submitLead, type LeadFormData } from "@/lib/api";
 import { useLanguage } from "@/lib/language";
+import LegalDisclosure from "./LegalDisclosure";
 
 const initial: LeadFormData = { name:"", email:"", eventType:"", date:"", location:"", guests:"", needs:"" };
 
@@ -37,6 +38,11 @@ export default function QuoteForm() {
       <label><span>{lang === "es" ? "Asistentes aproximados" : "Approximate guests"}</span><input name="guests" inputMode="numeric" value={form.guests} onChange={change}/></label>
       <label><span>{lang === "es" ? "¿Qué quieres lograr o qué necesitas?" : "What do you need to accomplish?"}</span><textarea name="needs" rows={6} required minLength={10} value={form.needs} onChange={change} placeholder={lang === "es" ? "Cuéntanos la idea con tus propias palabras. No necesitas saber términos técnicos." : "Describe the idea in your own words. You do not need technical terms."}/></label>
       {state === "error" && <div className="form-error"><AlertCircle size={18}/><div><strong>{lang === "es" ? "No pudimos guardar la solicitud en línea." : "We could not save the request online."}</strong><p>{lang === "es" ? "No te mostraremos un éxito falso. Puedes intentar de nuevo o abrir un correo con la información preparada." : "We will not show a false success. Try again or open an email with the information prepared."}</p>{fallback && <a className="button button--outline" href={fallback}><Mail size={17}/>{lang === "es" ? "Enviar por correo" : "Send by email"}</a>}</div></div>}
+      <p className="form-note">
+        {lang === "es" ? "Antes de enviar, consulta nuestra " : "Before sending, review our "}
+        <LegalDisclosure kind="privacy" variant="inline" />
+        {lang === "es" ? ". No incluyas datos personales sensibles en la descripción." : ". Please do not include sensitive personal data in the description."}
+      </p>
       <button className="button button--light button--wide" disabled={state === "sending"} type="submit"><Send size={17}/>{state === "sending" ? (lang === "es" ? "Enviando…" : "Sending…") : (lang === "es" ? "Enviar mi solicitud" : "Send my request")}</button>
       <p className="form-note">{lang === "es" ? "Tu solicitud solo se confirma cuando el sistema logra guardarla. Abrir un correo no cuenta como envío exitoso." : "Your request is confirmed only when the system saves it. Opening an email is not counted as a successful submission."}</p>
     </form>

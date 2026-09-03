@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useLanguage } from "@/lib/language";
 import { siteContent } from "@/lib/site-content";
 import BrandMark from "./BrandMark";
+import LegalDisclosure from "./LegalDisclosure";
 import socialStyles from "./FooterSocial.module.css";
 
 const WHATSAPP_NUMBER = "525549110045";
@@ -46,7 +47,12 @@ export default function SiteFooter() {
           </div>
         </div>
       </div>
-      <div className="site-footer__bottom"><span>© {new Date().getFullYear()} dos A</span><span>{lang === "es" ? "audio · iluminación · video" : "audio · lighting · video"}</span></div>
+      <div className="site-footer__bottom">
+        <span>© {new Date().getFullYear()} dos A</span>
+        <span>{lang === "es" ? "audio · iluminación · video" : "audio · lighting · video"}</span>
+        <LegalDisclosure kind="terms" />
+        <LegalDisclosure kind="privacy" />
+      </div>
     </footer>
   );
 }
