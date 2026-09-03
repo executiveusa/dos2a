@@ -6,6 +6,45 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Serve sharpened HD derivatives for legacy low-resolution project image paths.
+# Keeping the public paths stable avoids component-level regressions while the
+# Netlify edge proxies the higher-resolution source transparently.
+[[redirects]]
+  from = "/images/projects/dosa-recovered-audio-video.webp"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_33irX78ICVwRYWpFZ5l6a5vZbf5/7a7dfdcb-5101-42c1-a124-ef30efa2308d.webp"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/images/projects/dosa-recovered-experiential-entry.webp"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_33irX78ICVwRYWpFZ5l6a5vZbf5/43d56825-aa30-4cde-8c6b-743616ede4e1.webp"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/images/projects/dosa-recovered-hero-scale.webp"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_33irX78ICVwRYWpFZ5l6a5vZbf5/ba7fa02a-7176-4400-b35d-6d522ad4db12.webp"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/images/projects/dosa-recovered-stand-exhibition.webp"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_33irX78ICVwRYWpFZ5l6a5vZbf5/218a6ffe-d5ad-4a41-bf97-f475b76434a3.webp"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/images/projects/led-sculpture-1181w.webp"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_33irX78ICVwRYWpFZ5l6a5vZbf5/0b62328b-7e4b-4e32-b49b-9417f6ead9e7.webp"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/images/projects/mobil-hologram-1920w.webp"
+  to = "https://d2ol7oe51mr4n9.cloudfront.net/user_33irX78ICVwRYWpFZ5l6a5vZbf5/d8246324-f904-4d0c-8f42-f734034e5de3.webp"
+  status = 200
+  force = true
+
 # Netlify's Next.js runtime adapter is auto-detected for Next.js 15.
 # Keep previews isolated from production; environment-specific secrets belong
 # in Netlify's deploy-preview/branch contexts, never in this repository.
