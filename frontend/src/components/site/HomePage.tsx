@@ -3,9 +3,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/lib/language";
-import { siteContent } from "@/lib/site-content";
 import PublicShell from "./PublicShell";
-import CinematicJourney from "./CinematicJourney";
 import BrandMark from "./BrandMark";
 import styles from "./DosaEditorial.module.css";
 
@@ -51,7 +49,6 @@ const audiences: Array<{ title: Bilingual; body: Bilingual; image: string; alt: 
 
 export default function HomePage() {
   const { lang } = useLanguage();
-  const c = siteContent;
 
   return (
     <PublicShell>
@@ -144,7 +141,7 @@ export default function HomePage() {
             <div className="section-heading !mb-0 !max-w-[820px]">
               <p id="about-dosa-title">
                 {lang === "es"
-                  ? "Somos una agencia mexicana especializada en la producción integral de eventos corporativos, gubernamentales, sociales y masivos. Con más de 25 años de experiencia en el mercado , nos destacamos por ofrecer soluciones tecnológicas a la medida para presentaciones en espacios abiertos, cerrados, hoteles y empresas."
+                  ? "Somos una agencia mexicana especializada en la producción integral de eventos corporativos, gubernamentales, sociales y masivos. Con más de 25 años de experiencia en el mercado, nos destacamos por ofrecer soluciones tecnológicas a la medida para presentaciones en espacios abiertos, cerrados, hoteles y empresas."
                   : "We are a Mexican agency specializing in end-to-end event production."}
               </p>
               <p className="mt-5 text-[#55534e]">
@@ -216,26 +213,6 @@ export default function HomePage() {
               </article>
             ))}
           </div>
-        </section>
-
-        <CinematicJourney />
-
-        <section className="section section--paper">
-          <div className="section-heading">
-            <p className="eyebrow eyebrow--dark">{lang === "es" ? "Proceso" : "Process"}</p>
-            <h2>{c.process.title[lang]}</h2>
-          </div>
-          <ol className="process-list">
-            {c.process.steps.map((step) => (
-              <li key={step.n}>
-                <span>{step.n}</span>
-                <div>
-                  <h3>{step.title[lang]}</h3>
-                  <p>{step.body[lang]}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
         </section>
 
         <section className="closing-cta">
