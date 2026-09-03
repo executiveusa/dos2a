@@ -1,0 +1,11 @@
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Netlify's Next.js runtime adapter is auto-detected for Next.js 15.
+# Keep previews isolated from production; environment-specific secrets belong
+# in Netlify's deploy-preview/branch contexts, never in this repository.
