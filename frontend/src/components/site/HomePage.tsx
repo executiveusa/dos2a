@@ -53,22 +53,7 @@ export default function HomePage() {
   return (
     <PublicShell>
       <div className={styles.home}>
-        <section className="hero-orientation">
-          <div
-            className="hero-orientation__image"
-            aria-hidden="true"
-            style={{ background: "#0b0b0c url('/images/projects/dosa-recovered-hero-scale.webp') center / cover no-repeat" }}
-          >
-            <img
-              src="/images/projects/dosa-recovered-hero-scale.webp"
-              alt=""
-              width={1920}
-              height={1080}
-              fetchPriority="high"
-              decoding="async"
-            />
-            <div />
-          </div>
+        <section className="hero-orientation hero-orientation--black">
           <div className="hero-orientation__content">
             <BrandMark className="hero-brand" />
             <p className="eyebrow">
