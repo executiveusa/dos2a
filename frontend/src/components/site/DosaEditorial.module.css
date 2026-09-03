@@ -366,8 +366,14 @@
   }
 
   .home :global(.client-wall__gov) {
-    margin-top: 34px;
-    line-height: 1.65;
+    max-width: 31ch;
+    margin: 42px 0 0;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font-size: 0.9rem;
+    line-height: 1.48;
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
   }
 
   .home :global(section[aria-labelledby="audience-title"] > div:last-child) {
