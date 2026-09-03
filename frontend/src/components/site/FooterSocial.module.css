@@ -1,6 +1,6 @@
 .social {
   display: grid;
-  grid-template-columns: repeat(3, 44px);
+  grid-template-columns: repeat(4, 44px);
   gap: 14px;
   align-items: center;
   justify-content: end;
@@ -37,6 +37,11 @@
 .mark:nth-child(3) svg {
   width: 23px;
   height: 23px;
+}
+
+.mark:nth-child(4) svg {
+  width: 24px;
+  height: 24px;
 }
 
 @media (hover: hover) and (pointer: fine) {
