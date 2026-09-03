@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BrandMark from "./BrandMark";
 import styles from "./HeroIntro.module.css";
 
@@ -8,7 +8,7 @@ const SESSION_KEY = "dos2a:hero-intro:v1";
 
 type Phase = "hidden" | "image1" | "image2" | "image3" | "video" | "signature" | "black" | "exit";
 
-const timeline: Array<{ phase: Phase; at: number }> = [
+const timeline: Array<{ phase: Exclude<Phase, "hidden">; at: number }> = [
   { phase: "image1", at: 0 },
   { phase: "image2", at: 1250 },
   { phase: "image3", at: 2500 },
@@ -16,11 +16,13 @@ const timeline: Array<{ phase: Phase; at: number }> = [
   { phase: "signature", at: 5050 },
   { phase: "black", at: 8450 },
   { phase: "exit", at: 9050 },
-  { phase: "hidden", at: 9850 },
 ];
+
+const END_AT = 9850;
 
 export default function HeroIntro() {
   const [phase, setPhase] = useState<Phase>("hidden");
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -37,7 +39,7 @@ export default function HeroIntro() {
     try {
       window.sessionStorage.setItem(SESSION_KEY, "1");
     } catch {
-      // The intro remains non-critical when storage is unavailable.
+      // Storage is a progressive enhancement; the opening remains functional without it.
     }
 
     const previousOverflow = document.body.style.overflow;
@@ -47,15 +49,29 @@ export default function HeroIntro() {
       window.setTimeout(() => setPhase(nextPhase), at),
     );
 
+    const endTimer = window.setTimeout(() => {
+      document.body.style.overflow = previousOverflow;
+      setPhase("hidden");
+    }, END_AT);
+
     return () => {
       timers.forEach(window.clearTimeout);
+      window.clearTimeout(endTimer);
       document.body.style.overflow = previousOverflow;
     };
   }, []);
 
   useEffect(() => {
-    if (phase !== "hidden") return;
-    document.body.style.overflow = "";
+    if (phase !== "video" || !videoRef.current) return;
+
+    const video = videoRef.current;
+    video.currentTime = 0;
+    const playPromise = video.play();
+    playPromise?.catch(() => {
+      // If autoplay is blocked, the still sequence still resolves into the signature.
+    });
+
+    return () => video.pause();
   }, [phase]);
 
   if (phase === "hidden") return null;
@@ -88,10 +104,10 @@ export default function HeroIntro() {
           decoding="async"
         />
         <video
+          ref={videoRef}
           className={`${styles.frame} ${styles.video} ${phase === "video" ? styles.active : ""}`}
           src="/videos/mobil-reveal-loop.mp4"
           muted
-          autoPlay
           playsInline
           preload="metadata"
         />
