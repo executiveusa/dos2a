@@ -91,6 +91,7 @@ export default function LegalDisclosure({ kind, variant = "footer" }: { kind: Le
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
 
   const isPrivacy = kind === "privacy";
   const label = isPrivacy
@@ -107,7 +108,24 @@ export default function LegalDisclosure({ kind, variant = "footer" }: { kind: Le
     document.body.style.overflow = "hidden";
     const timer = window.setTimeout(() => closeRef.current?.focus(), 0);
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (event.key !== "Tab" || !panelRef.current) return;
+      const focusable = Array.from(panelRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      ));
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => {
@@ -120,7 +138,7 @@ export default function LegalDisclosure({ kind, variant = "footer" }: { kind: Le
 
   const modal = open && typeof document !== "undefined" ? createPortal(
     <div className={styles.backdrop} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
-      <section className={styles.panel} role="dialog" aria-modal="true" aria-labelledby={titleId}>
+      <section ref={panelRef} className={styles.panel} role="dialog" aria-modal="true" aria-labelledby={titleId}>
         <header className={styles.header}>
           <div>
             <p className={styles.kicker}>DOS A · México</p>
@@ -138,7 +156,7 @@ export default function LegalDisclosure({ kind, variant = "footer" }: { kind: Le
   ) : null;
 
   return (
-    <span className={`${styles.disclosure} ${variant === "inline" ? styles.inline : styles.footer}`}>
+    <span className={`${styles.disclosure}${variant === "inline" ? ` ${styles.inline}` : ""}`}>
       <button ref={triggerRef} className={styles.trigger} type="button" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-expanded={open}>{label}</button>
       <span className={styles.preview} role="tooltip" aria-hidden="true">
         <strong>{label}</strong>
