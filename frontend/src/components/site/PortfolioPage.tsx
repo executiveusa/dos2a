@@ -22,7 +22,7 @@ const projects = [
     caption: { es: "Gala corporativa · L'Oréal Luxe", en: "Corporate gala · L'Oréal Luxe" },
   },
   {
-    src: "/images/projects/dosa-recovered-stand-exhibition.webp",
+    src: "/images/projects/dosa-portfolio-4-abbott.webp",
     key: "stand",
     caption: { es: "Stand y espacio de exposición", en: "Exhibition stand and space" },
   },
@@ -32,7 +32,7 @@ const projects = [
     caption: { es: "Video y pantallas en contexto", en: "Video and screens in context" },
   },
   {
-    src: "/images/projects/dosa-recovered-experiential-entry.webp",
+    src: "/images/projects/dosa-portfolio-6-universal.webp",
     key: "entry",
     caption: { es: "Experiencia de entrada", en: "Entrance experience" },
   },
@@ -45,8 +45,8 @@ export default function PortfolioPage() {
     <PublicShell>
       <section className="page-hero">
         <p className="eyebrow">{lang === "es" ? "Portafolio" : "Portfolio"}</p>
-        <h1>{lang === "es" ? "Trabajo real. Escala real. Producción en contexto." : "Real work. Real scale. Production in context."}</h1>
-        <p>{lang === "es" ? "Una selección de proyectos para mostrar cómo se integran audio, video, iluminación, espacios y operación en situaciones reales." : "A curated selection showing how audio, video, lighting, spaces, and technical operation come together in real situations."}</p>
+        <h1>{lang === "es" ? "Proyectos reales. Producción técnica de alto impacto." : "Real projects. High-impact technical production."}</h1>
+        <p>{lang === "es" ? "Explora nuestra selección de eventos y observa cómo coordinamos audio, video, iluminación y operación para marcas e instituciones líderes." : "Explore our curated events and see how we coordinate audio, video, lighting, and technical operations for leading brands and institutions."}</p>
       </section>
 
       <section className="reel-case" aria-label={lang === "es" ? "Caso destacado: Experiencia Mobil" : "Featured case: Mobil experience"}>
@@ -79,9 +79,9 @@ export default function PortfolioPage() {
         ))}
       </section>
       <section className="closing-cta">
-        <h2>{lang === "es" ? "¿Tienes un proyecto parecido o algo completamente distinto?" : "Have a similar project or something completely different?"}</h2>
-        <p>{lang === "es" ? "Empieza por el objetivo. Nosotros te ayudamos a aterrizar el alcance técnico." : "Start with the objective. We can help define the technical scope."}</p>
-        <Link className="button button--light" href="/cotizar">{lang === "es" ? "Hablar de mi proyecto" : "Talk about my project"}<ArrowRight size={17}/></Link>
+        <h2>{lang === "es" ? "Cada evento es único. Adaptamos la tecnología a tu visión." : "Every event is unique. We adapt technology to your vision."}</h2>
+        <p>{lang === "es" ? "Cuéntanos tu objetivo. Nosotros nos encargamos de diseñar el alcance técnico de audio, video e iluminación para hacerlo realidad en cualquier recinto." : "Tell us your objective. We take care of designing the technical scope of audio, video, and lighting to make it a reality in any venue."}</p>
+        <Link className="button button--light" href="/cotizar">{lang === "es" ? "Cotización a la medida" : "Custom quote"}<ArrowRight size={17}/></Link>
       </section>
     </PublicShell>
   );

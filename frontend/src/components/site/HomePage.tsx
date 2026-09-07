@@ -55,20 +55,26 @@ export default function HomePage() {
       <div className={styles.home}>
         <section className="hero-orientation hero-orientation--black">
           <div className="hero-orientation__content">
-            <BrandMark className="hero-brand" />
-            <p className="eyebrow">
-              {lang === "es" ? "PRODUCCIÓN AUDIOVISUAL & EVENT MANAGEMENT" : "Audiovisual production & event management"}
-            </p>
-            <h1>{lang === "es" ? "Audio, video, iluminación y operación. Un solo equipo." : "Audio, video, lighting, and operation. One team."}</h1>
-            <p className="hero-support">
-              {lang === "es"
-                ? "Sistemas de audio, iluminación, pantallas LED y escenografías de alta gama, diseñados para reflejar la excelencia y potencia de tu marca."
-                : "High-end audio, lighting, LED screens, and scenic systems designed to reflect the quality and strength of your brand."}
-            </p>
-            <div className="button-row">
-              <Link className="button button--light" href="/cotizar">
-                {lang === "es" ? "COTIZAR MI EVENTO" : "Get a quote"} <ArrowRight size={17} />
-              </Link>
+            <div className="hero-grid">
+              <div className="flex items-center justify-start">
+                <BrandMark className="hero-brand !mb-0" />
+              </div>
+              <div>
+                <p className="eyebrow">
+                  {lang === "es" ? "PRODUCCIÓN AUDIOVISUAL & EVENT MANAGEMENT" : "Audiovisual production & event management"}
+                </p>
+                <h1>{lang === "es" ? "Audio, video, iluminación y operación. Un solo equipo." : "Audio, video, lighting, and operation. One team."}</h1>
+                <p className="hero-support">
+                  {lang === "es"
+                    ? "Sistemas de audio, iluminación, pantallas LED y escenografías de alta gama, diseñados para reflejar la excelencia y potencia de tu marca."
+                    : "High-end audio, lighting, LED screens, and scenic systems designed to reflect the quality and strength of your brand."}
+                </p>
+                <div className="button-row">
+                  <Link className="button button--light" href="/cotizar">
+                    {lang === "es" ? "COTIZAR MI EVENTO" : "Get a quote"} <ArrowRight size={17} />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -76,7 +82,6 @@ export default function HomePage() {
         <section className="section" aria-labelledby="home-services-title">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(360px,1.1fr)] lg:items-end">
             <div className="section-heading !mb-0">
-              <p className="eyebrow">{lang === "es" ? "SERVICIOS" : "Services"}</p>
               <h2 id="home-services-title">
                 {lang === "es"
                   ? "La parte técnica de tu evento, coordinada de principio a fin."
@@ -90,8 +95,8 @@ export default function HomePage() {
             </div>
             <figure className="m-0 overflow-hidden border border-[var(--line)] bg-[var(--ink2)]">
               <img
-                src="/images/projects/dosa-recovered-audio-video.webp"
-                alt={lang === "es" ? "Producción audiovisual con audio, video y pantallas" : "Audiovisual production with audio, video, and screens"}
+                src="/images/projects/dosa-home-services-universal.webp"
+                alt={lang === "es" ? "Instalación y exhibición técnica El Universal" : "El Universal technical installation and display"}
                 width={1600}
                 height={1000}
                 loading="lazy"
@@ -101,7 +106,8 @@ export default function HomePage() {
             </figure>
           </div>
 
-          <ol className="mt-12 list-none border-t border-[var(--line)] p-0">
+          <p className="eyebrow mt-12 mb-4">{lang === "es" ? "SERVICIOS" : "Services"}</p>
+          <ol className="list-none border-t border-[var(--line)] p-0">
             {homeServices.map((service) => (
               <li
                 key={service.n}
@@ -137,8 +143,8 @@ export default function HomePage() {
             </div>
             <figure className="m-0 overflow-hidden bg-[#dedbd4]">
               <img
-                src="/images/projects/dosa-recovered-stand-exhibition.webp"
-                alt={lang === "es" ? "Montaje integral de stand y producción audiovisual" : "Integrated exhibition stand and audiovisual production"}
+                src="/images/projects/dosa-about-abbott.webp"
+                alt={lang === "es" ? "Stand y espacio de exposición Abbott" : "Abbott exhibition stand and space"}
                 width={1600}
                 height={1100}
                 loading="lazy"

@@ -32,8 +32,8 @@ const services: ServiceBlock[] = [
       es: "Equipamiento Bose, dB Technologies y Shure, junto con iluminación arquitectónica adaptada a la escala de tu evento.",
       en: "Bose, dB Technologies, and Shure equipment, paired with architectural lighting adapted to the scale of your event.",
     },
-    image: "/images/projects/dosa-recovered-hero-scale.webp",
-    alt: { es: "Producción integral de audio e iluminación para evento", en: "Integrated audio and lighting production for an event" },
+    image: "/images/services/dosa-service-1-audio-luz.webp",
+    alt: { es: "Consola de DJ y sistema de iluminación dos A", en: "DJ console and lighting system by dos A" },
   },
   {
     n: "02",
@@ -74,8 +74,8 @@ const services: ServiceBlock[] = [
       es: "Gestión integral de proveedores, tiempos y montaje con un profesional dedicado a la operación impecable de tu evento.",
       en: "Integrated management of vendors, timing, and setup with a professional dedicated to the precise operation of your event.",
     },
-    image: "/images/hero/dosa-hero-loreal-1920w.webp",
-    alt: { es: "Operación técnica durante un evento corporativo", en: "Technical operation during a corporate event" },
+    image: "/images/services/dosa-service-4-coordinacion.webp",
+    alt: { es: "Coordinación y montaje técnico para Cerveceros de México", en: "Technical coordination and setup for Cerveceros de México" },
   },
   {
     n: "05",
@@ -86,6 +86,8 @@ const services: ServiceBlock[] = [
       es: "Sistemas de microfonía parlamentaria y traducción simultánea multilingüe para eventos internacionales y corporativos.",
       en: "Conference microphone systems and multilingual simultaneous interpretation for international and corporate events.",
     },
+    image: "/images/services/dosa-service-5-traduccion.webp",
+    alt: { es: "Traducción simultánea y producción en evento plenario Hilti", en: "Simultaneous interpretation and production at Hilti plenary event" },
   },
   {
     n: "06",
@@ -96,6 +98,8 @@ const services: ServiceBlock[] = [
       es: "Alquiler de equipo informático para logística, además de producción de materiales digitales, impresos y artículos promocionales.",
       en: "Computer equipment rental for event logistics, plus production of digital materials, printed materials, and promotional items.",
     },
+    image: "/images/services/dosa-service-6-especiales.webp",
+    alt: { es: "Servicios especiales y cómputo en stand Cofepris", en: "Special services and computer setup at Cofepris stand" },
   },
 ];
 
@@ -110,8 +114,8 @@ export default function ServicesPage() {
           <p className="eyebrow">{lang === "es" ? "Servicios" : "Services"}</p>
           <h1>
             {lang === "es"
-              ? "En Dos2A transformamos cualquier espacio en una experiencia memorable a través de soluciones audiovisuales de alta precisión."
-              : "At dos A, we transform any space into a memorable experience through high-precision audiovisual solutions."}
+              ? "En Dos2A transformamos cualquier espacio en una experiencia memorable."
+              : "At dos A, we transform any space into a memorable experience."}
           </h1>
           <p>
             {lang === "es"
@@ -143,7 +147,7 @@ export default function ServicesPage() {
                         </span>
                       </div>
                       <p className="eyebrow">{service.overline[lang]}</p>
-                      <h2 className="m-0 max-w-[18ch] font-[var(--font-sora)] text-[clamp(2.2rem,4.8vw,5rem)] font-semibold leading-[1] tracking-[-0.05em]">
+                      <h2 className="m-0 max-w-[18ch] font-[var(--font-sora)] text-[clamp(1.75rem,3.2vw,3rem)] font-semibold leading-[1.05] tracking-[-0.045em]">
                         {service.title[lang]}
                       </h2>
                       <p className="mt-6 max-w-[720px] text-[1.05rem] text-[var(--paper2)]">{service.body[lang]}</p>

@@ -21,13 +21,23 @@ export const siteContent = {
   contact: {
     eyebrow: { es: "Contacto", en: "Contact" },
     title: { es: "Hablemos de tu evento.", en: "Let's talk about your event." },
-    intro: { es: "Elige el canal que te quede más cómodo. Respondemos con un alcance claro, no con un guion de ventas.", en: "Pick whichever channel suits you. We reply with a clear scope, not a sales script." },
+    intro: {
+      es: "Elige la vía que te resulte más cómoda. Te respondemos con una propuesta clara, transparente y personalizada",
+      en: "Choose whichever way is most convenient for you. We will reply with a clear, transparent, and personalized proposal.",
+    },
     waTitle: { es: "WhatsApp", en: "WhatsApp" },
-    waBody: { es: "La vía más rápida para una primera conversación. Cuéntanos qué evento tienes en puerta.", en: "The fastest way to start a conversation. Tell us about your upcoming event." },
+    waBody: {
+      es: "Ideal para dudas rápidas, disponibilidad de fechas y asesoría inmediata sobre la producción técnica de tu evento.",
+      en: "Ideal for quick questions, date availability, and immediate advice on technical event production.",
+    },
     waCta: { es: "Abrir WhatsApp", en: "Open WhatsApp" },
     waMessage: { es: "Hola dos A, tengo un evento en puerta y quiero cotizar: ", en: "Hi dos A, I have an event coming up and I'd like a quote: " },
     mailTitle: { es: "Correo", en: "Email" },
-    mailBody: { es: "Para briefs, propuestas y archivos. Todo queda por escrito.", en: "For briefs, proposals, and files. Everything in writing." },
+    mailBody: {
+      es: "Perfecto para envío de briefs completos, licitaciones, RFPs y requerimientos detallados.",
+      en: "Perfect for sending full briefs, tenders, RFPs, and detailed requirements.",
+    },
+    mailAddress: "alanis@eventosdos2a.mx",
     quoteTitle: { es: "Cotización", en: "Quote" },
     quoteBody: { es: "Si ya sabes lo que necesitas, el formulario te toma dos minutos.", en: "If you already know what you need, the form takes two minutes." },
     quoteCta: { es: "Ir al formulario", en: "Go to the form" },
@@ -275,7 +285,21 @@ export const siteContent = {
     cta: { es: "Preparar mi brief", en: "Prepare my brief" },
   },
   quote: {
-    title: { es: "Cuéntanos tu evento. Empecemos por lo esencial.", en: "Tell us about your event. Start with what you know." },
-    body: { es: "No necesitas saber qué equipo pedir. Danos el contexto y te ayudamos a ordenar el alcance.", en: "You do not need to know which equipment to request. Give us the context and we will help organize the scope." },
+    title: {
+      es: "Cotiza la producción de tu evento en minutos.",
+      en: "Quote your event production in minutes.",
+    },
+    body: {
+      es: "Dinos dónde, cuándo y qué deseas lograr. Nos encargamos del alcance técnico en audio, video e iluminación para entregarte un presupuesto detallado.",
+      en: "Tell us where, when, and what you want to achieve. We handle the technical scope in audio, video, and lighting to deliver a detailed budget.",
+    },
+    helperTitle: {
+      es: "Asesoría personalizada de principio a fin.",
+      en: "Personalized advice from start to finish.",
+    },
+    helperBody: {
+      es: "No necesitas dominar términos técnicos ni saber qué equipo solicitar. Danos el contexto general de tu proyecto (aforo, lugar y tipo de evento) y nuestro equipo técnico diseñará la infraestructura adecuada.",
+      en: "You do not need to master technical terms or know what equipment to request. Give us the general context of your project (audience size, venue, and event type) and our technical team will design the appropriate infrastructure.",
+    },
   },
 };
