@@ -3,6 +3,11 @@
   --editorial-max: 1440px;
 }
 
+.home :global(.hero-grid) {
+  display: grid;
+  gap: 28px;
+}
+
 @media (min-width: 901px) {
   .home :global(.hero-orientation) {
     min-height: min(92svh, 920px);
@@ -13,10 +18,17 @@
     padding: 92px 6vw 76px;
   }
 
+  .home :global(.hero-grid) {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.35fr);
+    gap: clamp(36px, 6vw, 72px);
+    align-items: center;
+  }
+
   .home :global(.hero-brand) {
-    width: clamp(150px, 13vw, 218px);
+    width: clamp(180px, 18vw, 280px);
     height: auto;
-    margin-bottom: 34px;
+    margin-bottom: 0;
   }
 
   .home :global(.hero-orientation h1) {
