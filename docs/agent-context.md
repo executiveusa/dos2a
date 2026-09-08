@@ -1,4 +1,4 @@
-﻿# Agent Context: dos2a (DOS A)
+# Agent Context: dos2a (DOS A)
 
 ## Repo Purpose
 Website for **dos A** (Eventos Dos2A) — high-end audiovisual production, stage lighting, sound engineering, and corporate event management in Mexico.
@@ -33,10 +33,20 @@ Website for **dos A** (Eventos Dos2A) — high-end audiovisual production, stage
 8. `frontend/src/lib/site-content.ts`: Updated contact copy, email address, and quote block text in both Spanish and English.
 9. `frontend/public/images/projects/*` & `frontend/public/images/services/*`: 8 production-optimized, clean-cropped WebP images.
 
-## Validation Commands
-- Build: `cd frontend && npm run build` (Static export: 16/16 routes compiled, 0 errors).
-- Preview: `npx next start -p 3000` (Tested in Chrome DevTools on desktop 1440x900 and mobile 390x844).
+## Recent Changes (PR #39, Commit d90a62f)
+1. `frontend/src/components/site/ServicesPage.tsx`: Removed redundant overlines repeating the service label in Service 03 (Escenarios & Stands) and Service 05 (Traducción Simultánea).
+2. `frontend/src/components/site/HeroIntro.tsx`: Orchestrated transition timing (exit at 2300ms, end at 3200ms) with `dataset.heroIntro` set to "active" and "exiting" on `<html>`, using session key `dos2a:hero-intro:v3`.
+3. `frontend/src/components/site/HeroIntro.module.css`: Added vertical opening mask (`clip-path: inset(50% 0 50% 0)`) and opacity fade transition.
+4. `frontend/src/components/site/DosaEditorial.module.css`: Choreographed hero entrance during exit phase: `.hero-brand` settles from `scale(1.03)` to `scale(1)` over 1100ms; staggered text reveal for eyebrow (120ms), h1 (240ms), support (360ms), and CTA (480ms); complete reduced-motion fallback overrides.
+5. Footer Email: Verified display and link to `alanis@eventosdos2a.mx`.
+6. Header Logo: Verified existing approved 13% enlargement (45.2px desktop / 35px mobile).
 
-## Known Issues / Future Work
-- Deploying to production (`dos2a.netlify.app`) requires user approval.
-- Final PR merge to `master` pending client sign-off.
+## Validation Commands & Results
+- Build: `cd frontend && npm run build` (16/16 static pages generated, 0 errors).
+- CI / Checks: All GitHub Actions checks passed on PR #39 (`build-and-smoke`, Vercel deploy, Netlify preview).
+- Squash-merged to `master` as commit `d90a62f`.
+- Live Production Deployment: Verified live on `https://eventosdos2a.mx` and `https://dos2a.vercel.app` (HTTP 200, verified removal of duplicated overlines on `/servicios`).
+
+## Current Known Issues / Next Steps
+- Production is fully updated and verified live.
+- Netlify fallback domain (`https://dos2a.netlify.app`) remains untouched as required.
