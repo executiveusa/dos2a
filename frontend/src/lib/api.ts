@@ -26,7 +26,7 @@ function buildMailto(data: LeadFormData) {
       `Fecha: ${data.date}\nUbicación: ${data.location}\nAsistentes: ${data.guests}\n` +
       `Necesidades: ${data.needs}\n`
   );
-  return `mailto:2audioiluminacion@gmail.com?subject=${subject}&body=${body}`;
+  return `mailto:alanis@eventosdos2a.mx?subject=${subject}&body=${body}`;
 }
 
 function fingerprintLead(data: LeadFormData) {

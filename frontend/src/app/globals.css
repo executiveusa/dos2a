@@ -24,7 +24,7 @@
 .client-wall__gov{margin:26px 0 0;font-size:.82rem;letter-spacing:.06em;color:var(--muted)}
 .client-wall__gov span{display:block;margin-top:4px;font-size:.72rem}
 @media(max-width:640px){.client-wall{padding:40px 18px}.client-wall ul{gap:12px}.client-wall li{height:56px;padding:0 18px}.client-wall li img{height:27px}.client-wall li.client-wall__tall img{height:36px}}
-.brand-mark{display:block;height:40px;width:auto;color:var(--paper)}
+.brand-mark{display:block;height:45.2px;width:auto;color:var(--paper)}
 .brand-lockup{flex-direction:row;align-items:center;gap:12px}
 .brand-lockup span{margin-top:0}
 .hero-brand{display:block;height:clamp(150px,26vw,340px);width:auto;color:var(--paper);margin:0 0 34px}
