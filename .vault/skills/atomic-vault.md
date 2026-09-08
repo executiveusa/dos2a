@@ -3,8 +3,8 @@ description: How to use the project vault for goals, intents, and shared memory
 name: Atomic Vault
 entry_type: skill
 content_hash: PMF5J7HNZY2TB3BVUG536P4QJRCJBMRCACVPK6IVIZQGZGBQ3U4A
-created_at: 2026-09-07T03:41:25.839424800+00:00
-updated_at: 2026-09-07T03:41:25.839424800+00:00
+created_at: 2026-07-27T21:19:49.566456100+00:00
+updated_at: 2026-07-27T21:19:49.566456100+00:00
 ---
 ---
 name: Atomic Vault
