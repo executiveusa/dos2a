@@ -12,7 +12,7 @@ type Bilingual = { es: string; en: string };
 type ServiceBlock = {
   n: string;
   label: Bilingual;
-  overline: Bilingual;
+  overline?: Bilingual;
   title: Bilingual;
   body: Bilingual;
   image?: string;
@@ -53,7 +53,6 @@ const services: ServiceBlock[] = [
   {
     n: "03",
     label: { es: "Escenarios & Stands", en: "Stages & Stands" },
-    overline: { es: "ESCENARIOS + STANDS", en: "Stages + Stands" },
     title: {
       es: "Diseño, estructura y fabricación adaptada a los requerimientos de tu marca o espacio.",
       en: "Design, structure, and fabrication adapted to the requirements of your brand or venue.",
@@ -80,7 +79,6 @@ const services: ServiceBlock[] = [
   {
     n: "05",
     label: { es: "Traducción Simultánea", en: "Simultaneous Interpretation" },
-    overline: { es: "TRADUCCIÓN SIMULTÁNEA", en: "Simultaneous Interpretation" },
     title: { es: "Comunicación fluida sin fronteras.", en: "Clear communication across languages." },
     body: {
       es: "Sistemas de microfonía parlamentaria y traducción simultánea multilingüe para eventos internacionales y corporativos.",
@@ -146,7 +144,7 @@ export default function ServicesPage() {
                           {service.label[lang]}
                         </span>
                       </div>
-                      <p className="eyebrow">{service.overline[lang]}</p>
+                      {service.overline && <p className="eyebrow">{service.overline[lang]}</p>}
                       <h2 className="m-0 max-w-[18ch] font-[var(--font-sora)] text-[clamp(1.75rem,3.2vw,3rem)] font-semibold leading-[1.05] tracking-[-0.045em]">
                         {service.title[lang]}
                       </h2>
@@ -157,7 +155,7 @@ export default function ServicesPage() {
                       <div className="pt-8 text-xs tracking-[0.12em] text-[var(--muted)] lg:py-10">{service.n}</div>
                       <div className="py-6 lg:py-10 lg:pr-12">
                         <p className="mb-4 font-[var(--font-sora)] text-sm font-semibold tracking-[-0.015em] text-[var(--paper)]">{service.label[lang]}</p>
-                        <p className="eyebrow">{service.overline[lang]}</p>
+                        {service.overline && <p className="eyebrow">{service.overline[lang]}</p>}
                         <h2 className="m-0 max-w-[24ch] font-[var(--font-sora)] text-[clamp(1.75rem,3vw,3rem)] font-semibold leading-[1.05] tracking-[-0.045em]">
                           {service.title[lang]}
                         </h2>

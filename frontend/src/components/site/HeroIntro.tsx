@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import BrandMark from "./BrandMark";
 import styles from "./HeroIntro.module.css";
 
-const SESSION_KEY = "dos2a:hero-intro:v2";
+const SESSION_KEY = "dos2a:hero-intro:v3";
 const EXIT_AT = 2300;
-const END_AT = 3000;
+const END_AT = 3200;
 
 type Phase = "hidden" | "signature" | "exit";
 
@@ -33,20 +33,24 @@ export default function HeroIntro() {
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.dataset.heroIntro = "active";
     setPhase("signature");
 
     const exitTimer = window.setTimeout(() => {
       document.body.style.overflow = previousOverflow;
+      document.documentElement.dataset.heroIntro = "exiting";
       setPhase("exit");
     }, EXIT_AT);
 
     const endTimer = window.setTimeout(() => {
+      delete document.documentElement.dataset.heroIntro;
       setPhase("hidden");
     }, END_AT);
 
     return () => {
       window.clearTimeout(exitTimer);
       window.clearTimeout(endTimer);
+      delete document.documentElement.dataset.heroIntro;
       document.body.style.overflow = previousOverflow;
     };
   }, []);

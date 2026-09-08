@@ -3,8 +3,8 @@ description: Use the knowledge graph to understand code structure, not just text
 name: Code Intelligence
 entry_type: skill
 content_hash: TCKNIW3YFM5I5QVJCWMI6OVBZABGSZIFVPRV6VOYOXWJQHTSPVHQ
-created_at: 2026-07-27T21:19:49.631298700+00:00
-updated_at: 2026-07-27T21:19:49.631298700+00:00
+created_at: 2026-09-07T03:41:25.878706400+00:00
+updated_at: 2026-09-07T03:41:25.878706400+00:00
 ---
 ---
 name: Code Intelligence
