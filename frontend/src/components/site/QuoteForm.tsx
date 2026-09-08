@@ -6,7 +6,7 @@ import { submitLead, type LeadFormData } from "@/lib/api";
 import { useLanguage } from "@/lib/language";
 import LegalDisclosure from "./LegalDisclosure";
 
-const initial: LeadFormData = { name:"", email:"", eventType:"Producción integral", date:"", location:"", guests:"", needs:"" };
+const initial: LeadFormData = { name:"", email:"", eventType:"", date:"", location:"", guests:"", needs:"" };
 
 export default function QuoteForm() {
   const { lang } = useLanguage();
@@ -41,6 +41,17 @@ export default function QuoteForm() {
           <input name="email" type="email" required value={form.email} onChange={change} autoComplete="email"/>
         </label>
       </div>
+      <label>
+        <span>{lang === "es" ? "Tipo de evento" : "Event type"}</span>
+        <select name="eventType" required value={form.eventType} onChange={change}>
+          <option value="">{lang === "es" ? "Selecciona una opción" : "Choose an option"}</option>
+          <option>{lang === "es" ? "Corporativo / congreso" : "Corporate / conference"}</option>
+          <option>{lang === "es" ? "Lanzamiento / activación" : "Launch / activation"}</option>
+          <option>{lang === "es" ? "Stand / exposición" : "Stand / exhibition"}</option>
+          <option>{lang === "es" ? "Escenario / experiencia en vivo" : "Stage / live experience"}</option>
+          <option>{lang === "es" ? "Otro" : "Other"}</option>
+        </select>
+      </label>
       <div className="field-grid">
         <label>
           <span>{lang === "es" ? "Fecha estimada del evento" : "Estimated event date"}</span>
