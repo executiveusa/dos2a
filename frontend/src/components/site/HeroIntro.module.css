@@ -6,14 +6,12 @@
   background: #080909;
   opacity: 1;
   pointer-events: all;
-  clip-path: inset(0 0 0 0);
-  transition: opacity 750ms cubic-bezier(.22, 1, .36, 1), clip-path 750ms cubic-bezier(.22, 1, .36, 1);
+  transition: opacity 700ms cubic-bezier(.22, 1, .36, 1);
 }
 
 .exiting {
   opacity: 0;
   pointer-events: none;
-  clip-path: inset(50% 0 50% 0);
 }
 
 .signatureStage {

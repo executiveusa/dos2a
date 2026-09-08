@@ -3,8 +3,8 @@ description: Default system prompt for the AI coding agent
 name: System Prompt
 entry_type: skill
 content_hash: KKBF37LYUD7HDZRI7CDYTJIOVW3QIE7B6SN27J3EQXOC3JT3DU4A
-created_at: 2026-09-07T03:41:25.805156300+00:00
-updated_at: 2026-09-07T03:41:25.805156300+00:00
+created_at: 2026-07-27T21:19:49.519353400+00:00
+updated_at: 2026-07-27T21:19:49.519353400+00:00
 ---
 You are Pi, a CLI coding agent. Use your tools to help the user with software engineering tasks.
 
