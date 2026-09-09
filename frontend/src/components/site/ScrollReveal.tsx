@@ -1,7 +1,7 @@
-﻿"use client";
+"use client";
 
-import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { useRef, type ReactNode } from "react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -14,8 +14,10 @@ export default function ScrollReveal({
   children,
   className,
   delay = 0,
-  yOffset = 16,
+  yOffset = 10,
 }: ScrollRevealProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
   const shouldReduceMotion = useReducedMotion();
 
   if (shouldReduceMotion) {
@@ -24,13 +26,13 @@ export default function ScrollReveal({
 
   return (
     <motion.div
+      ref={ref}
       className={className}
-      initial={{ opacity: 0.2, y: yOffset }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
+      initial={{ opacity: 0.85, y: yOffset }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0.85, y: yOffset }}
       transition={{
         type: "spring",
-        stiffness: 240,
+        stiffness: 280,
         damping: 32,
         delay,
       }}
@@ -39,3 +41,4 @@ export default function ScrollReveal({
     </motion.div>
   );
 }
+
