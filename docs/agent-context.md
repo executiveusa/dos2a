@@ -96,4 +96,23 @@ Website for **dos A** (Eventos Dos2A) — high-end audiovisual production, stage
   - Hero 100% frozen.
 - Pushed commit `77d79ed` to `origin/master`.
 
-
+## Milestone ZTE-20260909-0005 through 0007 (Hostinger CDN Edge Cache Crash & Permanent Self-Healing)
+1. **Incident Root Cause**:
+   - Hostinger CDN edge nodes (`hcdn` e.g. `bos-edge3`, `bos-edge7`) had cached an HTML response from 39+ hours ago with `Cache-Control: s-maxage=31536000` (1-year TTL).
+   - When new builds were deployed, previous CSS (`63ca38dffe7dd760.css`, `890bf1f5d1ff7ce3.css`) and JS chunks were deleted from origin, returning 404s to browsers receiving the stale HTML.
+   - The missing CSS stripped all site styling (rendering giant unstyled SVGs), and the missing JS chunks caused `ChunkLoadError: Loading chunk failed` in Next.js runtime.
+2. **Permanent Systemic Fixes**:
+   - `frontend/src/app/layout.tsx`:
+     - Enforced `export const dynamic = "force-dynamic";` and `export const revalidate = 0;` across all routes so Next.js never produces static 1-year cache headers (`s-maxage=31536000`).
+     - Upgraded inline `<head>` self-healing error handler to run in the `capture` phase (`useCapture: true`), intercepting failed `<link>`/`<script>` tags and unhandled chunk rejections, immediately recovering with a timestamped cache-buster query string (`?v=<timestamp>`).
+   - `frontend/next.config.ts`:
+     - Added legacy chunk rewrites mapping previous hashes to active build files:
+       - `/_next/static/css/63ca38dffe7dd760.css` -> `/_next/static/css/ebcbcf7eb267f5cd.css`
+       - `/_next/static/css/890bf1f5d1ff7ce3.css` -> `/_next/static/css/4b64c490b5e03688.css`
+       - `/_next/static/chunks/app/page-e48fb6c8285a8d3b.js` -> `/_next/static/chunks/app/page-0aea3f714fd204e6.js`
+       - `/_next/static/chunks/app/servicios/page-e189d1a417a72ddf.js` -> `/_next/static/chunks/app/servicios/page-9492160d2b781e6a.js`
+3. **Verification**:
+   - `https://eventosdos2a.mx/` loads with 200 OK across all styles and scripts.
+   - Services sequentially renumbered 01 to 04 with no gaps.
+   - Hero section 100% frozen (#080909, BrandMark on left, headline on right).
+   - Netlify reference (`https://dos2a.netlify.app/`) completely green and verified.
