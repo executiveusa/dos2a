@@ -74,3 +74,26 @@ Website for **dos A** (Eventos Dos2A) — high-end audiovisual production, stage
 - Pushed commit `c127599` to `origin/master`.
 - Production auto-deploy triggered via git integration.
 
+## Milestone ZTE-20260909-0004 (Apple Polish Pass & Mobile Client Centering)
+1. `frontend/src/components/site/DosaEditorial.module.css`:
+   - Mobile `.client-wall`: Eyebrow and under-logo text (`.client-wall__gov`) centered with max-width 42ch and clean margins.
+2. `frontend/src/app/globals.css`:
+   - `scroll-padding-top: 84px` and `overscroll-behavior-y: none` to lock dark canvas on iOS pull.
+   - Button & link arrow hover animation (`translateX(4px)` with spring cubic-bezier).
+   - Button active tactile haptic compression (`scale(0.965)`).
+   - Portfolio grid cards: `overflow: hidden`, `border-radius: 8px`, and smooth hover scale zoom (`scale(1.035)`).
+   - Form inputs: bespoke dark hairline focus glow (`box-shadow: 0 0 0 1px rgba(245,243,238,0.25)`).
+   - iOS auto-zoom prevention: `font-size: 16px !important` on mobile form inputs.
+   - Custom 7px luxury dark scrollbars for desktop.
+3. `frontend/src/components/site/SiteNav.tsx`:
+   - Added quick-action pills for direct call (`tel:+525549110045`) and WhatsApp inside the mobile Vaul drawer.
+
+## Validation Commands
+- Build: `cd frontend && pnpm build` (Passed, 16/16 static routes).
+- Chrome DevTools:
+  - Mobile: `proof_apple_mobile_client_centered.png`, `proof_apple_mobile_drawer.png`.
+  - Desktop: `proof_apple_desktop_portfolio.png`, `proof_apple_desktop_hero.png`.
+  - Hero 100% frozen.
+- Pushed commit `77d79ed` to `origin/master`.
+
+
