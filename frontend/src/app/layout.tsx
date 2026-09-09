@@ -32,4 +32,22 @@ const jsonLd={
     {"@type":"Offer",itemOffered:{"@type":"Service",name:"Operación y coordinación técnica de eventos"}}
   ]
 };
-export default function RootLayout({children}:{children:ReactNode}){return <html lang="es" className={`${sora.variable} ${inter.variable}`}><body><LanguageProvider>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(jsonLd)}}/></LanguageProvider></body></html>}
+export default function RootLayout({children}:{children:ReactNode}){
+  return (
+    <html lang="es" className={`${sora.variable} ${inter.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){window.addEventListener('error',function(e){var m=e&&e.message?e.message:'';if(m.indexOf('ChunkLoadError')!==-1||m.indexOf('Loading chunk')!==-1){var k='dosa_chunk_recovery',n=Date.now(),l=parseInt(sessionStorage.getItem(k)||'0',10);if(!l||n-l>15000){sessionStorage.setItem(k,String(n));var u=new URL(window.location.href);u.searchParams.set('v',String(n));window.location.replace(u.toString())}}});})();`,
+          }}
+        />
+      </head>
+      <body>
+        <LanguageProvider>
+          {children}
+          <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(jsonLd)}}/>
+        </LanguageProvider>
+      </body>
+    </html>
+  );
+}
