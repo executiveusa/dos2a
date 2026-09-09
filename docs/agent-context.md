@@ -1,4 +1,4 @@
-﻿# Agent Context: dos2a (DOS A)
+# Agent Context: dos2a (DOS A)
 
 ## Repo Purpose
 Website for **dos A** (Eventos Dos2A) — high-end audiovisual production, stage lighting, sound engineering, and corporate event management in Mexico.
@@ -29,14 +29,33 @@ Website for **dos A** (Eventos Dos2A) — high-end audiovisual production, stage
 4. `frontend/src/components/site/PortfolioPage.tsx`: Updated H1 and intro copy; updated closing CTA copy to "Cotización a la medida"; slotted Abbott in Position 04 and El Universal in Position 06.
 5. `frontend/src/components/site/ContactPage.tsx`: Updated direct email to `alanis@eventosdos2a.mx`; embedded `<QuoteForm />` directly on page under WhatsApp and Email cards.
 6. `frontend/src/components/site/QuotePage.tsx`: Synchronized helper sidebar copy with client specification.
-7. `frontend/src/components/site/QuoteForm.tsx`: Replaced selector with simplified mandatory fields (Nombre completo, Correo electrónico, Fecha estimada del evento, Ubicación / Ciudad / Recinto, Asistentes o aforo aproximado, Detalles o idea del evento); added mandatory explanatory notice banner at top.
+7. `frontend/src/components/site/QuoteForm.tsx`: Replaced selector with simplified mandatory fields; added mandatory explanatory notice banner at top.
 8. `frontend/src/lib/site-content.ts`: Updated contact copy, email address, and quote block text in both Spanish and English.
 9. `frontend/public/images/projects/*` & `frontend/public/images/services/*`: 8 production-optimized, clean-cropped WebP images.
 
+## Mobile Interaction Upgrade Milestone (`feat/mobile-apple-polish-repo-mot`)
+1. `frontend/src/app/globals.css`:
+   - Tactile `:active` micro-compression (`scale(0.97)` / `scale(0.94)`) with 80ms cubic-bezier physics on all touch controls.
+   - Expanded touch bounds (`min-width: 44px; min-height: 44px`) and safe-area insets.
+2. `frontend/src/components/site/SiteNav.tsx`:
+   - Replaced static mobile dropdown with **Vaul gesture-driven bottom drawer**.
+   - 1:1 finger swipe down to dismiss, physical drag handle, accessible dialog props, zero layout distortion.
+   - Desktop navigation remains 100% frozen.
+3. `frontend/src/components/site/PublicShell.tsx`:
+   - Mounted `sonner` Toaster configured for solid dark theme (`#101111`, `#f5f3ee`, hairline border).
+4. `frontend/src/components/site/QuoteForm.tsx`:
+   - Wired non-disruptive toast confirmations upon lead submission.
+5. `frontend/src/components/site/ScrollReveal.tsx`:
+   - Lightweight leaf component powered by `motion/react` with critically damped spring transitions (`stiffness: 240, damping: 32`).
+   - Content-first fallback with automatic `useReducedMotion()` handling.
+6. `frontend/src/components/site/HomePage.tsx` & `frontend/src/components/site/ServicesPage.tsx`:
+   - Integrated `ScrollReveal` around services list items and audience cards.
+
 ## Validation Commands
-- Build: `cd frontend && npm run build` (Static export: 16/16 routes compiled, 0 errors).
-- Preview: `npx next start -p 3000` (Tested in Chrome DevTools on desktop 1440x900 and mobile 390x844).
+- Typecheck: `cd frontend && npx tsc --noEmit` (Passed, 0 errors).
+- Dev Server: `pnpm dev --turbopack` (Running on `http://localhost:3000`).
+- Routes checked: `/`, `/servicios`, `/portafolio`, `/contacto`, `/cotizar` (All HTTP 200 OK).
 
 ## Known Issues / Future Work
-- Deploying to production (`dos2a.netlify.app`) requires user approval.
-- Final PR merge to `master` pending client sign-off.
+- Final merge of `feat/mobile-apple-polish-repo-mot` into `master` after visual sign-off.
+- Production deployment on Netlify/Vercel.

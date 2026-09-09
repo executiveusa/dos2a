@@ -2,6 +2,7 @@
 
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Send, Mail, CheckCircle2, AlertCircle } from "lucide-react";
+import { toast } from "sonner";
 import { submitLead, type LeadFormData } from "@/lib/api";
 import { useLanguage } from "@/lib/language";
 import LegalDisclosure from "./LegalDisclosure";
@@ -18,8 +19,14 @@ export default function QuoteForm() {
   async function submit(e: FormEvent) {
     e.preventDefault(); setState("sending"); setFallback(null);
     const result = await submitLead(form);
-    if (result.success) { setState("success"); return; }
-    setFallback(result.mailtoUrl ?? null); setState("error");
+    if (result.success) {
+      setState("success");
+      toast.success(lang === "es" ? "Solicitud recibida. Te responderemos a la brevedad." : "Request received. We will get back to you shortly.");
+      return;
+    }
+    setFallback(result.mailtoUrl ?? null);
+    setState("error");
+    toast.error(lang === "es" ? "No se pudo enviar la solicitud en línea." : "Could not submit online.");
   }
 
   if (state === "success") return <div className="form-state form-state--success"><CheckCircle2/><h2>{lang === "es" ? "Recibimos tu solicitud." : "We received your request."}</h2><p>{lang === "es" ? "Guardamos la información de tu evento. El siguiente paso es revisarla y contactarte para definir el alcance." : "Your event information was saved. The next step is to review it and contact you to define the scope."}</p></div>;

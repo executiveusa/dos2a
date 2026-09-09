@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/lib/language";
 import PublicShell from "./PublicShell";
 import BrandMark from "./BrandMark";
+import ScrollReveal from "./ScrollReveal";
 import styles from "./DosaEditorial.module.css";
 
 type Bilingual = { es: string; en: string };
@@ -108,15 +109,19 @@ export default function HomePage() {
 
           <p className="eyebrow mt-12 mb-4">{lang === "es" ? "SERVICIOS" : "Services"}</p>
           <ol className="list-none border-t border-[var(--line)] p-0">
-            {homeServices.map((service) => (
+            {homeServices.map((service, index) => (
               <li
                 key={service.n}
-                className="grid grid-cols-[52px_1fr] items-center gap-4 border-b border-[var(--line)] py-5 md:grid-cols-[80px_1fr] md:py-6"
+                className="border-b border-[var(--line)]"
               >
-                <span className="text-xs tracking-[0.12em] text-[var(--muted)]">{service.n}</span>
-                <h3 className="m-0 font-[var(--font-sora)] text-[clamp(1.25rem,2.3vw,2rem)] font-semibold tracking-[-0.035em]">
-                  {service.title[lang]}
-                </h3>
+                <ScrollReveal delay={index * 0.05} yOffset={12}>
+                  <div className="grid grid-cols-[52px_1fr] items-center gap-4 py-5 md:grid-cols-[80px_1fr] md:py-6">
+                    <span className="text-xs tracking-[0.12em] text-[var(--muted)]">{service.n}</span>
+                    <h3 className="m-0 font-[var(--font-sora)] text-[clamp(1.25rem,2.3vw,2rem)] font-semibold tracking-[-0.035em]">
+                      {service.title[lang]}
+                    </h3>
+                  </div>
+                </ScrollReveal>
               </li>
             ))}
           </ol>
@@ -184,23 +189,25 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="grid gap-px overflow-hidden bg-[var(--line-dark)] lg:grid-cols-3">
-            {audiences.map((item) => (
+            {audiences.map((item, index) => (
               <article key={item.title.es} className="bg-[var(--paper)]">
-                <img
-                  src={item.image}
-                  alt={item.alt[lang]}
-                  width={1200}
-                  height={800}
-                  loading="lazy"
-                  decoding="async"
-                  className="block aspect-[4/3] h-auto w-full object-cover"
-                />
-                <div className="p-6 md:p-8">
-                  <h3 className="m-0 font-[var(--font-sora)] text-[clamp(1.35rem,2.2vw,2rem)] font-semibold leading-[1.08] tracking-[-0.035em]">
-                    {item.title[lang]}
-                  </h3>
-                  <p className="mb-0 mt-4 text-[#55534e]">{item.body[lang]}</p>
-                </div>
+                <ScrollReveal delay={index * 0.08} yOffset={14}>
+                  <img
+                    src={item.image}
+                    alt={item.alt[lang]}
+                    width={1200}
+                    height={800}
+                    loading="lazy"
+                    decoding="async"
+                    className="block aspect-[4/3] h-auto w-full object-cover"
+                  />
+                  <div className="p-6 md:p-8">
+                    <h3 className="m-0 font-[var(--font-sora)] text-[clamp(1.35rem,2.2vw,2rem)] font-semibold leading-[1.08] tracking-[-0.035em]">
+                      {item.title[lang]}
+                    </h3>
+                    <p className="mb-0 mt-4 text-[#55534e]">{item.body[lang]}</p>
+                  </div>
+                </ScrollReveal>
               </article>
             ))}
           </div>

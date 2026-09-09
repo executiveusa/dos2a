@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Drawer } from "vaul";
 import { useLanguage } from "@/lib/language";
 import { siteContent } from "@/lib/site-content";
 import BrandMark from "./BrandMark";
@@ -11,68 +12,7 @@ import styles from "./DosaEditorial.module.css";
 export default function SiteNav() {
   const { lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const n = siteContent.nav;
-
-  useEffect(() => {
-    if (!open) return;
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const focusableSelector =
-      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
-    const focusFirstMenuItem = window.requestAnimationFrame(() => {
-      const firstLink = headerRef.current?.querySelector<HTMLElement>("#mobile-menu a[href]");
-      firstLink?.focus();
-    });
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setOpen(false);
-        window.requestAnimationFrame(() => menuButtonRef.current?.focus());
-        return;
-      }
-
-      if (e.key !== "Tab" || !headerRef.current) return;
-
-      const focusable = Array.from(
-        headerRef.current.querySelectorAll<HTMLElement>(focusableSelector),
-      ).filter((element) => element.offsetParent !== null);
-
-      if (focusable.length === 0) return;
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      const active = document.activeElement;
-
-      if (e.shiftKey && active === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && active === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    };
-
-    const onTap = (e: PointerEvent) => {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    };
-
-    document.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", onTap);
-
-    return () => {
-      window.cancelAnimationFrame(focusFirstMenuItem);
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("pointerdown", onTap);
-    };
-  }, [open]);
 
   const links = [
     ["/", n.home[lang]],
@@ -82,7 +22,7 @@ export default function SiteNav() {
   ] as const;
 
   return (
-    <header className={`site-header ${styles.siteChrome}`} ref={headerRef}>
+    <header className={`site-header ${styles.siteChrome}`}>
       <div className="site-header__inner">
         <Link className="brand-lockup" href="/" aria-label="dos A — inicio">
           <BrandMark className="brand-mark" />
@@ -94,15 +34,42 @@ export default function SiteNav() {
         <div className="header-actions">
           <button className="language-switch" onClick={() => setLang(lang === "es" ? "en" : "es")} aria-label={lang === "es" ? "Cambiar a inglés" : "Switch to Spanish"}>{lang === "es" ? "EN" : "ES"}</button>
           <Link className="button button--small button--light desktop-quote" href="/cotizar">{n.quote[lang]}</Link>
-          <button ref={menuButtonRef} className="menu-button" onClick={() => setOpen(v => !v)} aria-expanded={open} aria-controls="mobile-menu" aria-haspopup="true" aria-label={open ? "Cerrar menú" : "Abrir menú"}>{open ? <X size={22}/> : <Menu size={22}/>}</button>
+          <button className="menu-button" onClick={() => setOpen(v => !v)} aria-expanded={open} aria-label={open ? "Cerrar menú" : "Abrir menú"}>
+            {open ? <X size={22}/> : <Menu size={22}/>}
+          </button>
         </div>
       </div>
-      {open && (
-        <nav id="mobile-menu" className="mobile-menu" aria-label={lang === "es" ? "Navegación móvil" : "Mobile navigation"}>
-          {links.map(([href, label]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}
-          <Link className="button button--light" href="/cotizar" onClick={() => setOpen(false)}>{n.quote[lang]}</Link>
-        </nav>
-      )}
+
+      <Drawer.Root open={open} onOpenChange={setOpen}>
+        <Drawer.Portal>
+          <Drawer.Overlay className="fixed inset-0 z-[70] bg-black/65 backdrop-blur-[2px] transition-opacity" />
+          <Drawer.Content className="fixed bottom-0 left-0 right-0 z-[80] flex max-h-[85vh] flex-col rounded-t-[20px] border-t border-[var(--line)] bg-[var(--ink)] px-6 pt-4 pb-[max(28px,env(safe-area-inset-bottom))] text-[var(--paper)] focus:outline-none">
+            <Drawer.Title className="sr-only">{lang === "es" ? "Menú de navegación" : "Navigation menu"}</Drawer.Title>
+            <Drawer.Description className="sr-only">{lang === "es" ? "Navega por las secciones de dos A" : "Navigate through dos A sections"}</Drawer.Description>
+            <div className="mx-auto mb-6 h-1.5 w-12 rounded-full bg-[var(--line)]" aria-hidden="true" />
+            <nav className="flex flex-col" aria-label={lang === "es" ? "Navegación móvil" : "Mobile navigation"}>
+              {links.map(([href, label]) => (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className="flex min-h-[52px] items-center border-b border-[var(--line)] text-lg font-medium text-[var(--paper2)] transition-colors active:text-[var(--paper)]"
+                >
+                  {label}
+                </Link>
+              ))}
+              <Link
+                className="button button--light mt-6 w-full"
+                href="/cotizar"
+                onClick={() => setOpen(false)}
+              >
+                {n.quote[lang]}
+              </Link>
+            </nav>
+          </Drawer.Content>
+        </Drawer.Portal>
+      </Drawer.Root>
     </header>
   );
 }
+

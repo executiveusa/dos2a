@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/lib/language";
 import { siteContent } from "@/lib/site-content";
 import PublicShell from "./PublicShell";
+import ScrollReveal from "./ScrollReveal";
 import styles from "./DosaEditorial.module.css";
 
 type Bilingual = { es: string; en: string };
@@ -132,54 +133,55 @@ export default function ServicesPage() {
             {services.map((service, index) => {
               const isStar = index === 0;
               return (
-                <article
-                  key={service.n}
-                  className={`grid gap-0 border-b border-[var(--line)] ${isStar ? "lg:grid-cols-[minmax(0,1.12fr)_minmax(340px,0.88fr)]" : "lg:grid-cols-[120px_minmax(0,1fr)_minmax(300px,0.75fr)]"}`}
-                >
-                  {isStar ? (
-                    <div className="py-8 pr-0 md:py-12 lg:pr-12">
-                      <div className="mb-8 flex items-center gap-4">
-                        <span className="text-xs tracking-[0.12em] text-[var(--muted)]">{service.n}</span>
-                        <span className="border border-[var(--line)] px-3 py-1 text-[0.7rem] tracking-[0.12em] text-[var(--paper2)]">
-                          {service.label[lang]}
-                        </span>
-                      </div>
-                      {service.overline && <p className="eyebrow">{service.overline[lang]}</p>}
-                      <h2 className="m-0 max-w-[18ch] font-[var(--font-sora)] text-[clamp(1.75rem,3.2vw,3rem)] font-semibold leading-[1.05] tracking-[-0.045em]">
-                        {service.title[lang]}
-                      </h2>
-                      <p className="mt-6 max-w-[720px] text-[1.05rem] text-[var(--paper2)]">{service.body[lang]}</p>
-                    </div>
-                  ) : (
-                    <>
-                      <div className="pt-8 text-xs tracking-[0.12em] text-[var(--muted)] lg:py-10">{service.n}</div>
-                      <div className="py-6 lg:py-10 lg:pr-12">
-                        <p className="mb-4 font-[var(--font-sora)] text-sm font-semibold tracking-[-0.015em] text-[var(--paper)]">{service.label[lang]}</p>
+                <ScrollReveal key={service.n} delay={0.04} yOffset={12}>
+                  <article
+                    className={`grid gap-0 border-b border-[var(--line)] ${isStar ? "lg:grid-cols-[minmax(0,1.12fr)_minmax(340px,0.88fr)]" : "lg:grid-cols-[120px_minmax(0,1fr)_minmax(300px,0.75fr)]"}`}
+                  >
+                    {isStar ? (
+                      <div className="py-8 pr-0 md:py-12 lg:pr-12">
+                        <div className="mb-8 flex items-center gap-4">
+                          <span className="text-xs tracking-[0.12em] text-[var(--muted)]">{service.n}</span>
+                          <span className="border border-[var(--line)] px-3 py-1 text-[0.7rem] tracking-[0.12em] text-[var(--paper2)]">
+                            {service.label[lang]}
+                          </span>
+                        </div>
                         {service.overline && <p className="eyebrow">{service.overline[lang]}</p>}
-                        <h2 className="m-0 max-w-[24ch] font-[var(--font-sora)] text-[clamp(1.75rem,3vw,3rem)] font-semibold leading-[1.05] tracking-[-0.045em]">
+                        <h2 className="m-0 max-w-[18ch] font-[var(--font-sora)] text-[clamp(1.75rem,3.2vw,3rem)] font-semibold leading-[1.05] tracking-[-0.045em]">
                           {service.title[lang]}
                         </h2>
-                        <p className="mt-5 max-w-[720px] text-[var(--paper2)]">{service.body[lang]}</p>
+                        <p className="mt-6 max-w-[720px] text-[1.05rem] text-[var(--paper2)]">{service.body[lang]}</p>
                       </div>
-                    </>
-                  )}
+                    ) : (
+                      <>
+                        <div className="pt-8 text-xs tracking-[0.12em] text-[var(--muted)] lg:py-10">{service.n}</div>
+                        <div className="py-6 lg:py-10 lg:pr-12">
+                          <p className="mb-4 font-[var(--font-sora)] text-sm font-semibold tracking-[-0.015em] text-[var(--paper)]">{service.label[lang]}</p>
+                          {service.overline && <p className="eyebrow">{service.overline[lang]}</p>}
+                          <h2 className="m-0 max-w-[24ch] font-[var(--font-sora)] text-[clamp(1.75rem,3vw,3rem)] font-semibold leading-[1.05] tracking-[-0.045em]">
+                            {service.title[lang]}
+                          </h2>
+                          <p className="mt-5 max-w-[720px] text-[var(--paper2)]">{service.body[lang]}</p>
+                        </div>
+                      </>
+                    )}
 
-                  {service.image ? (
-                    <figure className={`m-0 overflow-hidden bg-[var(--ink2)] ${isStar ? "min-h-[360px] lg:min-h-[620px]" : "min-h-[260px] lg:my-8"}`}>
-                      <img
-                        src={service.image}
-                        alt={service.alt?.[lang] ?? ""}
-                        width={1400}
-                        height={900}
-                        loading="lazy"
-                        decoding="async"
-                        className="h-full min-h-[260px] w-full object-cover"
-                      />
-                    </figure>
-                  ) : (
-                    <div className="hidden lg:block" aria-hidden="true" />
-                  )}
-                </article>
+                    {service.image ? (
+                      <figure className={`m-0 overflow-hidden bg-[var(--ink2)] ${isStar ? "min-h-[360px] lg:min-h-[620px]" : "min-h-[260px] lg:my-8"}`}>
+                        <img
+                          src={service.image}
+                          alt={service.alt?.[lang] ?? ""}
+                          width={1400}
+                          height={900}
+                          loading="lazy"
+                          decoding="async"
+                          className="h-full min-h-[260px] w-full object-cover"
+                        />
+                      </figure>
+                    ) : (
+                      <div className="hidden lg:block" aria-hidden="true" />
+                    )}
+                  </article>
+                </ScrollReveal>
               );
             })}
           </div>
