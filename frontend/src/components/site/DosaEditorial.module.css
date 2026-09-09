@@ -360,12 +360,13 @@
 
   .home :global(.client-wall) {
     padding: 68px 18px;
-    text-align: left;
+    text-align: center;
   }
 
   .home :global(.client-wall__eyebrow) {
     margin-bottom: 30px;
     line-height: 1.5;
+    text-align: center;
   }
 
   .home :global(.client-wall ul) {
@@ -391,14 +392,15 @@
   }
 
   .home :global(.client-wall__gov) {
-    max-width: 31ch;
-    margin: 42px 0 0;
+    max-width: 42ch;
+    margin: 36px auto 0;
     padding-top: 22px;
     border-top: 1px solid var(--line);
-    font-size: 0.9rem;
-    line-height: 1.48;
+    font-size: 0.88rem;
+    line-height: 1.5;
     letter-spacing: -0.01em;
     text-wrap: pretty;
+    text-align: center;
   }
 
   .home :global(section[aria-labelledby="audience-title"] > div:last-child) {

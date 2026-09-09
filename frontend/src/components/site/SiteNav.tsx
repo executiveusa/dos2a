@@ -65,6 +65,22 @@ export default function SiteNav() {
               >
                 {n.quote[lang]}
               </Link>
+              <div className="mt-3 flex gap-3">
+                <a
+                  href="tel:+525549110045"
+                  className="button button--ghost flex-1 text-xs"
+                >
+                  +52 55 4911 0045
+                </a>
+                <a
+                  href="https://wa.me/525549110045"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button button--ghost flex-1 text-xs"
+                >
+                  WhatsApp
+                </a>
+              </div>
             </nav>
           </Drawer.Content>
         </Drawer.Portal>
