@@ -51,11 +51,26 @@ Website for **dos A** (Eventos Dos2A) — high-end audiovisual production, stage
 6. `frontend/src/components/site/HomePage.tsx` & `frontend/src/components/site/ServicesPage.tsx`:
    - Integrated `ScrollReveal` around services list items and audience cards.
 
-## Validation Commands
-- Typecheck: `cd frontend && npx tsc --noEmit` (Passed, 0 errors).
-- Dev Server: `pnpm dev --turbopack` (Running on `http://localhost:3000`).
-- Routes checked: `/`, `/servicios`, `/portafolio`, `/contacto`, `/cotizar` (All HTTP 200 OK).
+## Milestone ZTE-20260909-0003 (UI Polish, Sequential Services & Footer Contact Fixes)
+1. `frontend/src/components/site/HomePage.tsx`:
+   - Numbered list renumbered sequentially `01.` through `05.` with zero gap (Hero section 100% frozen).
+2. `frontend/src/components/site/SiteFooter.tsx`:
+   - Added direct clickable telephone link (`tel:+525549110045`) displaying `+52 55 4911 0045` directly between the location line and email.
+   - Preserved `mailto:alanis@eventosdos2a.mx` and WhatsApp deep link (`https://wa.me/525549110045`).
+3. `frontend/src/app/globals.css` & `frontend/src/components/site/DosaEditorial.module.css`:
+   - Converted client logo wall (`.client-wall ul`) from unconstrained flex wrap to balanced CSS Grid:
+     - Desktop: 3 columns × 2 rows (`repeat(3, minmax(0, 1fr))`) with 40px uniform logo height and 72px card height.
+     - Mobile: 2 columns × 3 rows (`repeat(2, minmax(0, 1fr))`) with 32px uniform logo height and 60px card height.
+   - Eliminated awkward 4-top / 2-bottom split and orphan logo cards.
 
-## Known Issues / Future Work
-- Final merge of `feat/mobile-apple-polish-repo-mot` into `master` after visual sign-off.
-- Production deployment on Netlify/Vercel.
+## Validation Commands
+- Build: `cd frontend && pnpm build` (Passed, 16/16 static pages generated).
+- Visual & Headless Chrome:
+  - Desktop 1280x800: `proof_desktop_services.png`, `proof_desktop_client_grid.png`, `proof_desktop_footer.png`.
+  - Mobile 375x812: `proof_mobile_services.png`, `proof_mobile_client_grid.png`, `proof_mobile_footer.png`.
+  - Hero layout: BrandMark on LEFT, headline/copy on RIGHT, `#080909` background verified 100% intact.
+
+## Commit & Deployment Status
+- Pushed commit `c127599` to `origin/master`.
+- Production auto-deploy triggered via git integration.
+
