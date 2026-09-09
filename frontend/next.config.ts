@@ -46,7 +46,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/_next/static/chunks/app/servicios/page-e189d1a417a72ddf.js",
-        destination: "/_next/static/chunks/app/servicios/page-c5c22ec99d78e0c1.js",
+        destination: "/_next/static/chunks/app/servicios/page-9492160d2b781e6a.js",
       },
     ];
   },
