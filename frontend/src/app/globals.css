@@ -19,13 +19,13 @@
 .hero-secondary{margin-top:4px;color:var(--paper2)}
 .client-wall{background:var(--ink2);border-top:1px solid var(--line);padding:52px clamp(18px,5vw,72px);text-align:center}
 .client-wall__eyebrow{margin:0 0 26px;text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;font-weight:600;color:var(--muted)}
-.client-wall ul{margin:0 auto;padding:0;max-width:var(--max);list-style:none;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:16px}
-.client-wall li{display:flex;align-items:center;justify-content:center;height:66px;padding:0 26px;background:var(--paper);border-radius:12px}
-.client-wall li img{display:block;height:32px;width:auto}
-.client-wall li.client-wall__tall img{height:42px}
+.client-wall ul{margin:0 auto;padding:0;max-width:960px;list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-content:center;align-items:center;gap:20px}
+.client-wall li{display:flex;align-items:center;justify-content:center;height:72px;padding:0 24px;background:var(--paper);border-radius:12px}
+.client-wall li img{display:block;height:40px;max-height:40px;width:auto;max-width:100%;object-fit:contain}
+.client-wall li.client-wall__tall img{height:40px;max-height:40px}
 .client-wall__gov{margin:26px 0 0;font-size:.82rem;letter-spacing:.06em;color:var(--muted)}
 .client-wall__gov span{display:block;margin-top:4px;font-size:.72rem}
-@media(max-width:640px){.client-wall{padding:40px 18px}.client-wall ul{gap:12px}.client-wall li{height:56px;padding:0 18px}.client-wall li img{height:27px}.client-wall li.client-wall__tall img{height:36px}}
+@media(max-width:640px){.client-wall{padding:40px 18px}.client-wall ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.client-wall li{height:60px;padding:0 14px}.client-wall li img{height:32px;max-height:32px}.client-wall li.client-wall__tall img{height:32px;max-height:32px}}
 .brand-mark{display:block;height:45.2px;width:auto;color:var(--paper)}
 .brand-lockup{flex-direction:row;align-items:center;gap:12px}
 .brand-lockup span{margin-top:0}

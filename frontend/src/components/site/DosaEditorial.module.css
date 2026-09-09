@@ -90,17 +90,28 @@
   }
 
   .home :global(.client-wall ul) {
-    gap: clamp(28px, 4vw, 64px);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+    align-items: center;
   }
 
-  .home :global(.client-wall img) {
-    max-height: 48px;
-    width: auto;
-    object-fit: contain;
+  .home :global(.client-wall li) {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
+  .home :global(.client-wall img),
   .home :global(.client-wall__tall img) {
-    max-height: 54px;
+    height: 40px;
+    max-height: 40px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
   }
 
   .home :global(.cinematic__copy) {
@@ -373,8 +384,10 @@
   .home :global(.client-wall li img),
   .home :global(.client-wall li.client-wall__tall img) {
     max-width: 100%;
-    height: auto;
-    max-height: 34px;
+    height: 32px;
+    max-height: 32px;
+    width: auto;
+    object-fit: contain;
   }
 
   .home :global(.client-wall__gov) {

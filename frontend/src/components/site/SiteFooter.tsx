@@ -62,7 +62,15 @@ export default function SiteFooter() {
           <Link href="/cotizar">{siteContent.nav.quote[lang]}</Link>
         </div>
         <div className="footer-note">
-          <p>{lang === "es" ? "Ciudad de México · proyectos en todo México" : "Mexico City · projects across Mexico"}<br/><a href="mailto:alanis@eventosdos2a.mx">alanis@eventosdos2a.mx</a><br/><a href={SOCIAL_LINKS.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+          <p>
+            {lang === "es" ? "Ciudad de México · proyectos en todo México" : "Mexico City · projects across Mexico"}
+            <br />
+            <a href="tel:+525549110045">+52 55 4911 0045</a>
+            <br />
+            <a href="mailto:alanis@eventosdos2a.mx">alanis@eventosdos2a.mx</a>
+            <br />
+            <a href={SOCIAL_LINKS.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          </p>
           <div className={socialStyles.social} aria-label={lang === "es" ? "Redes sociales y contacto" : "Social media and contact"}>
             <a className={socialStyles.mark} href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FacebookIcon/></a>
             <a className={socialStyles.mark} href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><InstagramIcon/></a>
