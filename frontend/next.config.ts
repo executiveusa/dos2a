@@ -33,6 +33,18 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
+        source: "/_next/static/css/63ca38dffe7dd760.css",
+        destination: "/_next/static/css/ebcbcf7eb267f5cd.css",
+      },
+      {
+        source: "/_next/static/css/890bf1f5d1ff7ce3.css",
+        destination: "/_next/static/css/4b64c490b5e03688.css",
+      },
+      {
+        source: "/_next/static/chunks/app/page-e48fb6c8285a8d3b.js",
+        destination: "/_next/static/chunks/app/page-0aea3f714fd204e6.js",
+      },
+      {
         source: "/_next/static/chunks/app/servicios/page-e189d1a417a72ddf.js",
         destination: "/_next/static/chunks/app/servicios/page-c5c22ec99d78e0c1.js",
       },

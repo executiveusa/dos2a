@@ -32,13 +32,16 @@ const jsonLd={
     {"@type":"Offer",itemOffered:{"@type":"Service",name:"Operación y coordinación técnica de eventos"}}
   ]
 };
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default function RootLayout({children}:{children:ReactNode}){
   return (
     <html lang="es" className={`${sora.variable} ${inter.variable}`}>
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){window.addEventListener('error',function(e){var m=e&&e.message?e.message:'';if(m.indexOf('ChunkLoadError')!==-1||m.indexOf('Loading chunk')!==-1){var k='dosa_chunk_recovery',n=Date.now(),l=parseInt(sessionStorage.getItem(k)||'0',10);if(!l||n-l>15000){sessionStorage.setItem(k,String(n));var u=new URL(window.location.href);u.searchParams.set('v',String(n));window.location.replace(u.toString())}}});})();`,
+            __html: `(function(){function recover(){var k='dosa_chunk_recovery',n=Date.now(),l=parseInt(sessionStorage.getItem(k)||'0',10);if(!l||n-l>10000){sessionStorage.setItem(k,String(n));var u=new URL(window.location.href);u.searchParams.set('v',String(n));window.location.replace(u.toString())}}window.addEventListener('error',function(e){var m=e&&e.message?e.message:'';if(m.indexOf('ChunkLoadError')!==-1||m.indexOf('Loading chunk')!==-1||m.indexOf('CSS_CHUNK_LOAD_FAILED')!==-1){recover()}else if(e&&e.target&&(e.target.tagName==='LINK'||e.target.tagName==='SCRIPT')){var s=e.target.src||e.target.href||'';if(s.indexOf('/_next/static/')!==-1){recover()}}},true);window.addEventListener('unhandledrejection',function(e){var r=e&&e.reason?String(e.reason):'';if(r.indexOf('ChunkLoadError')!==-1||r.indexOf('Loading chunk')!==-1){recover()}});})();`,
           }}
         />
       </head>
