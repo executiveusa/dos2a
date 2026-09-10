@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Sora, Inter } from "next/font/google";
 import { LanguageProvider } from "@/lib/language";
+import { SITE_URL } from "@/lib/site-config";
 import "./globals.css";
 
 const sora=Sora({subsets:["latin"],variable:"--font-sora",display:"swap",weight:["400","600","700"]});
 const inter=Inter({subsets:["latin"],variable:"--font-inter",display:"swap",weight:["400","500","600"]});
 
 export const metadata:Metadata={
-  metadataBase:new URL("https://dos2a.vercel.app"),
+  metadataBase:new URL(SITE_URL),
   alternates:{canonical:"/"},
   title:{default:"dos A | Audio, video, iluminación y producción técnica para eventos",template:"%s | dos A"},
   description:"Producción técnica para empresas, agencias y organizadores: audio, video, iluminación, escenarios, stands y operación desde Ciudad de México para proyectos en México.",
@@ -18,8 +19,8 @@ const jsonLd={
   "@context":"https://schema.org",
   "@type":["Organization","LocalBusiness"],
   name:"dos A",
-  url:"https://dos2a.vercel.app",
-  logo:"https://dos2a.vercel.app/images/dos-a-logo.svg",
+  url:SITE_URL,
+  logo:`${SITE_URL}/images/dos-a-logo.svg`,
   slogan:"audio · iluminación · video",
   description:"Producción técnica para empresas, agencias y organizadores: audio, video, iluminación, escenarios, stands y operación desde Ciudad de México para proyectos en México.",
   areaServed:[{"@type":"City",name:"Ciudad de México"},{"@type":"Country",name:"México"}],
