@@ -17,6 +17,7 @@ export interface LeadSubmitResult {
 const LEAD_ENDPOINT = "https://cyxdevcjycmffhmwxojh.supabase.co/functions/v1/dosa-lead-intake";
 const IDEMPOTENCY_KEY_STORAGE = "dosa_lead_idempotency";
 const IDEMPOTENCY_FINGERPRINT_STORAGE = "dosa_lead_idempotency_fingerprint";
+const REQUEST_TIMEOUT_MS = 12_000;
 
 function buildMailto(data: LeadFormData) {
   const subject = encodeURIComponent(`Nueva solicitud dos A — ${data.eventType || "Evento"}`);
@@ -61,6 +62,8 @@ function clearIdempotencyState() {
 }
 
 export async function submitLead(data: LeadFormData): Promise<LeadSubmitResult> {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   try {
     const idempotencyKey = getIdempotencyKey(data);
     const res = await fetch(LEAD_ENDPOINT, {
@@ -71,6 +74,7 @@ export async function submitLead(data: LeadFormData): Promise<LeadSubmitResult> 
         "X-Request-ID": crypto.randomUUID(),
       },
       body: JSON.stringify(data),
+      signal: controller.signal,
     });
     if (res.ok) {
       clearIdempotencyState();
@@ -79,5 +83,7 @@ export async function submitLead(data: LeadFormData): Promise<LeadSubmitResult> 
     return { success: false, message: `Lead API returned ${res.status}.`, mailtoUrl: buildMailto(data) };
   } catch {
     return { success: false, message: "Lead API request failed.", mailtoUrl: buildMailto(data) };
+  } finally {
+    window.clearTimeout(timeout);
   }
 }
