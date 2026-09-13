@@ -1,0 +1,16 @@
+{
+  "stage":"07",
+  "baseline_sha":"40ea5b9383390c60612c3e75d3b75ddc42496a99",
+  "risk":"MEDIUM",
+  "public_runtime_changed":true,
+  "database_changed":false,
+  "auth_changed":false,
+  "owner_server_connected":false,
+  "legacy_intro_removed":true,
+  "legacy_public_byok_chat_removed":true,
+  "false_mailto_success_removed":true,
+  "critical_route_ci":true,
+  "media_rewrite_ci":true,
+  "full_visual_device_matrix":"stage_16",
+  "status":"verified_pending_pr_merge"
+}

@@ -1,0 +1,1 @@
+{"baseline_sha":"2c12b579212ed8778b1f7da705d4b2f10f121115","affected_services":[],"production_data_risk":"none","rollback":"Revert the Stage 03 squash merge; no runtime/data rollback required."}

@@ -1,0 +1,8 @@
+{
+  "baseline_sha": "6b54cc0cf053165e9cbfade5606ad71937eedae8",
+  "affected_services": [],
+  "schema_changes": [],
+  "runtime_changes": [],
+  "production_data_risk": "none",
+  "rollback": "Revert the Stage 00 squash merge. No production or database rollback is required."
+}

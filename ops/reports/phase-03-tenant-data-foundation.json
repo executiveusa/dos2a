@@ -1,0 +1,66 @@
+{
+  "initiative": "DOSA-OS",
+  "phase": "03-tenant-data-foundation",
+  "status": "repository_build_complete_ci_verification_pending",
+  "risk": "medium_repository_low_operational_until_applied",
+  "openspec_change": "add-tenant-data-foundation",
+  "beads": [],
+  "beads_status": "CLI not exposed in current execution environment; state persisted in OpenSpec/ICM/ops artifacts",
+  "stages_completed": [
+    "hydrate",
+    "baseline",
+    "spec",
+    "data_contract_design",
+    "migration_authored",
+    "portable_postgres_hardening",
+    "tests_authored",
+    "migration_runner_authored",
+    "backup_restore_tooling",
+    "self_hosted_runbook",
+    "postgres_ci_workflow_authored",
+    "static_review"
+  ],
+  "baseline_sha": "b003a09f0e3ac68ef0cf63ac88cc7fcf3d6f2074",
+  "baseline_public_home_status": 200,
+  "deployment_target": {
+    "model": "owner_controlled_server",
+    "server_connected": false,
+    "hosted_database_project_required": false,
+    "production_migration_applied": false
+  },
+  "changes": {
+    "migration": "supabase/migrations/20260719030000_tenant_data_foundation.sql",
+    "pgtap_tests": "supabase/tests/database/tenant_data_foundation.test.sql",
+    "portable_verification": "scripts/db/verify_foundation.sql",
+    "migration_runner": "scripts/db/migrate.sh",
+    "backup_script": "scripts/db/backup.sh",
+    "restore_script": "scripts/db/restore.sh",
+    "local_postgres_harness": "infra/postgres/docker-compose.dev.yml",
+    "ci_workflow": ".github/workflows/database-foundation.yml",
+    "server_runbook": "docs/SELF-HOSTED-SERVER.md",
+    "schemas": ["app_core", "crm", "comms", "agent_audit"],
+    "auth_changes": false,
+    "rls_changes": false,
+    "browser_api_grants": false,
+    "legacy_schema_changes": false,
+    "application_runtime_changes": false
+  },
+  "verification_required_before_merge": [
+    "PostgreSQL 16 migration applies successfully in isolated CI",
+    "migration runner second pass safely skips matching migrations",
+    "portable schema/integrity verification passes",
+    "schema-only dump succeeds",
+    "PR has no valid unresolved review findings"
+  ],
+  "deferred_until_server_connection": [
+    "server inventory",
+    "production backup baseline",
+    "least-privilege database identities",
+    "auth/RLS/grants",
+    "production migration apply",
+    "restore drill against owner infrastructure"
+  ],
+  "stop_condition": "Do not connect to or mutate the owner's real server until access is intentionally provided and a separate infrastructure change is approved. Do not expose business schemas before auth/authorization hardening.",
+  "rollback_receipt": "ops/rollback/phase-03-tenant-data-foundation.json",
+  "zero_context_handoff": true
+}

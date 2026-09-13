@@ -1,0 +1,40 @@
+{
+  "project": "dos A",
+  "repository": "executiveusa/dos2a",
+  "production_url": "https://dos2a.vercel.app",
+  "hardening_squash_sha": "98477f4cea873cd5fbbd4d161bc81caedf2fa887",
+  "supabase_project_ref": "cyxdevcjycmffhmwxojh",
+  "schema": "dosa",
+  "edge_function": {
+    "name": "dosa-lead-intake",
+    "version": 3,
+    "status": "ACTIVE"
+  },
+  "verified": {
+    "public_web_build_and_local_route_smoke": "pass",
+    "stage08_typescript_contracts": "pass",
+    "stage08_postgres_migrations_and_contracts": "pass",
+    "database_migration_replay": "pass",
+    "rls_enabled_and_forced": "pass",
+    "restrictive_policy_matrix": "pass",
+    "anon_authenticated_direct_table_grants": 0,
+    "rpc_service_role_only": "pass",
+    "idempotency_same_payload_deduplicates": "pass",
+    "idempotency_changed_payload_rejects": "pass",
+    "rate_limit_11th_request_same_source_10_minutes": "pass",
+    "full_relational_lead_brief_intake_audit_creation": "pass",
+    "test_cleanup_zero_leftovers": "pass",
+    "schema_dump": "pass",
+    "backup_checksum": "pass",
+    "guarded_restore_and_security_reverification": "pass",
+    "vercel_runtime_error_clusters_last_7_days": 0
+  },
+  "deferred": {
+    "vercel_project_live": false,
+    "reason": "Vercel project/account reports live:false and deployments are externally blocked/paused.",
+    "visual_desktop_mobile_inspection": "deferred_until_unpause",
+    "browser_to_supabase_real_form_submission": "deferred_until_unpause"
+  },
+  "release_classification": "NONVISUAL_GATES_PASS_VISUAL_GATE_DEFERRED",
+  "feature_freeze": true
+}

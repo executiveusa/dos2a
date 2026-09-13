@@ -8,36 +8,82 @@ export interface LeadFormData {
   needs: string;
 }
 
-export async function submitLead(data: LeadFormData): Promise<{ success: boolean; message?: string }> {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+export interface LeadSubmitResult {
+  success: boolean;
+  message?: string;
+  mailtoUrl?: string;
+}
 
-  // Try real backend if available, fallback to mailto
-  if (apiUrl) {
-    try {
-      const res = await fetch(`${apiUrl}/api/v1/leads`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (res.ok) return { success: true };
-      return { success: false };
-    } catch {
-      // fall through to mailto
-    }
-  }
+const LEAD_ENDPOINT = "https://cyxdevcjycmffhmwxojh.supabase.co/functions/v1/dosa-lead-intake";
+const IDEMPOTENCY_KEY_STORAGE = "dosa_lead_idempotency";
+const IDEMPOTENCY_FINGERPRINT_STORAGE = "dosa_lead_idempotency_fingerprint";
+const REQUEST_TIMEOUT_MS = 12_000;
 
-  // Mailto fallback — always works, no backend needed
-  const subject = encodeURIComponent(`Nueva cotización — ${data.eventType || "Evento DOS2A"}`);
+function buildMailto(data: LeadFormData) {
+  const subject = encodeURIComponent(`Nueva solicitud dos A — ${data.eventType || "Evento"}`);
   const body = encodeURIComponent(
-    `Hola DOS2A,\n\nSolicitud de cotización:\n\n` +
-      `Nombre: ${data.name}\n` +
-      `Correo: ${data.email}\n` +
-      `Tipo de evento: ${data.eventType}\n` +
-      `Fecha: ${data.date}\n` +
-      `Ubicación: ${data.location}\n` +
-      `Asistentes: ${data.guests}\n` +
-      `Necesidades: ${data.needs}\n\nGracias.`
+    `Hola dos A,\n\nSolicitud de cotización:\n\n` +
+      `Nombre: ${data.name}\nCorreo: ${data.email}\nTipo de evento: ${data.eventType}\n` +
+      `Fecha: ${data.date}\nUbicación: ${data.location}\nAsistentes: ${data.guests}\n` +
+      `Necesidades: ${data.needs}\n`
   );
-  window.location.href = `mailto:2audioiluminacion@gmail.com?subject=${subject}&body=${body}`;
-  return { success: true };
+  return `mailto:alanis@eventosdos2a.mx?subject=${subject}&body=${body}`;
+}
+
+function fingerprintLead(data: LeadFormData) {
+  const input = JSON.stringify(data);
+  let hash = 2166136261;
+  for (let i = 0; i < input.length; i += 1) {
+    hash ^= input.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0).toString(16).padStart(8, "0");
+}
+
+function getIdempotencyKey(data: LeadFormData) {
+  if (typeof window === "undefined") return crypto.randomUUID();
+
+  const fingerprint = fingerprintLead(data);
+  const existingKey = sessionStorage.getItem(IDEMPOTENCY_KEY_STORAGE);
+  const existingFingerprint = sessionStorage.getItem(IDEMPOTENCY_FINGERPRINT_STORAGE);
+
+  if (existingKey && existingFingerprint === fingerprint) return existingKey;
+
+  const created = crypto.randomUUID();
+  sessionStorage.setItem(IDEMPOTENCY_KEY_STORAGE, created);
+  sessionStorage.setItem(IDEMPOTENCY_FINGERPRINT_STORAGE, fingerprint);
+  return created;
+}
+
+function clearIdempotencyState() {
+  if (typeof window === "undefined") return;
+  sessionStorage.removeItem(IDEMPOTENCY_KEY_STORAGE);
+  sessionStorage.removeItem(IDEMPOTENCY_FINGERPRINT_STORAGE);
+}
+
+export async function submitLead(data: LeadFormData): Promise<LeadSubmitResult> {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  try {
+    const idempotencyKey = getIdempotencyKey(data);
+    const res = await fetch(LEAD_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Idempotency-Key": idempotencyKey,
+        "X-Request-ID": crypto.randomUUID(),
+      },
+      body: JSON.stringify(data),
+      signal: controller.signal,
+    });
+    if (res.ok) {
+      clearIdempotencyState();
+      return { success: true };
+    }
+    return { success: false, message: `Lead API returned ${res.status}.`, mailtoUrl: buildMailto(data) };
+  } catch {
+    return { success: false, message: "Lead API request failed.", mailtoUrl: buildMailto(data) };
+  } finally {
+    window.clearTimeout(timeout);
+  }
 }

@@ -1,0 +1,246 @@
+.disclosure {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.trigger {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  cursor: pointer;
+}
+
+.trigger:focus-visible,
+.close:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.inline .trigger {
+  font-weight: 600;
+}
+
+.preview {
+  display: none;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgb(4 5 5 / 74%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: legalBackdropIn 160ms ease-out both;
+}
+
+.panel {
+  width: min(840px, calc(100vw - 48px));
+  max-height: min(84dvh, 900px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #f1efe9;
+  color: #171817;
+  border: 1px solid rgb(23 24 23 / 14%);
+  box-shadow: 0 28px 90px rgb(0 0 0 / 34%);
+  animation: legalPanelIn 190ms cubic-bezier(.22,1,.36,1) both;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 24px 18px;
+  border-bottom: 1px solid rgb(23 24 23 / 12%);
+}
+
+.header h2 {
+  margin: 4px 0 0;
+  max-width: 28ch;
+  font-size: clamp(1.55rem, 3vw, 2.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.58;
+}
+
+.close {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgb(23 24 23 / 15%);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 90ms ease, background-color 140ms ease;
+}
+
+.close:active {
+  transform: scale(.97);
+}
+
+.body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 22px 24px 32px;
+  scrollbar-gutter: stable;
+}
+
+.body p,
+.body li {
+  font-size: 0.98rem;
+  line-height: 1.68;
+}
+
+.body h3 {
+  margin: 28px 0 8px;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.body a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.updated,
+.languageNote,
+.factNote {
+  font-size: 0.84rem !important;
+  line-height: 1.55 !important;
+  color: #5b5b57;
+}
+
+.factNote {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid rgb(23 24 23 / 12%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .preview {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 12px);
+    z-index: 40;
+    width: min(300px, 72vw);
+    transform: translate(-50%, 4px);
+    padding: 14px 15px;
+    display: grid;
+    gap: 5px;
+    pointer-events: none;
+    background: #f1efe9;
+    color: #171817;
+    border: 1px solid rgb(23 24 23 / 15%);
+    box-shadow: 0 16px 44px rgb(0 0 0 / 24%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 130ms ease, transform 130ms ease, visibility 130ms ease;
+  }
+
+  .preview strong {
+    font-size: 0.78rem;
+  }
+
+  .preview span {
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .preview em {
+    font-size: 0.69rem;
+    font-style: normal;
+    opacity: 0.58;
+  }
+
+  .disclosure:hover .preview,
+  .disclosure:focus-within .preview {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 720px) {
+  .backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .panel {
+    width: 100%;
+    max-height: 90dvh;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -18px 60px rgb(0 0 0 / 34%);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .header {
+    padding: 20px 18px 15px;
+  }
+
+  .body {
+    padding: 18px 18px 26px;
+  }
+
+  .body p,
+  .body li {
+    font-size: 1rem;
+  }
+
+  .trigger {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .panel {
+    animation: none;
+  }
+
+  .preview,
+  .close {
+    transition: none;
+  }
+}
+
+@keyframes legalBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes legalPanelIn {
+  from { opacity: 0; transform: translateY(10px) scale(.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}

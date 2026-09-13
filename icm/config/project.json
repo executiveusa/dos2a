@@ -1,0 +1,16 @@
+{
+  "project": "dos A — Sovereign AV Business OS",
+  "repository": "executiveusa/dos2a",
+  "default_branch": "master",
+  "brand": "dos A",
+  "tagline": "audio · iluminación · video",
+  "primary_locale": "es-MX",
+  "secondary_locale": "en",
+  "market": "Ciudad de México first; projects throughout Mexico",
+  "audiences": ["corporate event and marketing teams", "event agencies and producers"],
+  "experience_claim_es": "Más de 10 años de experiencia.",
+  "hero_es": "Audio, video, iluminación y operación. Un solo equipo.",
+  "mobile_first_class": true,
+  "execution": "ICM + GRINIONS",
+  "merge_method": "squash"
+}

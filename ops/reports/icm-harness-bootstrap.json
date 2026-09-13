@@ -1,0 +1,10 @@
+{
+  "change":"install-icm-autonomous-harness",
+  "baseline_sha":"a0008e3de45b04e9128451300cbd641f706767df",
+  "scope":"docs/config/scripts only",
+  "risk":"LOW",
+  "production_runtime_changed":false,
+  "database_changed":false,
+  "verification":["bash -n scripts/agent/*.sh","JSON parse","20 stage contracts","python3 harness.py next"],
+  "status":"pending_remote_ci"
+}

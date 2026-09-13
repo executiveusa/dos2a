@@ -1,64 +1,56 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Sora, Inter } from "next/font/google";
 import { LanguageProvider } from "@/lib/language";
+import { SITE_URL } from "@/lib/site-config";
 import "./globals.css";
 
-const sora = Sora({
-  subsets: ["latin"],
-  variable: "--font-sora",
-  display: "swap",
-  weight: ["400", "600", "700", "800"],
-});
+const sora=Sora({subsets:["latin"],variable:"--font-sora",display:"swap",weight:["400","600","700"]});
+const inter=Inter({subsets:["latin"],variable:"--font-inter",display:"swap",weight:["400","500","600"]});
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  weight: ["400", "500", "600"],
-});
-
-export const metadata: Metadata = {
-  title: "DOS2A — Audio, Iluminación y Producción Audiovisual CDMX",
-  description:
-    "Diseño de montajes para conciertos, fiestas y eventos corporativos en Ciudad de México. Audio profesional, iluminación escénica y producción audiovisual.",
-  keywords: [
-    "renta de audio CDMX",
-    "iluminación eventos",
-    "producción audiovisual México",
-    "DJ equipment rental",
-    "audio para conciertos",
-  ],
-  openGraph: {
-    title: "DOS2A — Audio, Iluminación y Producción",
-    description: "Montajes de audio e iluminación para eventos que quieren verse y escucharse como headliners.",
-    type: "website",
-    locale: "es_MX",
-  },
+export const metadata:Metadata={
+  metadataBase:new URL(SITE_URL),
+  alternates:{canonical:"/"},
+  title:{default:"dos A | Audio, video, iluminación y producción técnica para eventos",template:"%s | dos A"},
+  description:"Producción técnica para empresas, agencias y organizadores: audio, video, iluminación, escenarios, stands y operación desde Ciudad de México para proyectos en México.",
+  openGraph:{title:"dos A | audio · iluminación · video",description:"Audio, video, iluminación y operación. Un solo equipo.",type:"website",locale:"es_MX",images:[{url:"/images/hero/dosa-hero-loreal-1920w.jpg",width:1920,height:1052,alt:"Gala corporativa producida por dos A"}]},
 };
+const jsonLd={
+  "@context":"https://schema.org",
+  "@type":["Organization","LocalBusiness"],
+  name:"dos A",
+  url:SITE_URL,
+  logo:`${SITE_URL}/images/dos-a-logo.svg`,
+  slogan:"audio · iluminación · video",
+  description:"Producción técnica para empresas, agencias y organizadores: audio, video, iluminación, escenarios, stands y operación desde Ciudad de México para proyectos en México.",
+  areaServed:[{"@type":"City",name:"Ciudad de México"},{"@type":"Country",name:"México"}],
+  knowsAbout:["audio para eventos","video y pantallas LED","iluminación escénica y arquitectónica","escenarios y stands","video mapping","producción técnica de eventos"],
+  makesOffer:[
+    {"@type":"Offer",itemOffered:{"@type":"Service",name:"Audio para eventos"}},
+    {"@type":"Offer",itemOffered:{"@type":"Service",name:"Video y pantallas LED"}},
+    {"@type":"Offer",itemOffered:{"@type":"Service",name:"Iluminación para eventos"}},
+    {"@type":"Offer",itemOffered:{"@type":"Service",name:"Escenarios, stands y escenografía"}},
+    {"@type":"Offer",itemOffered:{"@type":"Service",name:"Operación y coordinación técnica de eventos"}}
+  ]
+};
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({children}:{children:ReactNode}){
   return (
     <html lang="es" className={`${sora.variable} ${inter.variable}`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#080a0e" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){function recover(){var k='dosa_chunk_recovery',n=Date.now(),l=parseInt(sessionStorage.getItem(k)||'0',10);if(!l||n-l>10000){sessionStorage.setItem(k,String(n));var u=new URL(window.location.href);u.searchParams.set('v',String(n));window.location.replace(u.toString())}}window.addEventListener('error',function(e){var m=e&&e.message?e.message:'';if(m.indexOf('ChunkLoadError')!==-1||m.indexOf('Loading chunk')!==-1||m.indexOf('CSS_CHUNK_LOAD_FAILED')!==-1){recover()}else if(e&&e.target&&(e.target.tagName==='LINK'||e.target.tagName==='SCRIPT')){var s=e.target.src||e.target.href||'';if(s.indexOf('/_next/static/')!==-1){recover()}}},true);window.addEventListener('unhandledrejection',function(e){var r=e&&e.reason?String(e.reason):'';if(r.indexOf('ChunkLoadError')!==-1||r.indexOf('Loading chunk')!==-1){recover()}});})();`,
+          }}
+        />
       </head>
-      <body
-        style={{
-          background: "#080a0e",
-          color: "#f1f5f9",
-          margin: 0,
-          padding: 0,
-          fontFamily: "var(--font-inter), Inter, system-ui, sans-serif",
-          WebkitFontSmoothing: "antialiased",
-          MozOsxFontSmoothing: "grayscale",
-        }}
-      >
-        <LanguageProvider>{children}</LanguageProvider>
+      <body>
+        <LanguageProvider>
+          {children}
+          <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(jsonLd)}}/>
+        </LanguageProvider>
       </body>
     </html>
   );

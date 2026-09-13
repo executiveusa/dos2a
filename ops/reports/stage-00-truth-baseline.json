@@ -1,0 +1,16 @@
+{
+  "stage": "00",
+  "change": "stage-00-truth-baseline",
+  "baseline_sha": "6b54cc0cf053165e9cbfade5606ad71937eedae8",
+  "risk": "LOW",
+  "runtime_changed": false,
+  "database_changed": false,
+  "production_home_observed_http": 200,
+  "hero_asset_observed_http": 404,
+  "outputs": [
+    "icm/stages/00_truth/output/truth-baseline.md",
+    "icm/stages/00_truth/output/verified-claims.json",
+    "icm/stages/00_truth/output/risk-register.json"
+  ],
+  "status": "verified_pending_pr_merge"
+}

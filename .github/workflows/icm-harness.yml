@@ -1,0 +1,63 @@
+name: ICM harness
+on:
+  pull_request:
+    paths:
+      - 'TOKEN_SAVING_RULES.md'
+      - '.jcodemunch.jsonc'
+      - 'icm/**'
+      - 'scripts/agent/**'
+      - 'harness.py'
+      - '.github/workflows/icm-harness.yml'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate shell
+        run: bash -n scripts/agent/*.sh
+      - name: Validate JSON and stage contracts
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          json.load(open('icm/config/project.json'))
+          json.load(open('icm/_config/tooling/PINS.json'))
+          stages=json.load(open('icm/config/stages.json'))
+          assert len(stages)==20
+          for s in stages:
+              hits=list(pathlib.Path('icm/stages').glob(f"{s['id']}_*/CONTEXT.md"))
+              assert len(hits)==1,(s,hits)
+              status=hits[0].parent/'STATUS.md'
+              assert status.is_file(), status
+          print('20 ICM stage contracts valid')
+          PY
+      - name: Validate stage evidence gates
+        run: |
+          for stage in $(seq -w 0 19); do
+            bash scripts/agent/check-icm-stage.sh "$stage"
+          done
+      - name: Harness smoke identifies first incomplete stage
+        run: |
+          expected="$(python3 - <<'PY'
+          import json, pathlib
+          stages=json.load(open('icm/config/stages.json'))
+          root=pathlib.Path.cwd()
+          for s in stages:
+              hits=list((root/'icm/stages').glob(f"{s['id']}_*"))
+              assert len(hits)==1,(s,hits)
+              status={}
+              for line in (hits[0]/'STATUS.md').read_text().splitlines():
+                  if ':' in line:
+                      k,v=line.split(':',1); status[k.strip()]=v.strip()
+              if status.get('state') != 'complete':
+                  print(hits[0])
+                  break
+          else:
+              print('ALL_COMPLETE')
+          PY
+          )"
+          actual="$(python3 harness.py next)"
+          test "$actual" = "$expected"

@@ -1,0 +1,27 @@
+{
+  "phase": "02-canonical-architecture",
+  "risk": "low",
+  "baseline_main_sha": "d536e2468266f002311798ad89cc48762c0743f5",
+  "baseline_vercel_project_id": "prj_tezul1L8gVyxokWFX8OwwQZRMtMA",
+  "baseline_production_deployment_id": "dpl_8nJ4VQ1kHc8Je2L4wxb2ZbMgJn7y",
+  "baseline_production_state": "READY",
+  "baseline_public_home_status": 200,
+  "database_changes": false,
+  "auth_changes": false,
+  "dependency_changes": false,
+  "application_source_changes": false,
+  "deployment_configuration_changes": false,
+  "affected_services": [
+    "repository-documentation",
+    "architecture-specification",
+    "icm-context"
+  ],
+  "rollback": [
+    "Stop dependent phases if the architecture decision is rejected.",
+    "Revert the Phase 02 squash commit on master.",
+    "Verify any Vercel rebuild status without bypassing quota or protection controls.",
+    "Verify https://dos2a.vercel.app/ returns HTTP 200.",
+    "Record recovery evidence in ops/reports/."
+  ],
+  "data_loss_risk": "none expected; documentation/specification only"
+}

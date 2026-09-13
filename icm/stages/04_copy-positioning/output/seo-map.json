@@ -1,0 +1,30 @@
+{
+  "/": {
+    "title_es":"dos A | Audio, video, iluminación y producción técnica para eventos",
+    "description_es":"Producción técnica para empresas, agencias y organizadores: audio, video, iluminación, escenarios, stands y operación desde Ciudad de México para proyectos en México.",
+    "title_en":"dos A | Audio, video, lighting and technical event production",
+    "description_en":"Technical production for companies, agencies and event organizers: audio, video, lighting, staging, stands and operation from Mexico City for projects across Mexico."
+  },
+  "/servicios": {
+    "title_es":"Servicios | Audio, video, iluminación, escenarios y stands | dos A",
+    "description_es":"Conoce las capacidades de dos A para coordinar audio, video, iluminación, escenarios, stands y operación técnica según el evento."
+  },
+  "/eventos": {
+    "title_es":"Producción técnica para eventos corporativos, agencias y activaciones | dos A",
+    "description_es":"Producción técnica para congresos, lanzamientos, activaciones, exposiciones, escenarios y proyectos de agencias en Ciudad de México y México."
+  },
+  "/portafolio": {
+    "title_es":"Portafolio de producción para eventos | dos A",
+    "description_es":"Proyectos reales de audio, video, iluminación, stands, escenarios y experiencias producidas por dos A."
+  },
+  "/blog": {
+    "title_es":"dos A Señal | Guías para planear eventos y producción técnica",
+    "description_es":"Guías claras sobre audio, video, iluminación y decisiones de producción para empresas, agencias y organizadores de eventos."
+  },
+  "/cotizar": {
+    "title_es":"Cotiza tu evento | dos A",
+    "description_es":"Cuéntanos fecha, lugar, público y objetivo. Te ayudamos a convertir la idea en un alcance técnico claro para tu evento."
+  },
+  "prohibited_keywords":["DJ marketplace","DJ equipment rental","500+ DJs","2,400+ gigs"],
+  "structured_data_notes":["Do not publish aggregate ratings without verifiable review data.","Use Organization/LocalBusiness only with verified address/contact fields.","Case study metadata must not imply a client endorsement unless documented."]
+}

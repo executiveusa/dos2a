@@ -1,0 +1,27 @@
+{
+  "phase": "03-tenant-data-foundation",
+  "risk": "medium_repository_low_operational_until_applied",
+  "baseline_main_sha": "b003a09f0e3ac68ef0cf63ac88cc7fcf3d6f2074",
+  "baseline_vercel_project_id": "prj_tezul1L8gVyxokWFX8OwwQZRMtMA",
+  "baseline_production_deployment_id": "dpl_8nJ4VQ1kHc8Je2L4wxb2ZbMgJn7y",
+  "baseline_public_home_status": 200,
+  "live_database_target": null,
+  "migration_applied": false,
+  "auth_changes": false,
+  "browser_api_grants_added": false,
+  "legacy_schema_changes": false,
+  "dependency_changes": false,
+  "application_runtime_changes": false,
+  "rollback_before_database_apply": [
+    "Stop dependent data/auth/revenue-circuit phases.",
+    "Revert the Phase 03 squash commit or remove the additive migration in a corrective PR.",
+    "Verify legacy Prisma schema and public production remain unchanged."
+  ],
+  "rollback_after_future_database_apply": [
+    "Do not drop schemas automatically if any data has been written.",
+    "Use the database-specific backup/migration receipt captured immediately before apply.",
+    "Prefer forward corrective migration when data exists.",
+    "Verify tenant integrity and application behavior after recovery."
+  ],
+  "data_loss_risk": "none while migration is unapplied; must be reassessed immediately before any live database apply"
+}

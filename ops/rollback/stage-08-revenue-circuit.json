@@ -1,0 +1,7 @@
+{
+  "affected_services":[],
+  "production_server_touched":false,
+  "production_data_risk":"none until separately approved live migration",
+  "rollback":"Before any live apply, repository rollback is revert-only. The additive migration must not be auto-reversed on a live database; live rollback requires an approved backup/restore or forward-fix plan after server inventory.",
+  "high_risk_gate":"explicit approval required immediately before Stage 08 squash merge because the stage introduces revenue/database authority contracts"
+}

@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": ".tmp/stage08",
+    "rootDir": ".",
+    "types": ["node"],
+    "lib": ["ES2022"]
+  },
+  "include": [
+    "packages/validation/src/lead-intake.ts",
+    "packages/crm/src/revenue-circuit.ts",
+    "packages/bookings/src/domain.ts",
+    "packages/proposals/src/domain.ts",
+    "packages/projects/src/domain.ts",
+    "apps/agent-gateway/src/lead-intake-handler.ts",
+    "apps/worker/src/outbox-job.ts",
+    "tests/stage08/**/*.ts"
+  ]
+}

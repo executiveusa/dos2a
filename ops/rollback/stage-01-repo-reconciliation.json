@@ -1,0 +1,6 @@
+{
+  "baseline_sha": "5d7a927156bb819e9823f366a2ac6209c4c4c72e",
+  "affected_services": [],
+  "production_data_risk": "none",
+  "rollback": "Revert the Stage 01 squash merge to restore the prior README/evidence files. No runtime or database rollback required."
+}

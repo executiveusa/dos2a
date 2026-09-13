@@ -1,0 +1,11 @@
+{
+  "selected_indices": [35,20,17,23,54,62,36,26,58,12],
+  "desktop_derivative_pattern": "frontend/public/images/projects/dosa-project-<index>.webp",
+  "source_dimensions": [4000,2250],
+  "desktop_target_max": [1920,1080],
+  "portfolio_target_max": [1280,720],
+  "mobile_rule": "native portrait art direction; do not auto-center-crop all assets",
+  "cinematic_mobile_rule": "use native 9:16 Scroll World chain or simplified mobile treatment per scene",
+  "binary_import_status": "staged_for_public-site_phase",
+  "reason": "Stage 02 locks provenance/selection. Optimized binary derivatives are imported when the public-site scene implementation consumes them, avoiding orphan media in main."
+}

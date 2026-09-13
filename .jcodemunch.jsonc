@@ -1,0 +1,7 @@
+{
+  // Project policy: use JCodeMunch as the first code-context tool.
+  "index": {
+    "include": ["src/**", "frontend/**", "apps/**", "packages/**", "scripts/**", "infra/**"],
+    "exclude": ["node_modules/**", ".next/**", "dist/**", "coverage/**", "backups/**"]
+  }
+}

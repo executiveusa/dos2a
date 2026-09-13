@@ -1,0 +1,84 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  background: #080909;
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 700ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.exiting {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.signatureStage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #080909;
+}
+
+.signature {
+  display: block;
+  width: clamp(150px, 16vw, 250px);
+  height: auto;
+  color: #f5f3ee;
+}
+
+.signature :global(.bm-dos path) {
+  opacity: 0;
+}
+
+.signatureActive .signature :global(.bm-dos path) {
+  animation: dosa-mark-fade .4s ease .2s forwards;
+}
+
+.signatureActive .signature :global(.bm-dos path:nth-child(2)) {
+  animation-delay: .5s;
+}
+
+.signatureActive .signature :global(.bm-dos path:nth-child(3)) {
+  animation-delay: .8s;
+}
+
+.signature :global(.bm-cable) {
+  clip-path: inset(0 100% 0 0);
+}
+
+.signatureActive .signature :global(.bm-cable) {
+  animation: dosa-cable-draw 1.15s cubic-bezier(.22, 1, .36, 1) .9s forwards;
+}
+
+@keyframes dosa-mark-fade {
+  to { opacity: 1; }
+}
+
+@keyframes dosa-cable-draw {
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@media (max-width: 640px) {
+  .signature {
+    width: clamp(132px, 36vw, 172px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none;
+  }
+
+  .signature :global(.bm-dos path) {
+    opacity: 1;
+    animation: none;
+  }
+
+  .signature :global(.bm-cable) {
+    clip-path: none;
+    animation: none;
+  }
+}

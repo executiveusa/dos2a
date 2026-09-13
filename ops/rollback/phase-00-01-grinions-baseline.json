@@ -1,0 +1,20 @@
+{
+  "phase": "00-01-grinions-baseline",
+  "risk": "low",
+  "baseline_main_sha": "14cbffa1973b8fceb0cb71b66b76d5cd7ebbb22f",
+  "baseline_vercel_project_id": "prj_tezul1L8gVyxokWFX8OwwQZRMtMA",
+  "baseline_production_deployment_id": "dpl_8nJ4VQ1kHc8Je2L4wxb2ZbMgJn7y",
+  "baseline_production_state": "READY",
+  "database_changes": false,
+  "dependency_changes": false,
+  "application_source_changes": false,
+  "affected_services": ["repository-governance"],
+  "rollback": [
+    "Stop dependent GRINIONS phases.",
+    "Revert the phase squash commit on master.",
+    "Verify Vercel rebuild completes successfully.",
+    "Verify public production routes remain reachable.",
+    "Record the recovery result in ops/reports/."
+  ],
+  "data_loss_risk": "none expected; documentation/governance-only change"
+}

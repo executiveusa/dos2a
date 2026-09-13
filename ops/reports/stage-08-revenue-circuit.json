@@ -1,0 +1,9 @@
+{
+  "stage":"08",
+  "risk":"HIGH",
+  "runtime_connected_to_owner_server":false,
+  "migration_applied_to_owner_server":false,
+  "contracts":["lead-intake","idempotency","transactional-outbox","booking-conflicts","proposal-approval","project-snapshot"],
+  "verification":["TypeScript compile/tests","PostgreSQL 16 migration apply/replay","schema presence","booking trigger presence","schema dump"],
+  "status":"implementation_ready_for_ci_review"
+}

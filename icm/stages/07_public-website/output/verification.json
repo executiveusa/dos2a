@@ -1,0 +1,23 @@
+{
+  "stage": "07",
+  "branch": "icm/07-public-website",
+  "vercel_preview_build": "success_observed_via_github_status",
+  "deterministic_ci": [
+    "pnpm frozen install",
+    "next build",
+    "critical route HTTP smoke",
+    "legacy public chat string absence",
+    "reduced-motion CSS rule presence",
+    "mobile breakpoint rule presence",
+    "curated media rewrite HTTP/content-type checks"
+  ],
+  "critical_routes": ["/", "/servicios", "/eventos", "/portafolio", "/blog", "/cotizar", "/chat redirect"],
+  "public_chat_byok_removed": true,
+  "false_mailto_success_removed": true,
+  "mobile_first_class_structure": true,
+  "reduced_motion_fallback": true,
+  "database_migration": false,
+  "owner_server_connection": false,
+  "full_visual_device_matrix": "stage_16_gate",
+  "owner_controlled_media_storage": "stage_17_18_gate"
+}

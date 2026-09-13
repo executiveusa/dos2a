@@ -1,0 +1,25 @@
+{
+  "jcodemunch": {
+    "package": "jcodemunch-mcp",
+    "version": "1.97.0",
+    "source": "PyPI exact release"
+  },
+  "rtk": {
+    "repository": "https://github.com/rtk-ai/rtk",
+    "rev": "39583cf22b0a73ef78f935d8ada1c87a9a10e852",
+    "expected_version": "0.42.0"
+  },
+  "caveman": {
+    "repository": "https://github.com/JuliusBrussee/caveman",
+    "rev": "63a91ecadbf4c4719a4602a5abb00883f9966034",
+    "mode": "lite"
+  },
+  "scroll_world": {
+    "repository": "https://github.com/oso95/scroll-world",
+    "rev": "2912048246d057cdfe134dfc0b4dfb7e6a12f30e"
+  },
+  "codebase_to_course": {
+    "repository": "https://github.com/zarazhangrui/codebase-to-course",
+    "rev": "ff8837ecf8e9f6ce9874ffa42e42633394a52a00"
+  }
+}

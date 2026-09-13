@@ -1,0 +1,27 @@
+{
+  "source_archive": "DOSA audio.zip",
+  "source_count": 82,
+  "source_dimensions": "4000x2250 JPEG for all 82 files",
+  "owner_rights_statement": "Owner states supplied project photography is cleared for public use including visible client/project branding.",
+  "selection": [
+    {"rank":1,"index":35,"filename":"5299628e-ea01-4bcc-a063-5ca66d2340c0-35.jpg","sha256":"adb3c83adf69b3786e24d7a25e937b86aaa80946f8c1aad90ab1a1837173fd6b","role":"hero-scale","description":"Large integrated corporate/event environment with broad spatial scale and LED architecture."},
+    {"rank":2,"index":20,"filename":"5299628e-ea01-4bcc-a063-5ca66d2340c0-20.jpg","sha256":"d201222e19a43ed64af8e194df3e87c3df09ff7b71f2cf615aaa432145df2230","role":"audio-video","description":"Wide multi-screen event environment showing coordinated video, stage, and technical scale."},
+    {"rank":3,"index":17,"filename":"5299628e-ea01-4bcc-a063-5ca66d2340c0-17.jpg","sha256":"35e2ca4b238325ab0da94475b8be290a07b9f2ecbd7079ef4adc2ca87486d7c5","role":"lighting","description":"Conference room transformed by architectural/ambient uplighting."},
+    {"rank":4,"index":23,"filename":"5299628e-ea01-4bcc-a063-5ca66d2340c0-23.jpg","sha256":"f734ac7ef9c5ea8e91d76f9f7fc2c3f911be0424e5bb1b18c753713b607ad38c","role":"creative-installation","description":"Distinct geometric light installation; strong visual differentiation."},
+    {"rank":5,"index":54,"filename":"5299628e-ea01-4bcc-a063-5ca66d2340c0-54.jpg","sha256":"cc940be3ef4a22f11a312e80ab20663886e72cae34f7a9da58f3f991448c552b","role":"experiential-entry","description":"Circular interactive/experiential entrance installation."},
+    {"rank":6,"index":62,"filename":"5299628e-ea01-4bcc-a063-5ca66d2340c0-62.jpg","sha256":"a222da93b2e6cbb1fdaafdb49a23615b39fe7998a7f544866d36ec50ceb6afe8","role":"stand-exhibition","description":"Large branded exhibition stand demonstrating physical build and AV integration."},
+    {"rank":7,"index":36,"filename":"5299628e-ea01-4bcc-a063-5ca66d2340c0-36.jpg","sha256":"979810d03bc9c991e9faafb2e4c9b737329cf6bc26b0b90979bd5b9652c71142","role":"audience-proof","description":"Real audience facing a large presentation environment; strong operational proof."},
+    {"rank":8,"index":26,"filename":"5299628e-ea01-4bcc-a063-5ca66d2340c0-26.jpg","sha256":"a3eaa626778f459907b60fd0c1569644e2451d06f2227bc579111df777cbb336","role":"immersive-video","description":"Large multi-screen scenic/video environment with strong visual impact."},
+    {"rank":9,"index":58,"filename":"5299628e-ea01-4bcc-a063-5ca66d2340c0-58.jpg","sha256":"bc573ce9e5ac750d1af82886e8ba859448f18bd69cb5c91a2babcf91bdead8cb","role":"digital-installation","description":"Freestanding digital display installation in a polished event environment."},
+    {"rank":10,"index":12,"filename":"5299628e-ea01-4bcc-a063-5ca66d2340c0-12.jpg","sha256":"2c8e86de970e20f4a0ed1168a53a02946f821d5e6229de4940b3e4a502d74e97","role":"conference-operations","description":"Formal conference/meeting technical setup demonstrating complex operational delivery."}
+  ],
+  "legacy_or_separator_indices": [0,1,2,3,4,5,6,19,28,40,59,76,81],
+  "concept_render_indices": [77,78,79,80],
+  "publication_rules": [
+    "Never present concept renders as completed projects.",
+    "Preserve original filename and hash provenance.",
+    "Do not dump all 82 images into a gallery; select images to prove a specific capability.",
+    "Generate optimized derivatives rather than serving 4000x2250 originals.",
+    "Mobile cinematic assets require separate art direction or a native 9:16 chain where needed."
+  ]
+}
