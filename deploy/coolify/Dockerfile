@@ -1,14 +1,13 @@
+# Netlify parity: base=frontend, npm (no lockfile in frontend/, same as Netlify's npm install).
 FROM node:22-alpine AS build
 WORKDIR /app
-RUN corepack enable && corepack prepare pnpm@latest --activate
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm config set dangerously-allow-all-builds true && pnpm install --frozen-lockfile
-COPY . .
-RUN pnpm run build
+COPY frontend/package.json ./
+RUN npm install --no-audit --no-fund
+COPY frontend ./
+RUN npm run build
 FROM node:22-alpine
 WORKDIR /app
 ENV NODE_ENV=production PORT=80
-RUN corepack enable && corepack prepare pnpm@latest --activate
 COPY --from=build /app ./
 EXPOSE 80
 CMD ["npx", "next", "start", "-p", "80"]
