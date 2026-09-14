@@ -345,8 +345,8 @@ export const translations = {
       en: "Request sent! We'll contact you within 24 hours.",
     },
     error: {
-      es: "Ocurrió un error. Escríbenos directamente a 2audioiluminacion@gmail.com",
-      en: "An error occurred. Write to us directly at 2audioiluminacion@gmail.com",
+      es: "Ocurrió un error. Escríbenos directamente a alanis@eventosdos2a.mx",
+      en: "An error occurred. Write to us directly at alanis@eventosdos2a.mx",
     },
     email_info: { es: "Correo", en: "Email" },
     coverage_info: { es: "Cobertura", en: "Coverage" },
