@@ -1,4 +1,5 @@
 export type SiteLang = "es" | "en";
+import { CONTACT_EMAIL } from "./site-config";
 
 type Bilingual = { es: string; en: string };
 
@@ -7,7 +8,7 @@ export const siteContent = {
     name: "dos A",
     tagline: { es: "audio · iluminación · video", en: "audio · lighting · video" } as Bilingual,
     whatsapp: "525500000000",
-    email: "2audioiluminacion@gmail.com",
+    email: CONTACT_EMAIL,
   },
   nav: {
     home: { es: "Inicio", en: "Home" },
@@ -37,7 +38,7 @@ export const siteContent = {
       es: "Perfecto para envío de briefs completos, licitaciones, RFPs y requerimientos detallados.",
       en: "Perfect for sending full briefs, tenders, RFPs, and detailed requirements.",
     },
-    mailAddress: "alanis@eventosdos2a.mx",
+    mailAddress: CONTACT_EMAIL,
     quoteTitle: { es: "Cotización", en: "Quote" },
     quoteBody: { es: "Si ya sabes lo que necesitas, el formulario te toma dos minutos.", en: "If you already know what you need, the form takes two minutes." },
     quoteCta: { es: "Ir al formulario", en: "Go to the form" },

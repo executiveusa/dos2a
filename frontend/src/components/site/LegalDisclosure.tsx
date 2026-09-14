@@ -4,12 +4,11 @@ import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { useLanguage } from "@/lib/language";
+import { CONTACT_EMAIL } from "@/lib/site-config";
 import styles from "./LegalDisclosure.module.css";
 
 type LegalKind = "privacy" | "terms";
 type LegalVariant = "footer" | "inline";
-
-const CONTACT_EMAIL = "2audioiluminacion@gmail.com";
 
 function PrivacyContent() {
   return (
