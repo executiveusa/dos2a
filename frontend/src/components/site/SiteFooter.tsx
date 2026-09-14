@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useLanguage } from "@/lib/language";
 import { siteContent } from "@/lib/site-content";
+import { CONTACT_EMAIL } from "@/lib/site-config";
 import BrandMark from "./BrandMark";
 import LegalDisclosure from "./LegalDisclosure";
 import socialStyles from "./FooterSocial.module.css";
@@ -67,7 +68,7 @@ export default function SiteFooter() {
             <br />
             <a href="tel:+525549110045">+52 55 4911 0045</a>
             <br />
-            <a href="mailto:alanis@eventosdos2a.mx">alanis@eventosdos2a.mx</a>
+            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
             <br />
             <a href={SOCIAL_LINKS.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
           </p>
