@@ -21,7 +21,7 @@ export default function QuoteForm() {
     const result = await submitLead(form);
     if (result.success) {
       setState("success");
-      toast.success(lang === "es" ? "Solicitud recibida. Te responderemos a la brevedad." : "Request received. We will get back to you shortly.");
+      toast.success(lang === "es" ? "Mensaje enviado. Te responderemos a la brevedad." : "Message sent. We will get back to you shortly.");
       return;
     }
     setFallback(result.mailtoUrl ?? null);
@@ -29,7 +29,7 @@ export default function QuoteForm() {
     toast.error(lang === "es" ? "No se pudo enviar la solicitud en línea." : "Could not submit online.");
   }
 
-  if (state === "success") return <div className="form-state form-state--success"><CheckCircle2/><h2>{lang === "es" ? "Recibimos tu solicitud." : "We received your request."}</h2><p>{lang === "es" ? "Guardamos la información de tu evento. El siguiente paso es revisarla y contactarte para definir el alcance." : "Your event information was saved. The next step is to review it and contact you to define the scope."}</p></div>;
+  if (state === "success") return <div className="form-state form-state--success"><CheckCircle2/><h2>{lang === "es" ? "Tu mensaje fue enviado." : "Your message was sent."}</h2><p>{lang === "es" ? "Guardamos la información de tu evento. Alanis lo revisará y te contactará para definir el alcance." : "We saved your event information. Alanis will review it and contact you to define the scope."}</p></div>;
 
   return (
     <form className="quote-form" onSubmit={submit}>
