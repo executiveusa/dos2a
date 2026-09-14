@@ -6,10 +6,9 @@ import { useLanguage } from "@/lib/language";
 import { siteContent } from "@/lib/site-content";
 import PublicShell from "./PublicShell";
 import QuoteForm from "./QuoteForm";
+import { CONTACT_EMAIL } from "@/lib/site-config";
 
 const WHATSAPP_NUMBER = "525549110045";
-const CONTACT_EMAIL = "alanis@eventosdos2a.mx";
-
 export default function ContactPage() {
   const { lang } = useLanguage();
   const c = siteContent.contact;
