@@ -40,3 +40,4 @@ __pycache__/
 
 # Atomic VCS pristine store is machine-local (96MB+); each clone runs atomic init
 .atomic/
+supabase/.temp/
