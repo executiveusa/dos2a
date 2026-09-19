@@ -1,6 +1,5 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import nodemailer from "npm:nodemailer@^9";
-import nodemailer from "npm:nodemailer@^9";
 
 const encoder = new TextEncoder();
 const allowedOrigins = new Set(["https://dos2a.vercel.app", "https://eventosdos2a.mx", "https://www.eventosdos2a.mx", "http://localhost:3000"]);
