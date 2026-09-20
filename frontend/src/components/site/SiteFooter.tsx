@@ -83,8 +83,9 @@ export default function SiteFooter() {
       <div className="site-footer__bottom">
         <span>© {new Date().getFullYear()} dos A</span>
         <span>{lang === "es" ? "audio · iluminación · video" : "audio · lighting · video"}</span>
-        <LegalDisclosure kind="terms" />
         <LegalDisclosure kind="privacy" />
+        <LegalDisclosure kind="terms" />
+        <LegalDisclosure kind="cancellation" />
       </div>
     </footer>
   );

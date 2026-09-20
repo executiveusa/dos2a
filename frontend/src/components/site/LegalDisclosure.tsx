@@ -7,114 +7,254 @@ import { useLanguage } from "@/lib/language";
 import { CONTACT_EMAIL } from "@/lib/site-config";
 import styles from "./LegalDisclosure.module.css";
 
-type LegalKind = "privacy" | "terms";
+type LegalKind = "privacy" | "terms" | "cancellation";
 type LegalVariant = "footer" | "inline";
+
+const OFFICIAL_EMAIL = CONTACT_EMAIL;
 
 function PrivacyContent() {
   return (
-    <>
-      <p className={styles.updated}>Última actualización: 2 de septiembre de 2026.</p>
-      <p><strong>DOS A / 2 Audio Iluminación</strong>, con operación y domicilio de contacto publicado en Ciudad de México, México, es responsable del tratamiento de los datos personales recabados a través de este sitio. Para asuntos de privacidad y ejercicio de derechos, el medio de contacto es <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+    <article className={styles.document}>
+      <p className={styles.updated}>Última actualización: Septiembre de 2026.</p>
+      <p>
+        <strong>2A VISUAL &amp; SOUND LAB</strong> (en lo sucesivo identificado comercialmente como “Dos2A”), con domicilio fiscal ubicado en Cedro 323 - 11, Col. Santa María la Ribera, C.P. 06400, Alcaldía Cuauhtémoc, Ciudad de México, es el responsable del tratamiento, uso y protección de sus datos personales, y al respecto le informa lo siguiente:
+      </p>
 
-      <h3>1. Datos que recabamos</h3>
-      <p>El formulario de cotización puede recabar nombre, correo electrónico, tipo y fecha de evento, ciudad o lugar, número aproximado de asistentes y la descripción de necesidades del proyecto. El sitio también puede generar identificadores técnicos de sesión y datos estrictamente necesarios para seguridad, prevención de duplicados y operación del servicio. No solicitamos datos personales sensibles; te pedimos no incluirlos en campos abiertos.</p>
+      <h3>1. Datos Personales que Recopilamos</h3>
+      <p>Para llevar a cabo las finalidades descritas en el presente Aviso de Privacidad, recopilamos las siguientes categorías de datos personales:</p>
+      <ul>
+        <li><strong>Datos de identificación y contacto:</strong> Nombre completo, correo electrónico, teléfono de contacto, ciudad y detalles del evento.</li>
+        <li><strong>Datos de facturación y fiscales:</strong> Registro Federal de Contribuyentes (RFC), Razón Social, Domicilio Fiscal, Régimen Fiscal y Uso de CFDI.</li>
+      </ul>
 
-      <h3>2. Finalidades</h3>
-      <p>Usamos los datos para atender solicitudes, preparar y dar seguimiento a cotizaciones, dimensionar necesidades técnicas, comunicarnos sobre el proyecto, prevenir fraude o abuso, mantener evidencia operativa de la solicitud y, cuando exista contratación, administrar la relación comercial y cumplir obligaciones legales, fiscales, contables o de defensa de derechos. No utilizamos una solicitud de cotización para publicidad o prospección ajena a esa relación sin una base legal o consentimiento aplicable.</p>
+      <h3>2. Finalidades del Tratamiento de Datos Personales</h3>
+      <p>Sus datos personales serán utilizados exclusivamente para las siguientes finalidades primarias, las cuales son necesarias para prestarle el servicio solicitado:</p>
+      <ul>
+        <li>Elaborar, enviar y dar seguimiento a cotizaciones de servicios audiovisuales y producción de eventos.</li>
+        <li>Formalizar la relación contractual y elaborar contratos de prestación de servicios o arrendamiento de equipo.</li>
+        <li>Coordinar la logística, montaje, operación y desmontaje en el sitio o recinto de su evento.</li>
+        <li>Emitir los Comprobantes Fiscales Digitales por Internet (CFDI/Facturas) correspondientes.</li>
+        <li>Gestionar procesos de cobro, pagos y administración del servicio.</li>
+      </ul>
+      <p className={styles.highlightNotice}>
+        <strong>Uso publicitario o secundario:</strong> Hacemos de su conocimiento que NO utilizamos sus datos personales para finalidades secundarias de mercadotecnia, publicidad, envío de boletines o prospección comercial no solicitada.
+      </p>
 
-      <h3>3. Encargados, transferencias y almacenamiento</h3>
-      <p>Podemos apoyarnos en proveedores tecnológicos que actúan como encargados para alojamiento, base de datos, correo, seguridad y operación del sitio, bajo instrucciones de DOS A y únicamente para las finalidades descritas. Los datos podrán comunicarse a autoridades competentes cuando exista obligación legal, orden fundada o sea necesario para ejercer o defender derechos. Si en el futuro se realiza una transferencia que requiera consentimiento, se informará y obtendrá conforme a la ley antes de efectuarla.</p>
+      <h3>3. Transferencia de Datos Personales</h3>
+      <p>
+        <strong>2A VISUAL &amp; SOUND LAB NO realiza transferencias de sus datos personales a terceros</strong>, nacionales o extranjeros, ajenos a la organización. Sus datos son tratados con estricta confidencialidad por nuestro personal autorizado únicamente para el cumplimiento de las finalidades descritas.
+      </p>
+      <p className={styles.caption}>
+        (Se exceptúan únicamente los requerimientos de información formulados por autoridades competentes en términos de la legislación aplicable).
+      </p>
 
-      <h3>4. Derechos ARCO y limitación de uso</h3>
-      <p>Puedes solicitar acceso, rectificación, cancelación u oposición (derechos ARCO), así como limitar el uso o divulgación de tus datos, enviando una solicitud a <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Incluye tu nombre, un medio para responderte, el derecho que deseas ejercer, una descripción clara de los datos involucrados y, cuando sea necesario, documentos que acrediten identidad o representación. Atenderemos la solicitud dentro de los plazos y condiciones previstos por la legislación mexicana aplicable.</p>
+      <h3>4. Ejercicio de Derechos ARCO y Revocación del Consentimiento</h3>
+      <p>
+        Usted tiene derecho a conocer qué datos personales tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso). Asimismo, es su derecho solicitar la corrección de su información personal en caso de que esté desactualizada, sea inexacta o incompleta (Rectificación); que la eliminemos de nuestros registros o bases de datos cuando considere que la misma no está siendo utilizada adecuadamente (Cancelación); así como oponerse al uso de sus datos personales para fines específicos (Oposición). Estos derechos se conocen como Derechos ARCO.
+      </p>
+      <p>
+        Para el ejercicio de cualquiera de los Derechos ARCO, o para revocar el consentimiento que nos haya otorgado para el tratamiento de sus datos, usted deberá presentar la solicitud correspondiente enviando un correo electrónico a la dirección:{" "}
+        <a href={`mailto:${OFFICIAL_EMAIL}`}>{OFFICIAL_EMAIL}</a>
+      </p>
+      <p>Su solicitud deberá contener:</p>
+      <ul>
+        <li>Nombre completo del titular y correo electrónico para recibir notificaciones.</li>
+        <li>Documento oficial que acredite su identidad o representación legal.</li>
+        <li>Descripción clara y precisa de los datos personales respecto de los cuales busca ejercer alguno de los derechos ARCO.</li>
+      </ul>
+      <p>
+        Atenderemos su solicitud en un plazo máximo de <strong>20 (veinte) días hábiles</strong> contados desde la fecha de recepción de la misma.
+      </p>
 
-      <h3>5. Conservación y seguridad</h3>
-      <p>Conservamos los datos sólo durante el tiempo razonablemente necesario para las finalidades informadas y los plazos de prescripción, obligaciones fiscales, contractuales o de defensa que resulten aplicables. Aplicamos medidas administrativas, técnicas y físicas razonables para reducir riesgos de pérdida, alteración, acceso, uso o tratamiento no autorizado. Ningún sistema conectado a internet puede garantizar riesgo cero.</p>
+      <h3>5. Uso de Cookies y Tecnologías de Rastreo</h3>
+      <p>
+        Nuestro sitio web utiliza cookies y tecnologías de rastreo estándar únicamente para asegurar el funcionamiento correcto del sitio y mejorar la experiencia de navegación del usuario. Estas herramientas no recopilan información personal sensible ni son utilizadas para perfiles publicitarios.
+      </p>
 
-      <h3>6. Tecnologías del sitio</h3>
-      <p>El sitio puede utilizar almacenamiento local o de sesión estrictamente técnico para recordar estados de interfaz, evitar envíos duplicados y operar funciones del sitio. Actualmente no se declara el uso de estas tecnologías con fines de publicidad comportamental. Si se incorporan analítica, publicidad o tecnologías con finalidades adicionales que requieran información o consentimiento, este aviso y los controles correspondientes deberán actualizarse antes de su uso.</p>
-
-      <h3>7. Cambios al aviso</h3>
-      <p>Las modificaciones relevantes se comunicarán mediante este mismo aviso en el sitio, indicando la fecha de actualización. Cuando una modificación requiera nuevo consentimiento conforme a la ley, se solicitará antes de aplicar el nuevo tratamiento.</p>
-
-      <h3>8. Marco aplicable</h3>
-      <p>Este aviso se interpreta conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares vigente en México y demás disposiciones aplicables. El ejercicio de derechos ante DOS A no limita los derechos que correspondan a la persona titular frente a la autoridad competente.</p>
-
-      <p className={styles.factNote}><strong>Nota de identificación:</strong> el nombre o razón social fiscal y el domicilio contractual completo del prestador se identificarán en la cotización o contrato emitido para cada proyecto. Este aviso no sustituye esos datos contractuales.</p>
-    </>
+      <h3>6. Cambios al Aviso de Privacidad</h3>
+      <p>
+        El presente Aviso de Privacidad puede sufrir modificaciones, cambios o actualizaciones derivadas de nuevos requerimientos legales o de nuestras propias necesidades operativas. Cualquier modificación al presente aviso estará disponible para su consulta en nuestro sitio web oficial.
+      </p>
+    </article>
   );
 }
 
 function TermsContent() {
   return (
-    <>
-      <p className={styles.updated}>Última actualización: 2 de septiembre de 2026.</p>
-      <p>Estos términos regulan el uso del sitio de <strong>DOS A / 2 Audio Iluminación</strong> y el envío de solicitudes de cotización para servicios de producción audiovisual, audio, iluminación, video, pantallas, escenarios, stands, operación, coordinación y servicios relacionados en México.</p>
+    <article className={styles.document}>
+      <p className={styles.updated}>Última actualización: Septiembre de 2026.</p>
+      <p>
+        El presente documento establece los Términos y Condiciones generales (en lo sucesivo, los "Términos") bajo los cuales <strong>2A VISUAL &amp; SOUND LAB</strong> (en lo sucesivo identificado comercialmente como “Dos2A”), con domicilio fiscal en Cedro 323 - 11, Col. Santa María la Ribera, C.P. 06400, Alcaldía Cuauhtémoc, Ciudad de México, presta servicios de producción audiovisual, logística, operación y arrendamiento de equipo para eventos a sus Clientes.
+      </p>
+      <p className={styles.highlightNotice}>
+        Al solicitar una cotización, realizar el pago de un anticipo o firmar la propuesta comercial correspondiente, el Cliente acepta de manera íntegra y sin reserva los presentes Términos y Condiciones.
+      </p>
 
-      <h3>1. Sitio informativo y solicitudes de cotización</h3>
-      <p>La información del sitio es general. Enviar un formulario, correo o mensaje no crea por sí mismo un contrato, reserva, obligación de disponibilidad ni aceptación definitiva de precio. Una relación de servicios se perfecciona únicamente cuando DOS A y el cliente aceptan por un medio verificable la cotización, orden de servicio, contrato o documento equivalente que establezca alcance, precio, impuestos, fechas, anticipos, responsabilidades y demás condiciones aplicables.</p>
+      <h3>1. Esquema de Pago y Facturación</h3>
+      <ul>
+        <li><strong>Reserva de fecha:</strong> Para confirmar y apartar la fecha de un evento en la agenda de Dos2A, el Cliente deberá cubrir un anticipo equivalente al 50% (cincuenta por ciento) del monto total cotizado.</li>
+        <li><strong>Liquidación del saldo:</strong> El 50% restante deberá ser liquidado a más tardar el día del evento, previo al inicio de la operación o presentación técnica.</li>
+        <li><strong>Formas de pago aceptadas:</strong> Dos2A acepta pagos mediante transferencia electrónica (SPEI), tarjetas de crédito/débito, depósitos bancarios y pago en efectivo.</li>
+        <li><strong>Facturación:</strong> Todos los servicios son facturables. En caso de requerir Comprobante Fiscal Digital por Internet (CFDI), el Cliente deberá proporcionar sus datos fiscales actualizados al momento de realizar su pago o confirmar su servicio.</li>
+      </ul>
 
-      <h3>2. Cotizaciones, precios y alcance</h3>
-      <p>Los precios, disponibilidad de equipo, personal, montaje, transporte, viáticos, horarios, pruebas, horas extra, permisos, energía, rigging, internet, seguridad, seguros y servicios de terceros dependen de las características reales del evento y se definen en la propuesta aplicable. Salvo que la cotización indique otra cosa, cualquier cambio de fecha, sede, aforo, horario, alcance técnico o requerimientos puede requerir una revisión de precio y disponibilidad antes de ser aceptado.</p>
+      <h3>2. Accesos, Permisos e Infraestructura del Recinto</h3>
+      <ul>
+        <li><strong>Responsabilidad de acceso:</strong> El Cliente es el único responsable de gestionar los permisos de ingreso, horarios de carga/descarga y acceso de personal técnico con la administración del recinto o hotel contratado.</li>
+        <li>
+          <strong>Infraestructura eléctrica y logística:</strong> El Cliente asume la total responsabilidad por la idoneidad del lugar elegido. Dos2A no se hace responsable por retrasos en el montaje o fallas en la ejecución derivadas de:
+          <ul>
+            <li>Horarios restringidos o denegación de acceso al recinto.</li>
+            <li>Suministro eléctrico deficiente, variaciones de voltaje o falta de capacidad instalada en el lugar.</li>
+            <li>Espacios físicos no adecuados o sin la ventilación/protección requerida.</li>
+          </ul>
+        </li>
+      </ul>
+      <p className={styles.caption}>Cualquier retraso en el programa del evento ocasionado por estas causas será responsabilidad exclusiva del Cliente.</p>
 
-      <h3>3. Información del cliente y condiciones del recinto</h3>
-      <p>El cliente debe proporcionar información razonablemente completa y veraz sobre sede, aforo, horarios, accesos, restricciones, energía disponible y necesidades técnicas. Cuando el servicio dependa de autorizaciones del recinto, permisos, condiciones estructurales, protección civil, seguridad o proveedores ajenos a DOS A, su viabilidad se confirmará antes de ejecutar trabajos que dependan de ellos.</p>
+      <h3>3. Eventos al Aire Libre, Clima y Fallas Ajenas</h3>
+      <ul>
+        <li><strong>Protección contra intemperie:</strong> En eventos organizados al aire libre, espacios abiertos o terrazas, el Cliente es responsable de proveer las medidas de protección necesarias (carpas, techos o estructuras impermeables) para resguardar la integridad del equipo de Dos2A.</li>
+        <li><strong>Condiciones climáticas y apagones:</strong> Dos2A no asumirá responsabilidad por la suspensión parcial o total del servicio atribuible a causas climáticas (lluvia, viento extremo, tormentas) o cortes imprevistos en el suministro eléctrico del recinto. Si las condiciones ambientales ponen en riesgo el equipo o la seguridad del personal técnico, Dos2A se reserva el derecho de pausar la operación hasta que existan condiciones seguras.</li>
+      </ul>
 
-      <h3>4. Pagos, cancelaciones y reprogramaciones</h3>
-      <p>Anticipos, calendario de pagos, facturación, cancelación, reprogramación, devoluciones y cargos por cambios se regirán por la cotización o contrato aceptado y por la legislación mexicana aplicable. Ninguna cláusula o condición de DOS A pretende excluir derechos irrenunciables de consumidores reconocidos por la Ley Federal de Protección al Consumidor. Cuando una contratación electrónica esté sujeta a reglas especiales de información, confirmación, cancelación o devolución, prevalecerán esas reglas legales.</p>
+      <h3>4. Responsabilidad sobre el Equipo, Daños y Faltantes</h3>
+      <ul>
+        <li><strong>Cuidado del equipamiento:</strong> Durante la estancia del equipo en las instalaciones del evento, la custodia del mismo recae en el Cliente y/o la administración del recinto.</li>
+        <li><strong>Reparación y Reposición:</strong> En caso de daño parcial, mal uso por parte de los asistentes, robo, extravío o destrucción total del equipo de Dos2A, el Cliente (y en su caso, en corresponsabilidad con el recinto según el contrato correspondiente) responderá por el costo total de reparación o reposición a valor mercado de los equipos afectados, conforme a las cláusulas estipuladas en el contrato de prestación de servicios firmado previamente.</li>
+      </ul>
 
-      <h3>5. Ejecución, fuerza mayor y terceros</h3>
-      <p>DOS A ejecutará el alcance contratado con diligencia profesional. Circunstancias fuera del control razonable de las partes —incluidos cierres de sede, decisiones de autoridad, fallas generalizadas de servicios, condiciones de seguridad, fenómenos naturales o incumplimientos de terceros indispensables— se atenderán conforme al contrato aplicable y la ley, procurando documentar alternativas razonables de reprogramación, sustitución o ajuste cuando sean posibles.</p>
+      <h3>5. Reprogramación y Cambios de Fecha</h3>
+      <p>
+        <strong>Cambio de fecha sin penalización:</strong> Si por razones operativas o personales el Cliente requiere cambiar la fecha de su evento, Dos2A respetará el 100% del anticipo pagado y lo aplicará a la nueva fecha, sujeto a la disponibilidad del equipo y personal técnico en la agenda de la empresa.
+      </p>
 
-      <h3>6. Propiedad intelectual y materiales</h3>
-      <p>El diseño del sitio, textos, fotografías, video, gráficos y elementos propios de DOS A están protegidos por las leyes aplicables. Las marcas y logotipos de terceros pertenecen a sus respectivos titulares y su aparición no transfiere derechos. El cliente es responsable de contar con autorizaciones suficientes sobre contenidos, música, marcas, artes, videos o materiales que entregue a DOS A para reproducir, proyectar o integrar en un evento.</p>
-
-      <h3>7. Uso permitido del sitio</h3>
-      <p>No se permite usar el sitio para introducir código malicioso, intentar acceso no autorizado, interferir con su operación, falsear identidad, enviar información ilícita o vulnerar derechos de terceros. DOS A puede limitar solicitudes automatizadas o abusivas para proteger la disponibilidad y seguridad del servicio.</p>
-
-      <h3>8. Responsabilidad y derechos del consumidor</h3>
-      <p>El sitio se mantiene con esfuerzos razonables para presentar información correcta, pero las características finales de cada servicio se determinan en la propuesta aceptada. Nada en estos términos limita responsabilidad que legalmente no pueda excluirse ni obliga a renunciar a derechos reconocidos por la legislación mexicana. Para aclaraciones o reclamaciones puedes escribir a <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Cuando corresponda por la naturaleza de la relación, la persona consumidora conserva su derecho a acudir a PROFECO.</p>
-
-      <h3>9. Ley aplicable y comunicaciones electrónicas</h3>
-      <p>Estos términos se interpretan conforme a las leyes federales aplicables de México, incluida la legislación de protección al consumidor y las reglas mercantiles sobre mensajes de datos cuando correspondan. Las comunicaciones electrónicas podrán utilizarse como medio de solicitud, negociación, aceptación y conservación de información en la medida permitida por la ley y por el documento contractual aplicable.</p>
-
-      <h3>10. Cambios</h3>
-      <p>DOS A puede actualizar estos términos para reflejar cambios legales, técnicos u operativos. La versión vigente mostrará su fecha de actualización. Los cambios no modificarán retroactivamente contratos ya celebrados salvo acuerdo válido de las partes o disposición legal aplicable.</p>
-    </>
+      <h3>6. Jurisdicción y Ley Aplicable</h3>
+      <p>
+        Para la interpretación y cumplimiento de los presentes Términos y Condiciones, las partes se someten a la legislación federal vigente en los Estados Unidos Mexicanos y a la jurisdicción de los tribunales competentes de la Ciudad de México, renunciando expresamente a cualquier otro fuero que por razón de sus domicilios presentes o futuros pudiera corresponderles.
+      </p>
+    </article>
   );
 }
 
-export default function LegalDisclosure({ kind, variant = "footer" }: { kind: LegalKind; variant?: LegalVariant }) {
+function CancellationContent() {
+  return (
+    <article className={styles.document}>
+      <p className={styles.updated}>Última actualización: Septiembre de 2026.</p>
+      <p>
+        En <strong>2A VISUAL &amp; SOUND LAB</strong> (en lo sucesivo “Dos2A”), nuestro compromiso es brindar certeza técnica y transparencia operativa en cada proyecto. La presente Política regula los términos bajo los cuales el Cliente podrá solicitar reprogramaciones, cancelaciones o reembolsos de los pagos efectuados por concepto de apartado o contratación de nuestros servicios de producción audiovisual.
+      </p>
+
+      <h3>1. Anticipos y Aplicación de Pagos</h3>
+      <p>
+        El 50% de anticipo requerido para reservar la fecha en la agenda operativa de Dos2A se abonará directamente a la cuenta total de la factura o comprobante fiscal del servicio.
+      </p>
+      <p className={styles.highlightNotice}>
+        En caso de que el evento no pueda realizarse en la fecha originalmente programada, el monto depositado no se pierde: este saldo a favor podrá aplicarse íntegramente para la realización del evento en una nueva fecha, sujeto a la disponibilidad de agenda y equipo de la empresa.
+      </p>
+
+      <h3>2. Cancelaciones por Parte del Cliente</h3>
+      <ul>
+        <li>
+          <strong>Cancelaciones con más de 30 días de anticipación:</strong> Si el Cliente cancela el servicio formalmente y por escrito con más de 30 días naturales de antelación a la fecha del evento, procederá el reembolso del monto pagado, deduciendo únicamente los gastos administrativos o comisiones bancarias aplicables.
+        </li>
+        <li>
+          <strong>Cancelaciones con menos de 30 días de anticipación:</strong> Si la cancelación se realiza con poco tiempo de anticipación (30 días o menos previo al evento), el dinero pagado no será devuelto en efectivo o transferencia, pero quedará abonado como un saldo a favor que el Cliente podrá utilizar para reagendar su evento en una fecha posterior.
+        </li>
+      </ul>
+
+      <h3>3. Imposibilidad de Prestación del Servicio por Causa Imputable a Dos2A</h3>
+      <p>
+        En el caso eventual de que Dos2A no pueda prestar el servicio por causas directamente atribuibles a la empresa o fallas internas imprevistas, nuestra prioridad será la reagendación del evento en mutuo acuerdo con el Cliente, garantizando la misma calidad técnica y equipamiento contratado sin costo adicional.
+      </p>
+
+      <h3>4. Cancelación por Fuerza Mayor o Caso Fortuito</h3>
+      <p>
+        Si el evento debe cancelarse o suspenderse debido a causas ajenas a ambas partes (tales como emergencias sanitarias, desastres naturales, restricciones gubernamentales o condiciones climáticas extremas), se aplicará la retención únicamente de los gastos operativos y logísticos ya devengados por Dos2A hasta el momento de la cancelación (ej. transporte, apartado de personal técnico o insumos no recuperables). El saldo restante quedará a favor del Cliente para ser reprogramado.
+      </p>
+
+      <h3>5. Plazos y Métodos para la Devolución de Fondos</h3>
+      <p>En todos los casos donde proceda una devolución en dinero:</p>
+      <ul>
+        <li>
+          Las solicitudes deberán canalizarse a través del correo oficial:{" "}
+          <a href={`mailto:${OFFICIAL_EMAIL}`}>{OFFICIAL_EMAIL}</a>.
+        </li>
+        <li>
+          Los tiempos de acreditación del reembolso dependerán exclusivamente del método de pago utilizado (transferencia SPEI, tarjeta de crédito o débito) y de los tiempos de procesamiento de las instituciones bancarias correspondientes. Dos2A emitirá el comprobante de dispersión en cuanto la operación sea autorizada.
+        </li>
+      </ul>
+    </article>
+  );
+}
+
+export default function LegalDisclosure({
+  kind,
+  variant = "footer",
+}: {
+  kind: LegalKind;
+  variant?: LegalVariant;
+}) {
   const { lang } = useLanguage();
   const [open, setOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<LegalKind>(kind);
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
 
-  const isPrivacy = kind === "privacy";
-  const label = isPrivacy
-    ? (lang === "es" ? "Política de privacidad" : "Privacy notice")
-    : (lang === "es" ? "Términos y condiciones" : "Terms & conditions");
-  const title = isPrivacy ? "Aviso de privacidad integral" : "Términos y condiciones de uso y contratación";
-  const preview = isPrivacy
-    ? (lang === "es" ? "Cómo tratamos tus datos y cómo ejercer derechos ARCO." : "How we handle personal data and ARCO rights in Mexico.")
-    : (lang === "es" ? "Reglas del sitio, cotizaciones, contratación y derechos del consumidor." : "Site, quote, contracting, and consumer terms in Mexico.");
+  const getLabel = (k: LegalKind) => {
+    switch (k) {
+      case "privacy":
+        return lang === "es" ? "Aviso de Privacidad" : "Privacy Notice";
+      case "terms":
+        return lang === "es" ? "Términos y Condiciones" : "Terms & Conditions";
+      case "cancellation":
+        return lang === "es" ? "Cancelación y Reembolsos" : "Cancellation Policy";
+    }
+  };
+
+  const getTitle = (k: LegalKind) => {
+    switch (k) {
+      case "privacy":
+        return "Aviso de Privacidad Integral";
+      case "terms":
+        return "Términos y Condiciones de Servicio";
+      case "cancellation":
+        return "Política de Cancelación y Reembolsos";
+    }
+  };
+
+  const handleOpen = () => {
+    setActiveTab(kind);
+    setOpen(true);
+  };
+
+  const switchTab = (nextTab: LegalKind) => {
+    setActiveTab(nextTab);
+    if (bodyRef.current) {
+      bodyRef.current.scrollTop = 0;
+    }
+  };
 
   useEffect(() => {
     if (!open) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const timer = window.setTimeout(() => closeRef.current?.focus(), 0);
+    const timer = window.setTimeout(() => closeRef.current?.focus(), 50);
+
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setOpen(false);
         return;
       }
       if (event.key !== "Tab" || !panelRef.current) return;
-      const focusable = Array.from(panelRef.current.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-      ));
+      const focusable = Array.from(
+        panelRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      );
       if (!focusable.length) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
@@ -126,6 +266,7 @@ export default function LegalDisclosure({ kind, variant = "footer" }: { kind: Le
         first.focus();
       }
     };
+
     window.addEventListener("keydown", onKey);
     return () => {
       window.clearTimeout(timer);
@@ -135,33 +276,108 @@ export default function LegalDisclosure({ kind, variant = "footer" }: { kind: Le
     };
   }, [open]);
 
-  const modal = open && typeof document !== "undefined" ? createPortal(
-    <div className={styles.backdrop} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
-      <section ref={panelRef} className={styles.panel} role="dialog" aria-modal="true" aria-labelledby={titleId}>
-        <header className={styles.header}>
-          <div>
-            <p className={styles.kicker}>DOS A · México</p>
-            <h2 id={titleId}>{title}</h2>
-          </div>
-          <button ref={closeRef} className={styles.close} type="button" onClick={() => setOpen(false)} aria-label={lang === "es" ? "Cerrar" : "Close"}><X size={22} /></button>
-        </header>
-        <div className={styles.body}>
-          {lang === "en" && <p className={styles.languageNote}>The governing legal text is presented in Spanish because the service operates in Mexico.</p>}
-          {isPrivacy ? <PrivacyContent /> : <TermsContent />}
-        </div>
-      </section>
-    </div>,
-    document.body,
-  ) : null;
+  const modal =
+    open && typeof document !== "undefined"
+      ? createPortal(
+          <div
+            className={styles.backdrop}
+            role="presentation"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setOpen(false);
+            }}
+          >
+            <section
+              ref={panelRef}
+              className={styles.panel}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={titleId}
+            >
+              {/* Mobile Drag Handle Indicator */}
+              <div className={styles.dragHandle} aria-hidden="true" />
+
+              <header className={styles.header}>
+                <div className={styles.headerInfo}>
+                  <p className={styles.kicker}>Dos2A · 2A Visual &amp; Sound Lab</p>
+                  <h2 id={titleId} className={styles.title}>
+                    {getTitle(activeTab)}
+                  </h2>
+                </div>
+                <button
+                  ref={closeRef}
+                  className={styles.close}
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  aria-label={lang === "es" ? "Cerrar documento" : "Close document"}
+                >
+                  <X size={20} />
+                </button>
+              </header>
+
+              {/* Apple Segmented Tab Switcher */}
+              <div
+                className={styles.segmentedContainer}
+                role="tablist"
+                aria-label={lang === "es" ? "Documentos Legales" : "Legal Documents"}
+              >
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === "privacy"}
+                  className={`${styles.segment} ${activeTab === "privacy" ? styles.segmentActive : ""}`}
+                  onClick={() => switchTab("privacy")}
+                >
+                  {getLabel("privacy")}
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === "terms"}
+                  className={`${styles.segment} ${activeTab === "terms" ? styles.segmentActive : ""}`}
+                  onClick={() => switchTab("terms")}
+                >
+                  {getLabel("terms")}
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === "cancellation"}
+                  className={`${styles.segment} ${activeTab === "cancellation" ? styles.segmentActive : ""}`}
+                  onClick={() => switchTab("cancellation")}
+                >
+                  {getLabel("cancellation")}
+                </button>
+              </div>
+
+              {/* Scrollable Document Body */}
+              <div ref={bodyRef} className={styles.body}>
+                {lang === "en" && (
+                  <p className={styles.languageNote}>
+                    Official corporate and fiscal policies are established in Spanish in compliance with Mexican commercial jurisdiction.
+                  </p>
+                )}
+                {activeTab === "privacy" && <PrivacyContent />}
+                {activeTab === "terms" && <TermsContent />}
+                {activeTab === "cancellation" && <CancellationContent />}
+              </div>
+            </section>
+          </div>,
+          document.body
+        )
+      : null;
 
   return (
     <span className={`${styles.disclosure}${variant === "inline" ? ` ${styles.inline}` : ""}`}>
-      <button ref={triggerRef} className={styles.trigger} type="button" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-expanded={open}>{label}</button>
-      <span className={styles.preview} role="tooltip" aria-hidden="true">
-        <strong>{label}</strong>
-        <span>{preview}</span>
-        <em>{lang === "es" ? "Haz clic para leer completo" : "Click to read the full text"}</em>
-      </span>
+      <button
+        ref={triggerRef}
+        className={styles.trigger}
+        type="button"
+        onClick={handleOpen}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+      >
+        {getLabel(kind)}
+      </button>
       {modal}
     </span>
   );

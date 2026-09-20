@@ -116,3 +116,20 @@ Website for **dos A** (Eventos Dos2A) — high-end audiovisual production, stage
    - Services sequentially renumbered 01 to 04 with no gaps.
    - Hero section 100% frozen (#080909, BrandMark on left, headline on right).
    - Netlify reference (`https://dos2a.netlify.app/`) completely green and verified.
+
+## Milestone (Unified Legal Policies Modal - Option A)
+1. **Scope & User Intent**:
+   - Integrated the 3 Mexican legal policies provided verbatim by client:
+     - *Aviso de Privacidad Integral* (2A Visual & Sound Lab / Dos2A, RFC, ARCO rights to `alanis@eventosdos2a.mx`, Cedro 323 - 11, Col. Santa María la Ribera, Cuauhtémoc, CDMX).
+     - *Términos y Condiciones de Servicio* (50% anticipo, 50% saldo día del evento, SPEI/tarjetas/efectivo, CFDI, responsabilidades de recinto/clima, CDMX jurisdicción).
+     - *Política de Cancelación y Reembolsos* (50% anticipo aplicable a nueva fecha, >30 días reembolso menos comisiones, <=30 días saldo a favor, fuerza mayor, `alanis@eventosdos2a.mx`).
+   - Implemented user-selected **Option A**: Apple-style unified modal / bottom sheet that does not block or interrupt browsing, featuring an Apple segmented pill switcher (`[ Aviso de Privacidad ] [ Términos y Condiciones ] [ Cancelación y Reembolsos ]`).
+2. **Files Changed**:
+   - `frontend/src/components/site/LegalDisclosure.tsx`: Added `type LegalKind = "privacy" | "terms" | "cancellation"`, verbatim copy sections for all 3 policies, Apple segmented tab switcher, automatic scroll reset on tab change, focus trapping, Escape dismiss, and mobile drag handle.
+   - `frontend/src/components/site/LegalDisclosure.module.css`: Styled dark luxury palette (`#111213` panel, `#f5f3ee` active tab, `#8e8e88` inactive tabs, `backdrop-filter: blur(20px)`, rounded pills, custom scrollbars, safe-area mobile sheet).
+   - `frontend/src/components/site/SiteFooter.tsx`: Mounted all 3 triggers in footer (`privacy`, `terms`, `cancellation`).
+3. **Verification**:
+   - Built with `npm run build`: Compiled successfully with 0 errors across all routes.
+   - Hero section 100% frozen.
+   - Exact client legal copy strictly locked verbatim.
+
