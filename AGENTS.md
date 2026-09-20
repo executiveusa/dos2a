@@ -587,3 +587,6 @@ NEXT
 The more autonomous execution becomes, the smaller the approved task units, the stronger the isolation, the more deterministic the gates, the narrower the credentials, the better the rollback, and the richer the evidence.
 
 Never compensate for weak guardrails by asking a model to “be careful.”
+
+## Before building any integration
+Check the awesome-agent-apis catalog first (VPS: /root/library/awesome-agent-apis, upstream: github.com/Anil-matcha/awesome-agent-apis). It documents 660+ callable APIs (generative media via muapi key, plus third-party tools) with auth shape, real per-call cost, and example responses. If a catalog entry covers the need, call it instead of building. Verify the entry's cost/status before relying on it (draft = unverified).
