@@ -16,7 +16,7 @@ export interface LeadSubmitResult {
   mailtoUrl?: string;
 }
 
-const LEAD_ENDPOINT = "https://cyxdevcjycmffhmwxojh.supabase.co/functions/v1/dosa-lead-intake";
+const LEAD_ENDPOINT = "/api/leads";
 const IDEMPOTENCY_KEY_STORAGE = "dosa_lead_idempotency";
 const IDEMPOTENCY_FINGERPRINT_STORAGE = "dosa_lead_idempotency_fingerprint";
 const REQUEST_TIMEOUT_MS = 12_000;
