@@ -14,21 +14,21 @@
     "db:generate": "prisma generate"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.127.0",
+    "@anthropic-ai/sdk": "^0.133.0",
     "@auth/prisma-adapter": "^2.11.3",
     "@prisma/client": "^7.10.0",
     "@sendgrid/mail": "^8.1.4",
-    "@stripe/stripe-js": "^9.16.0",
+    "@stripe/stripe-js": "^10.0.0",
     "bcryptjs": "^3.0.3",
-    "framer-motion": "^13.4.0",
+    "framer-motion": "^14.1.0",
     "ioredis": "^6.0.0",
-    "next": "16.3.5",
+    "next": "16.4.0",
     "next-auth": "^4.24.15",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "stripe": "^22.6.2",
-    "twilio": "^6.1.1",
-    "zod": "^4.6.5",
+    "stripe": "^23.0.0",
+    "twilio": "^6.1.2",
+    "zod": "^4.6.6",
     "zustand": "^5.0.15"
   },
   "devDependencies": {
@@ -37,7 +37,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.6.1",
-    "postcss": "^8.5.1",
+    "postcss": "^8.5.29",
     "prisma": "^7.10.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^7"
